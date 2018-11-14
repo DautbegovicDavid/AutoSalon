@@ -7,6 +7,12 @@ namespace AutoSalon.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser,IdentityRole<int>,int>
     {
+
+        public DbSet<Drzava> Drzave { get; set; }
+        public DbSet<Grad> Gradovi { get; set; }
+        public DbSet<Poslovnica> Poslovnice { get; set; }
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -26,7 +32,7 @@ namespace AutoSalon.Data
 
             });
 
-            builder.Entity<IdentityRole>(entity =>
+            builder.Entity<IdentityRole<int>>(entity =>
             {
                 entity.ToTable(name: "Role");
                 entity.Property(e => e.Id).HasColumnName("RoleID");
