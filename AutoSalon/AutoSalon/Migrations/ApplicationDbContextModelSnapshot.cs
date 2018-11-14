@@ -89,7 +89,6 @@ namespace AutoSalon.Migrations
                     b.Property<int>("GradID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("DrzavID");
 
                     b.Property<int>("DrzavaID");
 
