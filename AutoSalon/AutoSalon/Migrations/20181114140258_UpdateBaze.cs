@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AutoSalon.Migrations
 {
-    public partial class DrzavaGradPoslovnice : Migration
+    public partial class UpdateBaze : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,7 +69,6 @@ namespace AutoSalon.Migrations
                 {
                     GradID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DrzavID = table.Column<int>(nullable: true),
                     DrzavaID = table.Column<int>(nullable: false),
                     Naziv = table.Column<string>(nullable: true),
                     PostanskiBroj = table.Column<string>(nullable: true)
@@ -78,11 +77,11 @@ namespace AutoSalon.Migrations
                 {
                     table.PrimaryKey("PK_Gradovi", x => x.GradID);
                     table.ForeignKey(
-                        name: "FK_Gradovi_Drzave_DrzavID",
-                        column: x => x.DrzavID,
+                        name: "FK_Gradovi_Drzave_DrzavaID",
+                        column: x => x.DrzavaID,
                         principalTable: "Drzave",
                         principalColumn: "DrzavaID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,9 +214,9 @@ namespace AutoSalon.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Gradovi_DrzavID",
+                name: "IX_Gradovi_DrzavaID",
                 table: "Gradovi",
-                column: "DrzavID");
+                column: "DrzavaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Poslovnice_GradID",
