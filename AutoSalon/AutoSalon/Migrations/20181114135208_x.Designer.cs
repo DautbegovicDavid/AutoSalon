@@ -11,8 +11,8 @@ using System;
 namespace AutoSalon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181114140258_UpdateBaze")]
-    partial class UpdateBaze
+    [Migration("20181114135208_x")]
+    partial class x
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,6 +90,8 @@ namespace AutoSalon.Migrations
                     b.Property<int>("GradID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("DrzavID");
+
                     b.Property<int>("DrzavaID");
 
                     b.Property<string>("Naziv");
@@ -98,7 +100,7 @@ namespace AutoSalon.Migrations
 
                     b.HasKey("GradID");
 
-                    b.HasIndex("DrzavaID");
+                    b.HasIndex("DrzavID");
 
                     b.ToTable("Gradovi");
                 });
@@ -243,8 +245,7 @@ namespace AutoSalon.Migrations
                 {
                     b.HasOne("AutoSalon.Models.Drzava", "Drzava")
                         .WithMany()
-                        .HasForeignKey("DrzavaID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DrzavID");
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Poslovnica", b =>
