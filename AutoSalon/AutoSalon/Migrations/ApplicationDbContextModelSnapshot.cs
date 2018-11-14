@@ -107,16 +107,13 @@ namespace AutoSalon.Migrations
                     b.Property<int>("PoslovnicaID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Adresa")
-                        .HasMaxLength(30);
+                    b.Property<string>("Adresa");
 
                     b.Property<int>("GradID");
 
                     b.Property<string>("KontaktTelefon");
 
-                    b.Property<string>("Naziv")
-                        .IsRequired()
-                        .HasMaxLength(30);
+                    b.Property<string>("Naziv");
 
                     b.Property<string>("SlikaURL");
 

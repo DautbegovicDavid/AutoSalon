@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutoSalon.Models
@@ -8,24 +7,11 @@ namespace AutoSalon.Models
     {
         [Key]
         public int PoslovnicaID { get; set; }
-        [Required]
-        [DisplayName("Grad")]
         public int GradID { get; set; }
         [ForeignKey("GradID")]
         public Grad Grad { get; set; }
-        [Required]
-        [RegularExpression(@"^[A-Ža-ž 0-9]+$",ErrorMessage ="Format nije validan. " +
-            "Dozvoljeno je : -Mala i velika slova" +
-            "                -Razmaci i brojevi od 0 do 9")]
-        [StringLength(30,MinimumLength =5,ErrorMessage ="Naziv mora imati više od 5 znakova a manje od 30")]
         public string Naziv { get; set; }
-        [RegularExpression(@"^[A-Ža-ž 0-9\.]+$", ErrorMessage = "Format nije validan. " +
-            "Dozvoljeno je : -Mala i velika slova" +
-            "                -Razmaci i brojevi od 0 do 9")]
-        [StringLength(30, ErrorMessage = "Adresa mora imati manje od 30 znakova")]
         public string Adresa { get; set; }
-        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. Dozvoljeno je unositi samo brojeve")]
-        [DisplayName("Kontakt telefon")]
         public string KontaktTelefon { get; set; }
         public string SlikaURL { get; set; }
     }
