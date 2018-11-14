@@ -8,7 +8,7 @@ namespace AutoSalon.Models
         [Key]
         public int GradID { get; set; }
         public int DrzavaID { get; set; }
-        [ForeignKey("DrzavID")]
+        [ForeignKey("DrzavaID")]
         public Drzava Drzava { get; set; }
         public string Naziv { get; set; }
         public string PostanskiBroj { get; set; }
