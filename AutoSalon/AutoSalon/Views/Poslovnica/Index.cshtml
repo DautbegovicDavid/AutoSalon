@@ -1,0 +1,58 @@
+﻿@using AutoSalon.Models
+
+@model IEnumerable<Poslovnica>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Poslovnice</h2>
+
+<p>
+    <a asp-action="Dodaj" asp-controller="Poslovnica">Dodaj novu</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grad.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KontaktTelefon)
+            </th>
+            <th> </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Grad.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Adresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.KontaktTelefon)
+                </td>
+                <td>
+                    <a asp-action="Detalji" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaID">Detalji</a>
+                    <a asp-action="Uredi" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaID">Uredi</a>
+                    <a asp-action="Obriši" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaID">Obriši</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
