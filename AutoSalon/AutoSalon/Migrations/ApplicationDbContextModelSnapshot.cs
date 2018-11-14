@@ -89,8 +89,6 @@ namespace AutoSalon.Migrations
                     b.Property<int>("GradID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("DrzavID");
-
                     b.Property<int>("DrzavaID");
 
                     b.Property<string>("Naziv");
@@ -99,7 +97,7 @@ namespace AutoSalon.Migrations
 
                     b.HasKey("GradID");
 
-                    b.HasIndex("DrzavID");
+                    b.HasIndex("DrzavaID");
 
                     b.ToTable("Gradovi");
                 });
@@ -109,13 +107,16 @@ namespace AutoSalon.Migrations
                     b.Property<int>("PoslovnicaID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Adresa");
+                    b.Property<string>("Adresa")
+                        .HasMaxLength(30);
 
                     b.Property<int>("GradID");
 
                     b.Property<string>("KontaktTelefon");
 
-                    b.Property<string>("Naziv");
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasMaxLength(30);
 
                     b.Property<string>("SlikaURL");
 
@@ -244,7 +245,8 @@ namespace AutoSalon.Migrations
                 {
                     b.HasOne("AutoSalon.Models.Drzava", "Drzava")
                         .WithMany()
-                        .HasForeignKey("DrzavID");
+                        .HasForeignKey("DrzavaID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Poslovnica", b =>
