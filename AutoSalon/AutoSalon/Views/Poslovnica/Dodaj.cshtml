@@ -20,6 +20,7 @@
             <div class="form-group">
                 <label asp-for="Grad" class="control-label"></label>
                 <select asp-for="GradID" asp-items="ViewBag.GradID" class="form-control"></select>
+                <span asp-validation-for="Grad"></span>
             </div>
 
             <div class="form-group">
@@ -35,7 +36,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Dodaj" class="btn btn-primary" />
+                <input type="submit" value="Sačuvaj" class="btn btn-success" />
             </div>
 
         </form>

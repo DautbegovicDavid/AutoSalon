@@ -33,6 +33,7 @@ namespace AutoSalon.Controllers
 
         //Post Dodaj
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Dodaj([Bind("PoslovnicaID,GradID,Adresa,Naziv,KontaktTelefon")]Poslovnica poslovnica)
         {
             if (ModelState.IsValid)
@@ -43,6 +44,51 @@ namespace AutoSalon.Controllers
             }
             ViewData["GradID"] = new SelectList(_context.Gradovi, "GradID", "Naziv", poslovnica.GradID);
             return View(poslovnica);
+        }
+
+        //Get Uredi
+        public async Task<IActionResult> Uredi(int  PoslovnicaID)
+        {
+
+            var poslovnica =await _context.Poslovnice.SingleOrDefaultAsync(p=> p.PoslovnicaID==PoslovnicaID);
+            ViewData["GradID"] = new SelectList(_context.Gradovi, "GradID", "Naziv", poslovnica.GradID);
+            return View(poslovnica);
+        }
+
+        //Post Uredi
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Uredi(int PoslovnicaID,Poslovnica poslovnica)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.Update(poslovnica);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            ViewData["GradID"] = new SelectList(_context.Poslovnice, "GradID", "Naziv", poslovnica.GradID);
+            return View(poslovnica);
+        }
+
+        //Get
+        public async Task<IActionResult> Ukloni(int PoslovnicaID)
+        {
+            var poslovnica = await _context.Poslovnice
+                                                     .Include(p=>p.Grad)
+                                                     .SingleOrDefaultAsync(p=> p.PoslovnicaID==PoslovnicaID);
+            return View(poslovnica);
+        }
+
+        //Post
+        [HttpPost,ActionName("Ukloni")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UkloniPotvrda(int PoslovnicaID)
+        {
+            Poslovnica poslovnica =await _context.Poslovnice.SingleOrDefaultAsync(p=> p.PoslovnicaID==PoslovnicaID);
+            _context.Poslovnice.Remove(poslovnica);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }
