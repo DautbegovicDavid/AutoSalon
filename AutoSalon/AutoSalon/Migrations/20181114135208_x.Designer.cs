@@ -11,9 +11,10 @@ using System;
 namespace AutoSalon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181114135208_x")]
+    partial class x
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,16 +110,13 @@ namespace AutoSalon.Migrations
                     b.Property<int>("PoslovnicaID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Adresa")
-                        .HasMaxLength(30);
+                    b.Property<string>("Adresa");
 
                     b.Property<int>("GradID");
 
                     b.Property<string>("KontaktTelefon");
 
-                    b.Property<string>("Naziv")
-                        .IsRequired()
-                        .HasMaxLength(30);
+                    b.Property<string>("Naziv");
 
                     b.Property<string>("SlikaURL");
 
