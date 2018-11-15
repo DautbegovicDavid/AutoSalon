@@ -1,0 +1,46 @@
+﻿@using AutoSalon.Models.ViewModels;
+@{
+    ViewData["Title"] = "Index";
+    List<GradVM> podaci = ViewData["gradovi"] as List<GradVM>;
+    int g = 0;
+}
+
+
+<h2>Lista Gradova</h2>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+        <tr>
+            <th>rBR</th>
+            <th>Naziv</th>
+            <th>Drzava</th>
+            <th>Postanski broj</th>
+            <th colspan="2" style="text-align:center">Akcija</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (GradVM x in podaci)
+        {
+        <tr>
+            @{ g++;}
+            <td>@g</td>
+            <td>@x.Naziv</td>
+            <td>@x.Drzava</td>
+            <td>@x.PostanskiBroj</td>
+            <td style="text-align:center">
+                <a href="/grad/izbrisi?id=@x.GradID" class="btn btn-danger">Obrisi</a>
+            </td>
+            <td style="text-align:center">
+                <a href="/grad/uredi?id=@x.GradID" class="btn btn-warning">Uredi</a>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+
+</table>
+<a href="/grad/dodaj" class="btn btn-info">Dodaj Grad</a>
+

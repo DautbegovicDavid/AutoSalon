@@ -51,6 +51,7 @@ namespace AutoSalon.Controllers
         public IActionResult Snimi(int DrzavaID, string Naziv)
         {
             Drzava d = _context.Drzave.Find(DrzavaID);
+
             if (d == null)
             {
                 d = new Drzava { Naziv = Naziv };

@@ -1,17 +1,15 @@
 ﻿@using AutoSalon.Models.ViewModels;
 @{
-
-
     ViewData["Title"] = "Lista";
     var podaci = (List<DrzavaVM>)ViewData["drzave"];
     int r = 0;
 }
 <h2>Lista drzava</h2>
+
 <table class="table table-bordered table-hover">
 
     <thead>
         <tr>
-
             <th>rBR</th>
             <th>Naziv</th>
             <th colspan="2" style="text-align:center">Akcija</th>
@@ -23,20 +21,21 @@
         @foreach (DrzavaVM x in podaci)
         {
             <tr>
+
                 @{ r++;}
                 <td>@r</td>
                 <td>@x.Naziv</td>
-                <td>
-                    <a href="/drzava/izbrisi?id=@x.DrzavaID" class="alert-danger badge">Obrisi</a>
+                <td style="text-align:center">
+                    <a href="/drzava/izbrisi?id=@x.DrzavaID" class="btn btn-danger">Obrisi</a>
                 </td>
-                <td>
-                    <a href="/drzava/uredi?id=@x.DrzavaID" class="alert-warning badge">Uredi</a>
+                <td style="text-align:center">
+                    <a href="/drzava/uredi?id=@x.DrzavaID" class="btn btn-warning">Uredi</a>
                 </td>
-
+  
             </tr>
         }
 
     </tbody>
 
 </table>
-<a href="/drzava/dodaj">Dodaj drzavu</a>
+<a href="/drzava/dodaj" class="btn btn-info">Dodaj drzavu</a>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Uredi";
+    Grad g = ViewData["kljuc"] as Grad;
+    List<Drzava> d = ViewData["kljuc1"] as List<Drzava>;
+}
+
+<h2>Uredi grad </h2>
+
+<form action="/grad/snimi">
+
+    <label>GradID :</label>
+    <input type="text" name="gradID" style="border-radius:30px;margin:1%;padding:3px 1%;font-family:sans-serif" value="@g.GradID" readonly="readonly" />
+    
+    <label>Naziv :</label>
+    <input type="text" name="Naziv" style="border-radius:30px;margin:1%;padding:3px 1%;font-family:sans-serif" value="@g.Naziv" />
+
+    <label>Drzava :</label>
+    <select name="DrzavaID" style=" border-radius:30px; margin:1%;padding:3px 1%;font-family:sans-serif">
+        @foreach (Drzava x in d)
+        {
+            <option value="@x.DrzavaID">@x.Naziv</option>
+        }
+    </select>
+
+    <label>Postanski broj :</label>
+    <input type="text" name="PostanskiBroj" style="border-radius:30px;margin:1%;padding:3px 1%;font-family:sans-serif" value="@g.PostanskiBroj" />
+    <br />
+    <button type="submit" class="btn btn-success" style="margin-top:1%">Sacuvaj</button>
+
+</form>
+
