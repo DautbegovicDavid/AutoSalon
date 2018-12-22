@@ -41,7 +41,7 @@ namespace AutoSalon.Controllers
             _context.Remove(d);
             _context.SaveChanges();
 
-            return Redirect("/Drzava/index");
+            return Redirect("/Drzava/Index");
         }
         public IActionResult Dodaj()
         {

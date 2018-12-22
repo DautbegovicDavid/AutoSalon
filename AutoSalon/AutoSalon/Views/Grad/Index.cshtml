@@ -31,10 +31,10 @@
             <td>@x.Drzava</td>
             <td>@x.PostanskiBroj</td>
             <td style="text-align:center">
-                <a href="/grad/izbrisi?id=@x.GradID" class="btn btn-danger">Obrisi</a>
+                <a asp-action="Izbrisi" asp-route-id="@x.GradID" class="btn btn-danger">Obrisi</a>
             </td>
             <td style="text-align:center">
-                <a href="/grad/uredi?id=@x.GradID" class="btn btn-warning">Uredi</a>
+                <a asp-action="Uredi" asp-route-id="@x.GradID" class="btn btn-warning" ajax-poziv="da" ajax-rezultat="divRez">Uredi</a>
             </td>
         </tr>
         }
@@ -42,5 +42,6 @@
     </tbody>
 
 </table>
-<a href="/grad/dodaj" class="btn btn-info">Dodaj Grad</a>
+<a href="/grad/dodaj" class="btn btn-info" ajax-poziv="da" ajax-rezultat="divRez">Dodaj Grad</a>
+<div id="divRez"> </div>
 

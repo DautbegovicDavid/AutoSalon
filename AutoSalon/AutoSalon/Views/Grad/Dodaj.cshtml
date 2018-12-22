@@ -1,11 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Dodaj";
     List<Drzava> podaci=ViewData["kljuc"] as List<Drzava>;
+    Layout = null;
 }
 
 <h2>Unesi grad</h2>
 
-<form action="/grad/snimi" class=" form-group">
+<form action="/grad/snimi" class=" form-group" >
 
     <label>Naziv :</label>
     <input type="text" name="Naziv" style="border-radius:30px;margin:1%;padding:3px 1%;font-family:sans-serif;" value="Grad" />
@@ -24,4 +25,6 @@
     <button type="submit" class="btn btn-success" style="margin-top:1%">Sacuvaj</button>
 
 </form>
+<!--<div id="divRez"></div><!--Nema logike stavljati u novi div rezultat Forme - Istraziti !-->
+
 
