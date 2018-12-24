@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using AutoSalon.Models;
 using Microsoft.AspNetCore.Identity;
+using Autosalon.Models;
 
 namespace AutoSalon.Data
 {
@@ -11,8 +12,16 @@ namespace AutoSalon.Data
         public DbSet<Drzava> Drzave { get; set; }
         public DbSet<Grad> Gradovi { get; set; }
         public DbSet<Poslovnica> Poslovnice { get; set; }
-
-
+        public DbSet<Automobil> Automobili { get; set; }
+        public DbSet<AutoDetalji> Autodetalji { get; set; }
+        public DbSet<DodatnaOprema> DodatneOpreme { get; set; }
+        public DbSet<Kupovina> Kupovine { get; set; }
+        public DbSet<Ocjena> Ocjene { get; set; }
+        public DbSet<Proizvodjac> Proizvodjaci { get; set; }
+        public DbSet<Racun> Racuni { get; set; }
+        public DbSet<RezervacijaRentanje> rezervacijeRentanja { get; set; }
+        public DbSet<RezervacijaTestiranje> rezervacijeTestiranja { get; set; }
+        
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -76,6 +85,9 @@ namespace AutoSalon.Data
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
             });
+            
+
+
 
         }
     }
