@@ -1,5 +1,4 @@
-﻿@using AutoSalon.Models
-@model Poslovnica
+﻿@model PoslovnicaDodajVM
 @{
     ViewData["Title"] = "Dodaj";
 }
@@ -8,30 +7,34 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Dodaj">
+        <form asp-action="Dodaj" method="post" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            
             <div class="form-group">
-                <label asp-for="Naziv" class="control-label"></label>
+                <label asp-for="Naziv" class="control-label">Naziv poslovnice :</label>
                 <input asp-for="Naziv" class="form-control" />
+
+                @*@Html.TextBoxFor(model => model.Naziv, new { @class = "form-control" })*@
+
                 <span asp-validation-for="Naziv" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Grad" class="control-label"></label>
-                <select asp-for="GradID" asp-items="ViewBag.GradID" class="form-control"></select>
-                <span asp-validation-for="Grad"></span>
+                <label asp-for="GradID" class="control-label">Grad :</label>
+                <select asp-for="GradID" asp-items="Model.Gradovi" class="form-control"></select>
+                <span asp-validation-for="GradID"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Adresa" class="control-label"></label>
+                <label asp-for="Adresa" class="control-label">Adresa :</label>
                 <input asp-for="Adresa" class="form-control" />
+
                 <span asp-validation-for="Adresa" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="KontaktTelefon" class="control-label"></label>
-                <input asp-for="KontaktTelefon" class="form-control" />
+                <label asp-for="KontaktTelefon" class="control-label">Kontakt telefon</label>
+                <input asp-for="KontaktTelefon" class="form-control"/>
                 <span asp-validation-for="KontaktTelefon" class="text-danger"></span>
             </div>
 

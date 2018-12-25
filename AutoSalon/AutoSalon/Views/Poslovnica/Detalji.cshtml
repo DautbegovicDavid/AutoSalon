@@ -1,0 +1,49 @@
+﻿@model PoslovnicaDetaljiVM
+@{
+    ViewData["Title"] = "Detalji";
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="col-lg-4">
+            <dl>
+                <dt>
+                    <img src="~/images/Slika2.jpg" class="img-thumbnail" />
+                </dt>
+            </dl>
+        </div>
+        <dl class="jumbotron">
+
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.Naziv)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Naziv)
+
+            </dd>
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.Grad)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Grad)
+            </dd>
+
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.Adresa)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Adresa)
+            </dd>
+
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.KontaktTelefon)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.KontaktTelefon)
+            </dd>
+        </dl>
+        
+            <a asp-action="Index" class="container  col-lg-4">Vrati se nazad</a>
+        
+    </div>
+</div>

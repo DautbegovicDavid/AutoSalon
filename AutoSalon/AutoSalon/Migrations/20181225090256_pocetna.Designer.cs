@@ -11,8 +11,8 @@ using System;
 namespace AutoSalon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181224105646_dva")]
-    partial class dva
+    [Migration("20181225090256_pocetna")]
+    partial class pocetna
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

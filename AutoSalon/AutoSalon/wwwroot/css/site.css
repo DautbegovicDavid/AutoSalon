@@ -33,3 +33,11 @@
         display: none;
     }
 }
+
+
+/*MojCSS*/
+
+.PoslovnicaDetalji{
+    position:absolute;
+    right:150px;
+}

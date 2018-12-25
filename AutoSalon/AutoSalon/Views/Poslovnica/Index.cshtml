@@ -1,6 +1,5 @@
-﻿@using AutoSalon.Models
+﻿@model PoslovnicaIndexVM
 
-@model IEnumerable<Poslovnica>
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,47 +9,31 @@
 <p>
     <a asp-action="Dodaj" asp-controller="Poslovnica" class="btn btn-primary">Dodaj novu</a>
 </p>
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Naziv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Grad.Naziv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Adresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KontaktTelefon)
-            </th>
-            <th> </th>
+            <th>Naziv poslovnice</th>
+            <th>Naziv grada</th>
+            <th>Adresa poslovnice</th>
+            <th>Kontakt telefon</th>
+            <th></th>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Rows)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => item.Naziv)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Grad.Naziv)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Adresa)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.KontaktTelefon)
-                </td>
-                <td>
-                    <a asp-action="Detalji" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaID" class="btn btn-info">Detalji</a>
-                    <a asp-action="Uredi" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaID" class="btn btn-warning">Uredi</a>
-                    <a asp-action="Ukloni" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaID" class="btn btn-danger">Ukloni</a>
-                </td>
-            </tr>
+        <tr>
+            <td>@item.Naziv</td>
+            <td>@item.Grad</td>
+            <td>@item.Adresa</td>
+            <td>@item.KontaktTelefon</td>
+            <td>
+                <a asp-action="Detalji" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-info">Detalji</a>
+                <a asp-action="Uredi" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-warning">Uredi</a>
+                <a asp-action="Ukloni" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-danger">Ukloni</a>
+            </td>
+        </tr>
         }
     </tbody>
 
