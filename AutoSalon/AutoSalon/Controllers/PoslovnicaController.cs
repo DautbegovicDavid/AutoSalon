@@ -21,19 +21,35 @@ namespace AutoSalon.Controllers
         }
 
         //Index
-        public IActionResult Index()
+        public IActionResult Index(int ? GradID)
         {
-            PoslovnicaIndexVM model = new PoslovnicaIndexVM()
-            {
-                Rows=_context.Poslovnice.Select(x=> new PoslovnicaIndexVM.Row() {
-                    PoslovnicaId=x.PoslovnicaID,
+            PoslovnicaIndexVM model = new PoslovnicaIndexVM();
+            model.Gradovi = PripremaListItemGradovi();
+            model.Gradovi.FirstOrDefault().Text = "(sve poslovnice)";
+            if (GradID != null) {
+                model.Rows = _context.Poslovnica.Where(y=> y.GradID==GradID).Select(x => new PoslovnicaIndexVM.Row()
+                {
+                    PoslovnicaId = x.PoslovnicaID,
                     Naziv = x.Naziv,
                     Grad = x.Grad.Naziv,
-                    Adresa=x.Adresa,
+                    Adresa = x.Adresa,
                     KontaktTelefon = x.KontaktTelefon,
-                    SlikaUrl=x.SlikaURL
-                }).ToList()
-            };          
+                    SlikaUrl = x.SlikaURL
+                }).ToList();
+            }
+            else
+            {
+                model.Rows = _context.Poslovnica.Select(x => new PoslovnicaIndexVM.Row()
+                {
+                    PoslovnicaId = x.PoslovnicaID,
+                    Naziv = x.Naziv,
+                    Grad = x.Grad.Naziv,
+                    Adresa = x.Adresa,
+                    KontaktTelefon = x.KontaktTelefon,
+                    SlikaUrl = x.SlikaURL
+                }).ToList();
+            }
+
             return View( model);
         }
 
@@ -49,7 +65,7 @@ namespace AutoSalon.Controllers
                     Text="(Odaberite grad)"
                 }
             };
-            listItems.AddRange(_context.Gradovi.Select(x => new SelectListItem()
+            listItems.AddRange(_context.Grad.Select(x => new SelectListItem()
             {
                 Value = x.GradID.ToString(),
                 Text = x.Naziv
@@ -83,13 +99,13 @@ namespace AutoSalon.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Poslovnice.Add(poslovnica);
+                _context.Poslovnica.Add(poslovnica);
                  await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             model.Gradovi = PripremaListItemGradovi();
 
-            return View(poslovnica);
+            return View(model);
         }
 
 
@@ -98,7 +114,7 @@ namespace AutoSalon.Controllers
         public IActionResult Uredi(int  PoslovnicaID)
         {
 
-            Poslovnica poslovnica = _context.Poslovnice.FirstOrDefault(x => x.PoslovnicaID == PoslovnicaID);
+            Poslovnica poslovnica = _context.Poslovnica.FirstOrDefault(x => x.PoslovnicaID == PoslovnicaID);
 
             PoslovnicaUrediVM model = new PoslovnicaUrediVM()
             {
@@ -119,7 +135,7 @@ namespace AutoSalon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Uredi(PoslovnicaUrediVM model)
         {
-            Poslovnica poslovnica = _context.Poslovnice.FirstOrDefault(x => x.PoslovnicaID == model.PoslovnicaID);
+            Poslovnica poslovnica = _context.Poslovnica.FirstOrDefault(x => x.PoslovnicaID == model.PoslovnicaID);
             poslovnica.GradID = model.GradID;
             poslovnica.KontaktTelefon = model.KontaktTelefon;
             poslovnica.Adresa = model.Adresa;
@@ -143,7 +159,7 @@ namespace AutoSalon.Controllers
         //Detalji
         public IActionResult Detalji(int PoslovnicaID)
         {
-            Poslovnica poslovnica = _context.Poslovnice.Include(y=> y.Grad).FirstOrDefault(x => x.PoslovnicaID == PoslovnicaID);
+            Poslovnica poslovnica = _context.Poslovnica.Include(y=> y.Grad).FirstOrDefault(x => x.PoslovnicaID == PoslovnicaID);
 
             PoslovnicaDetaljiVM model = new PoslovnicaDetaljiVM()
             {
@@ -163,7 +179,7 @@ namespace AutoSalon.Controllers
         //Get Ukloni
         public IActionResult Ukloni(int PoslovnicaID)
         {
-            Poslovnica poslovnica =  _context.Poslovnice.Include(y=> y.Grad).FirstOrDefault(x=> x.PoslovnicaID==PoslovnicaID);
+            Poslovnica poslovnica =  _context.Poslovnica.Include(y=> y.Grad).FirstOrDefault(x=> x.PoslovnicaID==PoslovnicaID);
 
             PoslovnicaUkloniVM model = new PoslovnicaUkloniVM()
             {
@@ -182,8 +198,8 @@ namespace AutoSalon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UkloniPotvrda(int PoslovnicaID)
         {
-            Poslovnica poslovnica =await _context.Poslovnice.SingleOrDefaultAsync(p=> p.PoslovnicaID==PoslovnicaID);
-            _context.Poslovnice.Remove(poslovnica);
+            Poslovnica poslovnica =await _context.Poslovnica.SingleOrDefaultAsync(p=> p.PoslovnicaID==PoslovnicaID);
+            _context.Poslovnica.Remove(poslovnica);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");

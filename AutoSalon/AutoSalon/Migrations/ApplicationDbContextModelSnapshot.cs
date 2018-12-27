@@ -72,12 +72,48 @@ namespace AutoSalon.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("AutoSalon.Models.AutoDetalji", b =>
+            modelBuilder.Entity("AutoSalon.Models.Automobil", b =>
                 {
                     b.Property<int>("AutomobilID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Boja");
+
+                    b.Property<bool>("Dostupan");
+
+                    b.Property<string>("GodinaProizvodnje");
+
+                    b.Property<string>("Model");
+
+                    b.Property<bool>("Novo");
+
+                    b.Property<int>("ProizvodjacID");
+
+                    b.Property<string>("Slika");
+
+                    b.HasKey("AutomobilID");
+
+                    b.HasIndex("ProizvodjacID");
+
+                    b.ToTable("Automobil");
+                });
+
+            modelBuilder.Entity("AutoSalon.Models.AutomobilDetalji", b =>
+                {
+                    b.Property<int>("AutomobilDetaljiID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AutomobilID");
+
+                    b.Property<string>("BrojBrzina");
+
+                    b.Property<string>("BrojSjedista");
+
+                    b.Property<string>("BrojVrata");
+
                     b.Property<string>("Cijena");
+
+                    b.Property<string>("CijenaRentanja");
 
                     b.Property<string>("EmisioniStandard");
 
@@ -101,42 +137,12 @@ namespace AutoSalon.Migrations
 
                     b.Property<string>("VelicinaFelgi");
 
-                    b.Property<string>("brojBrzina");
+                    b.HasKey("AutomobilDetaljiID");
 
-                    b.Property<string>("brojSjedista");
+                    b.HasIndex("AutomobilID")
+                        .IsUnique();
 
-                    b.Property<string>("brojVrata");
-
-                    b.Property<string>("cijenaRentanja");
-
-                    b.HasKey("AutomobilID");
-
-                    b.ToTable("Autodetalji");
-                });
-
-            modelBuilder.Entity("AutoSalon.Models.Automobil", b =>
-                {
-                    b.Property<int>("AutomobilID");
-
-                    b.Property<string>("Boja");
-
-                    b.Property<bool>("Dostupan");
-
-                    b.Property<string>("GodinaProizvodnje");
-
-                    b.Property<string>("Model");
-
-                    b.Property<bool>("Novo");
-
-                    b.Property<int>("ProizvodjacID");
-
-                    b.Property<string>("Slika");
-
-                    b.HasKey("AutomobilID");
-
-                    b.HasIndex("ProizvodjacID");
-
-                    b.ToTable("Automobili");
+                    b.ToTable("AutomobilDetalji");
                 });
 
             modelBuilder.Entity("Autosalon.Models.DodatnaOprema", b =>
@@ -148,7 +154,7 @@ namespace AutoSalon.Migrations
 
                     b.HasKey("DodatnaOpremaID");
 
-                    b.ToTable("DodatneOpreme");
+                    b.ToTable("DodatnaOprema");
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Drzava", b =>
@@ -160,7 +166,7 @@ namespace AutoSalon.Migrations
 
                     b.HasKey("DrzavaID");
 
-                    b.ToTable("Drzave");
+                    b.ToTable("Drzava");
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Grad", b =>
@@ -178,7 +184,7 @@ namespace AutoSalon.Migrations
 
                     b.HasIndex("DrzavaID");
 
-                    b.ToTable("Gradovi");
+                    b.ToTable("Grad");
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Kupovina", b =>
@@ -214,7 +220,7 @@ namespace AutoSalon.Migrations
 
                     b.HasIndex("UposlenikID");
 
-                    b.ToTable("Kupovine");
+                    b.ToTable("Kupovina");
                 });
 
             modelBuilder.Entity("Autosalon.Models.Ocjena", b =>
@@ -229,7 +235,7 @@ namespace AutoSalon.Migrations
 
                     b.HasKey("RezervacijaRentanjaID");
 
-                    b.ToTable("Ocjene");
+                    b.ToTable("Ocjena");
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Poslovnica", b =>
@@ -254,7 +260,7 @@ namespace AutoSalon.Migrations
 
                     b.HasIndex("GradID");
 
-                    b.ToTable("Poslovnice");
+                    b.ToTable("Poslovnica");
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Proizvodjac", b =>
@@ -270,7 +276,7 @@ namespace AutoSalon.Migrations
 
                     b.HasIndex("DrzavaID");
 
-                    b.ToTable("Proizvodjaci");
+                    b.ToTable("Proizvodjac");
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Racun", b =>
@@ -284,7 +290,7 @@ namespace AutoSalon.Migrations
 
                     b.HasKey("RacunID");
 
-                    b.ToTable("Racuni");
+                    b.ToTable("Racun");
                 });
 
             modelBuilder.Entity("Autosalon.Models.RezervacijaRentanje", b =>
@@ -326,7 +332,7 @@ namespace AutoSalon.Migrations
 
                     b.HasIndex("UposlenikID");
 
-                    b.ToTable("rezervacijeRentanja");
+                    b.ToTable("RezervacijaRentanja");
                 });
 
             modelBuilder.Entity("Autosalon.Models.RezervacijaTestiranje", b =>
@@ -358,7 +364,7 @@ namespace AutoSalon.Migrations
 
                     b.HasIndex("UposlenikID");
 
-                    b.ToTable("rezervacijeTestiranja");
+                    b.ToTable("RezervacijaTestiranja");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -477,14 +483,17 @@ namespace AutoSalon.Migrations
 
             modelBuilder.Entity("AutoSalon.Models.Automobil", b =>
                 {
-                    b.HasOne("AutoSalon.Models.AutoDetalji", "AutoDetalji")
-                        .WithOne("Automobil")
-                        .HasForeignKey("AutoSalon.Models.Automobil", "AutomobilID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("AutoSalon.Models.Proizvodjac", "Proizvodjac")
                         .WithMany()
                         .HasForeignKey("ProizvodjacID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AutoSalon.Models.AutomobilDetalji", b =>
+                {
+                    b.HasOne("AutoSalon.Models.Automobil", "Automobil")
+                        .WithOne("AutomobilDetalji")
+                        .HasForeignKey("AutoSalon.Models.AutomobilDetalji", "AutomobilID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -1,0 +1,50 @@
+﻿@model AutomobilUkloniVM
+@{
+    ViewData["Title"] = "Ukloni";
+}
+
+<h2>Ukloni poslovnicu</h2>
+
+<h3>Da li ste sigurni da želite ukloniti automobil ?</h3>
+
+<div class="jumbotron">
+    <div class="col-lg-4">
+        <dl>
+            <dt>
+                <img src="~/images/@Model.SlikaURL" class="img-thumbnail" />
+            </dt>
+        </dl>
+    </div>
+    <dl class="dl-horiznotal">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GodinaProizvodnje)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GodinaProizvodnje)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Proizvodjac)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Proizvodjac)
+        </dd>
+
+
+    </dl>
+    <hr />
+
+    <form asp-action="Ukloni">
+        <input type="hidden" asp-for="AutomobilID" />
+        <div>
+            <a asp-action="Index" class="col-lg-2">Vrati se nazad</a>
+            <input type="submit" value="Ukloni" class="btn btn-danger" />
+        </div>
+    </form>
+</div>

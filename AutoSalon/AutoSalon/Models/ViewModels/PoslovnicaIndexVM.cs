@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AutoSalon.Models.ViewModels
 {
     public class PoslovnicaIndexVM
     {
         public List<Row> Rows { get; set; }
-
+        public int GradID { get; set; }
+        public List<SelectListItem> Gradovi { get;  set; }
+   
         public class Row
         {
             public int PoslovnicaId { get; set; }

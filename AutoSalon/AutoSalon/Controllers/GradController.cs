@@ -20,7 +20,7 @@ namespace AutoSalon.Controllers
         }
         public IActionResult Index()
         {
-            List<GradVM> podaci = _context.Gradovi.Select(x => new GradVM
+            List<GradVM> podaci = _context.Grad.Select(x => new GradVM
             {
                 GradID=x.GradID,
                 Naziv=x.Naziv,
@@ -36,7 +36,7 @@ namespace AutoSalon.Controllers
 
         public IActionResult Izbrisi(int id)
         {
-            Grad g = _context.Gradovi.SingleOrDefault(x => x.GradID == id);
+            Grad g = _context.Grad.SingleOrDefault(x => x.GradID == id);
 
             if (g == null)
                 return View("Error");
@@ -48,14 +48,14 @@ namespace AutoSalon.Controllers
         }
         public IActionResult Dodaj()
         {
-            List<Drzava> podaci = _context.Drzave.ToList();
+            List<Drzava> podaci = _context.Drzava.ToList();
             ViewData["kljuc"] = podaci;
             return View();
         }
 
         public IActionResult Snimi(int gradID, string Naziv,int DrzavaID,string PostanskiBroj)
         {
-            Grad g = _context.Gradovi.Find(gradID);
+            Grad g = _context.Grad.Find(gradID);
 
             if (g == null)
             {
@@ -75,8 +75,8 @@ namespace AutoSalon.Controllers
         }
         public IActionResult Uredi(int id)
         {
-            Grad g = _context.Gradovi.Find(id);
-            List<Drzava> drzave = _context.Drzave.ToList();
+            Grad g = _context.Grad.Find(id);
+            List<Drzava> drzave = _context.Drzava.ToList();
             ViewData["kljuc"] = g;
             ViewData["kljuc1"] = drzave;
 

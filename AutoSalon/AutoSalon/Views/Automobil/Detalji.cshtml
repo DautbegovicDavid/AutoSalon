@@ -1,0 +1,59 @@
+﻿@model AutomobilDetaljiVM
+@{
+    ViewData["Title"] = "Detalji";
+}
+
+<h2>Detalji automobila</h2>
+<dd>
+    @Html.HiddenFor(model => model.AutomobilID)
+</dd>
+<div class="container">
+    <div class="jumbotron">
+        <div class="col-lg-4">
+            <dl>
+                <dt>
+                    <img src="~/images/@Model.SlikaURL" class="img-thumbnail" />
+                </dt>
+            </dl>
+        </div>
+        <dl class="jumbotron">
+
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.Proizvodjac)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Proizvodjac)
+            </dd>
+
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.GodinaProizvodnje)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GodinaProizvodnje)
+            </dd>
+
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.Boja)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Boja)
+            </dd>
+
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.Novo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Novo)
+            </dd>
+        </dl>
+
+        <a asp-action="Index" class="container  col-lg-4">Vrati se nazad</a>
+
+    </div>
+</div>

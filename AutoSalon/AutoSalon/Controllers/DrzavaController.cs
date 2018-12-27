@@ -19,7 +19,7 @@ namespace AutoSalon.Controllers
         }
         public IActionResult Index()
         {
-            List<DrzavaVM> podaci = _context.Drzave.Select(x => new DrzavaVM
+            List<DrzavaVM> podaci = _context.Drzava.Select(x => new DrzavaVM
             {
                 DrzavaID = x.DrzavaID,
                 Naziv = x.Naziv
@@ -33,7 +33,7 @@ namespace AutoSalon.Controllers
 
         public IActionResult Izbrisi(int id)
         {
-            Drzava d = _context.Drzave.SingleOrDefault(x => x.DrzavaID == id);
+            Drzava d = _context.Drzava.SingleOrDefault(x => x.DrzavaID == id);
 
             if (d == null)
                 return View("Error");
@@ -50,7 +50,7 @@ namespace AutoSalon.Controllers
 
         public IActionResult Snimi(int DrzavaID, string Naziv)
         {
-            Drzava d = _context.Drzave.Find(DrzavaID);
+            Drzava d = _context.Drzava.Find(DrzavaID);
 
             if (d == null)
             {
@@ -68,7 +68,7 @@ namespace AutoSalon.Controllers
         }
         public IActionResult Uredi(int id)
         {
-            Drzava d = _context.Drzave.Find(id);
+            Drzava d = _context.Drzava.Find(id);
             ViewData["kljuc"] = d;
             return View();
         }

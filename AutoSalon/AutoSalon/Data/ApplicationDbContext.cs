@@ -9,18 +9,18 @@ namespace AutoSalon.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser,IdentityRole<int>,int>
     {
 
-        public DbSet<Drzava> Drzave { get; set; }
-        public DbSet<Grad> Gradovi { get; set; }
-        public DbSet<Poslovnica> Poslovnice { get; set; }
-        public DbSet<Automobil> Automobili { get; set; }
-        public DbSet<AutoDetalji> Autodetalji { get; set; }
-        public DbSet<DodatnaOprema> DodatneOpreme { get; set; }
-        public DbSet<Kupovina> Kupovine { get; set; }
-        public DbSet<Ocjena> Ocjene { get; set; }
-        public DbSet<Proizvodjac> Proizvodjaci { get; set; }
-        public DbSet<Racun> Racuni { get; set; }
-        public DbSet<RezervacijaRentanje> rezervacijeRentanja { get; set; }
-        public DbSet<RezervacijaTestiranje> rezervacijeTestiranja { get; set; }
+        public DbSet<Drzava> Drzava { get; set; }
+        public DbSet<Grad> Grad { get; set; }
+        public DbSet<Poslovnica> Poslovnica { get; set; }
+        public DbSet<Automobil> Automobil { get; set; }
+        public DbSet<AutomobilDetalji> AutomobilDetalji { get; set; }
+        public DbSet<DodatnaOprema> DodatnaOprema { get; set; }
+        public DbSet<Kupovina> Kupovina { get; set; }
+        public DbSet<Ocjena> Ocjena { get; set; }
+        public DbSet<Proizvodjac> Proizvodjac { get; set; }
+        public DbSet<Racun> Racun { get; set; }
+        public DbSet<RezervacijaRentanje> RezervacijaRentanja { get; set; }
+        public DbSet<RezervacijaTestiranje> RezervacijaTestiranja { get; set; }
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -85,7 +85,10 @@ namespace AutoSalon.Data
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
             });
-            
+            //builder.Entity<Automobil>()
+            //       .HasOne(s => s.AutoDetalji)
+            //       .WithOne(sd=> sd.Automobil)
+            //       .HasForeignKey<AutoDetalji>(ad=> ad.AutomobilID);
 
 
 

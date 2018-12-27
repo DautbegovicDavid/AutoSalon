@@ -13,9 +13,6 @@
             <div class="form-group">
                 <label asp-for="Naziv" class="control-label">Naziv poslovnice :</label>
                 <input asp-for="Naziv" class="form-control" />
-
-                @*@Html.TextBoxFor(model => model.Naziv, new { @class = "form-control" })*@
-
                 <span asp-validation-for="Naziv" class="text-danger"></span>
             </div>
 
@@ -28,7 +25,6 @@
             <div class="form-group">
                 <label asp-for="Adresa" class="control-label">Adresa :</label>
                 <input asp-for="Adresa" class="form-control" />
-
                 <span asp-validation-for="Adresa" class="text-danger"></span>
             </div>
 

@@ -21,7 +21,7 @@ namespace AutoSalon.Models
         public string Slika { get; set; }
         public bool Dostupan { get; set; }
         List<DodatnaOprema> dodatnaOprema = new List<DodatnaOprema>();
-        public virtual AutoDetalji AutoDetalji { get; set; }
+        public  AutomobilDetalji AutomobilDetalji { get; set; }
 
 
     }

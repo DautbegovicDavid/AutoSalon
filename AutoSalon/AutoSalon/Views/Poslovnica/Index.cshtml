@@ -4,12 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Poslovnice</h2>
+<h2></h2>
+<a asp-action="Dodaj" asp-controller="Poslovnica" class="btn btn-primary">Nova poslovnica</a>
+<br />
+<br />
+<br />
+<form class="form-inline" asp-action="Index" asp-route-GradID="@Model.GradID">
+    <div class="form-group">
+        <select asp-for="@Model.GradID" asp-items="@Model.Gradovi" class="form-control"></select>
 
-<p>
-    <a asp-action="Dodaj" asp-controller="Poslovnica" class="btn btn-primary">Dodaj novu</a>
-</p>
-<table class="table table-bordered">
+        <button type="submit" class="btn btn-success">Traži</button>
+    </div>
+</form>
+<br />
+
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Naziv poslovnice</th>
@@ -23,17 +32,22 @@
     <tbody>
         @foreach (var item in Model.Rows)
         {
-        <tr>
-            <td>@item.Naziv</td>
-            <td>@item.Grad</td>
-            <td>@item.Adresa</td>
-            <td>@item.KontaktTelefon</td>
-            <td>
-                <a asp-action="Detalji" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-info">Detalji</a>
-                <a asp-action="Uredi" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-warning">Uredi</a>
-                <a asp-action="Ukloni" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-danger">Ukloni</a>
-            </td>
-        </tr>
+
+            <tr>
+
+                <td>@item.Naziv</td>
+                <td>@item.Grad</td>
+                <td>@item.Adresa</td>
+                <td>@item.KontaktTelefon</td>
+                <td>
+                    <a asp-action="Detalji" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-info">Detalji</a>
+                    <a asp-action="Uredi" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-warning">Uredi</a>
+                    <a asp-action="Ukloni" asp-controller="Poslovnica" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-danger">Ukloni</a>
+                </td>
+            </tr>
+
+
+
         }
     </tbody>
 

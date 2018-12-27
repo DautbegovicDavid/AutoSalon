@@ -3,12 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AutoSalon.Models
 {
-    public class AutoDetalji
+    public class AutomobilDetalji
     {
         [Key]
-        [ForeignKey("AutomobilID")]
+        public int AutomobilDetaljiID { get; set; }
         public int AutomobilID { get; set; }
-        public virtual Automobil Automobil{get;set;}
+        [ForeignKey("AutomobilID")]
+        public  Automobil Automobil{get;set;}
         public string Gorivo { get; set; }
         public string Transmisija { get; set; }
         public string Pogon { get; set; }
@@ -16,14 +17,14 @@ namespace AutoSalon.Models
         public string KonjskeSnage { get; set; }
         public string VelicinaFelgi { get; set; }
         public string Tezina { get; set; }
-        public string brojSjedista { get; set; }
-        public string brojVrata { get; set; }
+        public string BrojSjedista { get; set; }
+        public string BrojVrata { get; set; }
         public string Kubikaza { get; set; }
         public string Tip { get; set; }
         public string EmisioniStandard { get; set; }
-        public string brojBrzina { get; set; }
+        public string BrojBrzina { get; set; }
         public string Kilometraza { get; set; }
         public string Cijena { get; set; }
-        public string cijenaRentanja { get; set; }
+        public string CijenaRentanja { get; set; }
     }
 }
