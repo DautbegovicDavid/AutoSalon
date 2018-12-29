@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +17,12 @@ namespace AutoSalon.Controllers
     public class PoslovnicaController : Controller
     {
         private ApplicationDbContext _context;
+        private IHostingEnvironment he;
 
-        public PoslovnicaController(ApplicationDbContext context)
+        public PoslovnicaController(ApplicationDbContext context, IHostingEnvironment _he)
         {
             _context = context;
+            he = _he;
         }
 
         //Index
@@ -88,14 +93,17 @@ namespace AutoSalon.Controllers
         //Post Dodaj
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Dodaj(PoslovnicaDodajVM model)
+        public async Task<IActionResult> Dodaj(PoslovnicaDodajVM model,IFormFile SlikaUrl)
         {
             Poslovnica poslovnica = new Poslovnica();
             poslovnica.GradID = model.GradID;
             poslovnica.Naziv = model.Naziv;
             poslovnica.Adresa = model.Adresa;
             poslovnica.KontaktTelefon = model.KontaktTelefon;
-            poslovnica.SlikaURL = model.SlikaUrl;
+            poslovnica.SlikaURL =SlikaUrl.FileName;
+
+            var filePath = Path.Combine(he.WebRootPath + "\\images\\Poslovnice", SlikaUrl.FileName);
+            SlikaUrl.CopyTo(new FileStream(filePath, FileMode.Create));
 
             if (ModelState.IsValid)
             {

@@ -104,7 +104,7 @@ namespace AutoSalon.Controllers
             automobil.Slika = SlikaURL.FileName;
 
             
-            var filePath = Path.Combine(he.WebRootPath+"\\images", SlikaURL.FileName);
+            var filePath = Path.Combine(he.WebRootPath+ "\\images\\Automobili", SlikaURL.FileName);
             SlikaURL.CopyTo(new FileStream(filePath, FileMode.Create));
 
             if (ModelState.IsValid)

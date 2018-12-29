@@ -10,41 +10,41 @@
 <br />
 <form class="form-inline" asp-action="Index" asp-route-ProizvodjacID="@Model.ProizvodjacID">
     <select asp-for="@Model.ProizvodjacID" asp-items="@Model.Proizvodjaci" class="form-control"></select>
-    <button type="submit" class="btn btn-default">Traži</button>
+    <button type="submit" class="btn btn-success">Traži</button>
 </form>
 <br />
 
 <table class="table table-striped">
-    <thead>
-        <tr>
+    <thead class="">
+        <tr >
             <th></th>
-            <th>Model</th>
-            <th>Proizvodjač</th>
-            <th>Godina proizvodnje</th>
-            <th>Dostupan</th>
-            <th></th>
+            <th class="text-center">Model</th>
+            <th class="text-center">Proizvodjač</th>
+            <th class="text-center">Godina proizvodnje</th>
+            <th class="text-center">Dostupan</th>
+            <th ></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Rows)
         {
             <tr>
-                <td><img src="~/images/@item.SlikaURL" width="120" /></td>
-                <td>@item.Model</td>
-                <td>@item.Proizvodjac</td>
-                <td>@item.GodinaProizvodnje</td>
+                <td ><img src="~/images/Automobili/@item.SlikaURL" width="120" /></td>
+                <td class="text-center">@item.Model</td>
+                <td class="text-center">@item.Proizvodjac</td>
+                <td class="text-center">@item.GodinaProizvodnje</td>
                 @if (item.Dostupan)
                 {
-                    <td>
-                        <p class="btn-success">Da</p>
+                    <td >
+                        <p class="text-success text-center">Da</p>
                     </td>
                 }
                 else
                 {
-                    <td><a class="btn-danger">Nije dostupan</a></td>
+                    <td><a class="text-danger text-center">Nije dostupan</a></td>
 
                 }
-                <td>@item.Cijena</td>
+                <td class="text-center">@item.Cijena</td>
                 <td>
                     <a asp-action="Detalji" asp-route-AutomobilID="@item.AutomobilID" class="btn btn-info">Detalji</a>
                     <a asp-action="Uredi" asp-route-AutomobilID="@item.AutomobilID" class="btn btn-warning">Uredi</a>
