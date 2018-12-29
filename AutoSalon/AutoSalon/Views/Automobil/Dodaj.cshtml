@@ -4,35 +4,40 @@
 }
 
 <h2>Dodaj automobil</h2>
-<div class="row">
+<div class="row jumbotron">
     <div class="col-md-4">
-        <form asp-action="Dodaj" method="post">
+        <form asp-action="Dodaj" method="post" enctype="multipart/form-data">
+            <div >
+                <img src="~/images/@Model.SlikaURL" />
+                <input type="file" asp-for="SlikaURL"/>
+            </div>
+            <div class="jumbotron col">
+                <div class="form-group">
+                    <label asp-for="ProizvodjacID">Proizvođač automobila :</label>
+                    <select asp-for="ProizvodjacID" asp-items="Model.Proizvodjaci" class="form-control"></select>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="ProizvodjacID">Proizvođač automobila :</label>
-                <select asp-for="ProizvodjacID" asp-items="Model.Proizvodjaci" class="form-control"></select>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Model">Model automobila :</label>
+                    <input asp-for="Model" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="GodinaProizvodnje">Godina proizvodnje automobila :</label>
+                    <input asp-for="GodinaProizvodnje" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Boja">Boja automobila :</label>
+                    <input asp-for="Boja" class="form-control" />
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Model">Model automobila :</label>
-                <input asp-for="Model" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="GodinaProizvodnje">Godina proizvodnje automobila :</label>
-                <input asp-for="GodinaProizvodnje" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Boja">Boja automobila :</label>
-                <input asp-for="Boja" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Dostupan">Dostupan  :</label>
-                <input  asp-for="Dostupan"  />
-            </div>
-            <div class="form-group">
-                <label asp-for="Novo">Novo :</label>
-                <input  asp-for="Novo"  />
+                <div class="form-group">
+                    <label asp-for="Dostupan">Dostupan  :</label>
+                    <input asp-for="Dostupan" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Novo">Novo :</label>
+                    <input asp-for="Novo" />
+                </div>
             </div>
             <input type="submit" value="Spremi" class="btn btn-success" />
         </form>

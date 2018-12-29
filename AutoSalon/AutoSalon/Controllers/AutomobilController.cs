@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +17,11 @@ namespace AutoSalon.Controllers
     public class AutomobilController : Controller
     {
         private ApplicationDbContext db;
-        public AutomobilController(ApplicationDbContext _db)
+        private IHostingEnvironment he;
+        public AutomobilController(ApplicationDbContext _db, IHostingEnvironment _he)
         {
             db = _db;
+            he = _he;
         }
         public IActionResult Index(int ? ProizvodjacID)
         {
@@ -87,7 +92,7 @@ namespace AutoSalon.Controllers
         }
 
         [HttpPost]
-        public async Task< IActionResult > Dodaj(AutomobilDodajVM AutomobilDodajVM)
+        public async Task< IActionResult > Dodaj(AutomobilDodajVM AutomobilDodajVM, IFormFile SlikaURL)
         {
             Automobil automobil = new Automobil();
             automobil.Boja = AutomobilDodajVM.Boja;
@@ -96,7 +101,11 @@ namespace AutoSalon.Controllers
             automobil.Model = AutomobilDodajVM.Model;
             automobil.Novo = AutomobilDodajVM.Novo;
             automobil.ProizvodjacID = AutomobilDodajVM.ProizvodjacID;
-            automobil.Slika = AutomobilDodajVM.SlikaURL;
+            automobil.Slika = SlikaURL.FileName;
+
+            
+            var filePath = Path.Combine(he.WebRootPath+"\\images", SlikaURL.FileName);
+            SlikaURL.CopyTo(new FileStream(filePath, FileMode.Create));
 
             if (ModelState.IsValid)
             {
