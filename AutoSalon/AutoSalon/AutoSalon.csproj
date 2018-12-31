@@ -23,6 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\lib\bootstrap\.github\CONTRIBUTING.md" />
+    <None Include="wwwroot\lib\bootstrap\.github\ISSUE_TEMPLATE.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="Views\Automobil\Ukloni.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

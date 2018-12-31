@@ -3,57 +3,65 @@
     ViewData["Title"] = "Detalji";
 }
 
-<h2>Detalji automobila</h2>
 <dd>
     @Html.HiddenFor(model => model.AutomobilID)
 </dd>
-<div class="container">
-    <div class="jumbotron">
-        <div class="col-lg-4">
-            <dl>
-                <dt>
-                    <img src="~/images/Automobili/@Model.SlikaURL" class="img-thumbnail" />
+<div class="d-flex mt-4">
+    <div class="w-50">
+        <dl >
+            <dt class="w-100">
+                <img src="~/images/Automobili/@Model.SlikaURL" class="img-thumbnail" />
+            </dt>
+        </dl>
+    </div>
+    <div class="ml-5 w-50">
+        <dl class="w-100 h-100">
+            <div class="row mb-3">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Model)
                 </dt>
-            </dl>
-        </div>
-        <dl class="jumbotron">
+                <dd>
+                    @Html.DisplayFor(model => model.Model)
+                </dd>
+            </div>
 
-            <dt class="col-lg-2">
-                @Html.DisplayNameFor(model => model.Model)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Model)
-            </dd>
-            <dt class="col-lg-2">
-                @Html.DisplayNameFor(model => model.Proizvodjac)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Proizvodjac)
-            </dd>
+            <div class="row mb-3">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Proizvodjac)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Proizvodjac)
+                </dd>
+            </div>
 
-            <dt class="col-lg-2">
-                @Html.DisplayNameFor(model => model.GodinaProizvodnje)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.GodinaProizvodnje)
-            </dd>
+            <div class="row mb-3">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.GodinaProizvodnje)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.GodinaProizvodnje)
+                </dd>
+            </div>
 
-            <dt class="col-lg-2">
-                @Html.DisplayNameFor(model => model.Boja)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Boja)
-            </dd>
+            <div class="row mb-3">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Boja)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Boja)
+                </dd>
+            </div>
 
-            <dt class="col-lg-2">
-                @Html.DisplayNameFor(model => model.Novo)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Novo)
-            </dd>
+            <div class="row mb-3">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Novo)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Novo)
+                </dd>
+            </div>
         </dl>
 
-        <a asp-action="Index" class="container  col-lg-4">Vrati se nazad</a>
-
+        <a asp-action="Index" class="float-lg-left">Vrati se nazad</a>
     </div>
 </div>
