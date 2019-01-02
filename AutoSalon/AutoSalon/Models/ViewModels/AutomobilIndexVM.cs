@@ -17,11 +17,12 @@ namespace AutoSalon.Models.ViewModels
             public int AutomobilID { get; set; }
             public string Model { get; set; }          
             public string Proizvodjac { get; set; }
-            public string GodinaProizvodnje { get; set; }
+            public int GodinaProizvodnje { get; set; }
             public string Boja { get; set; }
+            public string Stanje { get; set; }
             public string SlikaURL { get; set; }
             public bool Dostupan { get; set; }
-            public string Cijena { get; set; }
+            public double Cijena { get; set; }
         }
     }
 }

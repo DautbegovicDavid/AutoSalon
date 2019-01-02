@@ -15,53 +15,218 @@
         </dl>
     </div>
     <div class="ml-5 w-50">
-        <dl class="w-100 h-100">
-            <div class="row mb-3">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Model)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Model)
-                </dd>
+        <div class="container w-100 h-100">
+            <div class="row w-100 h-100">
+
+
+                <div class="col-sm-4">
+
+                    <div>
+                        <dt>
+                            <label asp-for="Proizvodjac" class="text-white">Proizvođač: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Proizvodjac</p>
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="GodinaProizvodnje" class="text-white">Godište: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.GodinaProizvodnje</p>
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="Gorivo" class="text-white">Gorivo: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Gorivo</p>
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="Transmisija" class="text-white">Transmisija: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Transmisija</p>
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="Pogon" class="text-white">Pogon: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Pogon</p>
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="Kilovati" class="text-white">Kilovati: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Kilovati</p>
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="Kilometraza" class="text-white">Kilometraža: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Kilometraza</p>
+                        </dd>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                    <div>
+                        <dt>
+                            <label asp-for="Model" class="text-white">Model: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Model</p>
+
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>
+                            <label asp-for="Boja" class="text-white">Boja: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Boja</p>
+
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="VelicinaFelgi" class="text-white">Veličina felgi: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.VelicinaFelgi</p>
+
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="BrojSjedista" class="text-white">Broj sjedišta: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.BrojSjedista</p>
+
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="BrojVrata" class="text-white">Broj vrata: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.BrojVrata</p>
+
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="Tezina" class="text-white">Težina: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Tezina</p>
+
+                        </dd>
+                    </div>
+
+                    <div>
+                        <dt>
+                            <label asp-for="Kubikaza" class="text-white">Kubikaža: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Kubikaza</p>
+
+                        </dd>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div>
+                        <dt>
+                            <label asp-for="Tip" class="text-white">Tip: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Tip</p>
+
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>
+                            <label asp-for="EmisioniStandard" class="text-white">Emisioni standard: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.EmisioniStandard</p>
+
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>
+                            <label asp-for="BrojBrzina" class="text-white">Broj brzina: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.BrojBrzina</p>
+
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>
+                            <label asp-for="Dostupan" class="text-white">Dostupan: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Dostupan</p>
+
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>
+                            <label asp-for="Novo" class="text-white">Novo: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Novo</p>
+
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>
+                            <label asp-for="Cijena" class="text-white">Cijena: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.Cijena</p>
+
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>
+                            <label asp-for="CijenaRentanja" class="text-white">Cijena rentanja: </label>
+                        </dt>
+                        <dd>
+                            <p>@Model.CijenaRentanja</p>
+
+                        </dd>
+                    </div>
+                </div>
+                </div>
+
             </div>
 
-            <div class="row mb-3">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Proizvodjac)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Proizvodjac)
-                </dd>
-            </div>
-
-            <div class="row mb-3">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.GodinaProizvodnje)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.GodinaProizvodnje)
-                </dd>
-            </div>
-
-            <div class="row mb-3">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Boja)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Boja)
-                </dd>
-            </div>
-
-            <div class="row mb-3">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Novo)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Novo)
-                </dd>
-            </div>
-        </dl>
-
-        <a asp-action="Index" class="float-lg-left">Vrati se nazad</a>
+        <a asp-action="Uredi" asp-route-AutomobilID="@Model.AutomobilID" class="btn btn-outline-warning ml-5">Uredi</a>
+        <a asp-action="Index" class="float-lg-left btn btn-outline-danger mr-2">Vrati se nazad</a>
     </div>
 </div>

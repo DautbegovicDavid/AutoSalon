@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\images\Automobili\" />
+    <Folder Include="wwwroot\images\Poslovnice\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +30,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Automobil\Detalji.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Automobil\Dodaj.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Automobil\Ukloni.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

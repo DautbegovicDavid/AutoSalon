@@ -268,11 +268,11 @@ namespace AutoSalon.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Boja = table.Column<string>(nullable: true),
                     Dostupan = table.Column<bool>(nullable: false),
-                    GodinaProizvodnje = table.Column<string>(nullable: true),
+                    GodinaProizvodnje = table.Column<int>(nullable: false),
                     Model = table.Column<string>(nullable: true),
                     Novo = table.Column<bool>(nullable: false),
                     ProizvodjacID = table.Column<int>(nullable: false),
-                    Slika = table.Column<string>(nullable: true)
+                    SlikaURL = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -292,21 +292,21 @@ namespace AutoSalon.Migrations
                     AutomobilDetaljiID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AutomobilID = table.Column<int>(nullable: false),
-                    BrojBrzina = table.Column<string>(nullable: true),
-                    BrojSjedista = table.Column<string>(nullable: true),
+                    BrojBrzina = table.Column<int>(nullable: false),
+                    BrojSjedista = table.Column<int>(nullable: false),
                     BrojVrata = table.Column<string>(nullable: true),
-                    Cijena = table.Column<string>(nullable: true),
-                    CijenaRentanja = table.Column<string>(nullable: true),
+                    Cijena = table.Column<double>(nullable: false),
+                    CijenaRentanja = table.Column<double>(nullable: false),
                     EmisioniStandard = table.Column<string>(nullable: true),
-                    Gorivo = table.Column<string>(nullable: true),
-                    Kilometraza = table.Column<string>(nullable: true),
-                    Kilovati = table.Column<string>(nullable: true),
-                    KonjskeSnage = table.Column<string>(nullable: true),
+                    Gorivo = table.Column<string>(nullable: false),
+                    Kilometraza = table.Column<float>(nullable: false),
+                    Kilovati = table.Column<int>(nullable: false),
+                    KonjskeSnage = table.Column<int>(nullable: false),
                     Kubikaza = table.Column<string>(nullable: true),
-                    Pogon = table.Column<string>(nullable: true),
-                    Tezina = table.Column<string>(nullable: true),
+                    Pogon = table.Column<string>(nullable: false),
+                    Tezina = table.Column<float>(nullable: false),
                     Tip = table.Column<string>(nullable: true),
-                    Transmisija = table.Column<string>(nullable: true),
+                    Transmisija = table.Column<string>(nullable: false),
                     VelicinaFelgi = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

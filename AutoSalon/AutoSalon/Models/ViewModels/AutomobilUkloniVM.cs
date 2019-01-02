@@ -10,7 +10,7 @@ namespace AutoSalon.Models.ViewModels
         public int AutomobilID { get; set; }
         public string Model { get; set; }
         public string Proizvodjac { get; set; }
-        public string GodinaProizvodnje { get; set; }
+        public int GodinaProizvodnje { get; set; }
         public string SlikaURL { get; set; }
     }
 }

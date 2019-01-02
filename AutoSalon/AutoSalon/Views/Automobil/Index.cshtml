@@ -13,45 +13,52 @@
     <button type="submit" class="btn btn-success">Traži</button>
 </form>
 <br />
+<div class="container">
+    <div class="row">
 
-<table class="table table-striped">
-    <thead class="">
-        <tr >
-            <th></th>
-            <th class="text-center">Model</th>
-            <th class="text-center">Proizvodjač</th>
-            <th class="text-center">Godina proizvodnje</th>
-            <th class="text-center">Dostupan</th>
-            <th ></th>
-        </tr>
-    </thead>
-    <tbody>
         @foreach (var item in Model.Rows)
         {
-            <tr>
-                <td ><img src="~/images/Automobili/@item.SlikaURL" width="120" /></td>
-                <td class="text-center">@item.Model</td>
-                <td class="text-center">@item.Proizvodjac</td>
-                <td class="text-center">@item.GodinaProizvodnje</td>
-                @if (item.Dostupan)
-                {
-                    <td >
-                        <p class="text-success text-center">Da</p>
-                    </td>
-                }
-                else
-                {
-                    <td><a class="text-danger text-center">Nije dostupan</a></td>
 
-                }
-                <td class="text-center">@item.Cijena</td>
-                <td>
-                    <a asp-action="Detalji" asp-route-AutomobilID="@item.AutomobilID" class="btn btn-info">Detalji</a>
-                    <a asp-action="Uredi" asp-route-AutomobilID="@item.AutomobilID" class="btn btn-warning">Uredi</a>
-                    <a asp-action="Ukloni" asp-route-AutomobilID="@item.AutomobilID" class="btn btn-danger">Ukloni</a>
-                </td>
+            <div class="card-deck col-3 ">
 
-            </tr>
+                <!-- Card -->
+                <div class="card mb-4">
+
+                    <!--Card image-->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="~/images/Automobili/@item.SlikaURL" alt="@item.SlikaURL">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+                        <!--Title-->
+                        <h4 class="card-title text-white">@item.Proizvodjac  @item.Model</h4>
+                        <!--Text-->
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Godište: @item.GodinaProizvodnje</li>
+                            <li class="list-group-item">Cijena: @item.Cijena KM</li>
+                            @if (item.Stanje == "Novo")
+                            {
+                                <li class="list-group-item text-success">Novo vozilo </li>
+                            }
+                            else
+                            {
+                                <li class="list-group-item text-info">Korišteno vozilo </li>
+                            }
+                        </ul>
+                        <div class="mt-3 ml-5">
+                            <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                            <a asp-action="Detalji" asp-route-AutomobilID="@item.AutomobilID" class="btn btn-outline-dark text-white ml-5">Detalji</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
+

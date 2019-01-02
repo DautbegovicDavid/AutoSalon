@@ -81,7 +81,7 @@ namespace AutoSalon.Migrations
 
                     b.Property<bool>("Dostupan");
 
-                    b.Property<string>("GodinaProizvodnje");
+                    b.Property<int>("GodinaProizvodnje");
 
                     b.Property<string>("Model");
 
@@ -89,7 +89,7 @@ namespace AutoSalon.Migrations
 
                     b.Property<int>("ProizvodjacID");
 
-                    b.Property<string>("Slika");
+                    b.Property<string>("SlikaURL");
 
                     b.HasKey("AutomobilID");
 
@@ -105,35 +105,38 @@ namespace AutoSalon.Migrations
 
                     b.Property<int>("AutomobilID");
 
-                    b.Property<string>("BrojBrzina");
+                    b.Property<int>("BrojBrzina");
 
-                    b.Property<string>("BrojSjedista");
+                    b.Property<int>("BrojSjedista");
 
                     b.Property<string>("BrojVrata");
 
-                    b.Property<string>("Cijena");
+                    b.Property<double>("Cijena");
 
-                    b.Property<string>("CijenaRentanja");
+                    b.Property<double>("CijenaRentanja");
 
                     b.Property<string>("EmisioniStandard");
 
-                    b.Property<string>("Gorivo");
+                    b.Property<string>("Gorivo")
+                        .IsRequired();
 
-                    b.Property<string>("Kilometraza");
+                    b.Property<float>("Kilometraza");
 
-                    b.Property<string>("Kilovati");
+                    b.Property<int>("Kilovati");
 
-                    b.Property<string>("KonjskeSnage");
+                    b.Property<int>("KonjskeSnage");
 
                     b.Property<string>("Kubikaza");
 
-                    b.Property<string>("Pogon");
+                    b.Property<string>("Pogon")
+                        .IsRequired();
 
-                    b.Property<string>("Tezina");
+                    b.Property<float>("Tezina");
 
                     b.Property<string>("Tip");
 
-                    b.Property<string>("Transmisija");
+                    b.Property<string>("Transmisija")
+                        .IsRequired();
 
                     b.Property<string>("VelicinaFelgi");
 
