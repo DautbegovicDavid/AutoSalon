@@ -11,17 +11,25 @@ namespace AutoSalon.Models
     {
         [Key]
         public int AutomobilID { get; set; }
+
+        [StringLength(20)]
+        [Required]
         public string  Model { get; set; }
+
         public int ProizvodjacID { get; set; }
         [ForeignKey("ProizvodjacID")]
         public Proizvodjac Proizvodjac { get; set; }
+
         [Required]
-        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. " +
+        [RegularExpression(@"[0-9]{4}$", ErrorMessage = "Format nije validan. " +
           "Dozvoljeni su samo brojevi od 0 do 9")]
         public int  GodinaProizvodnje { get; set; }
-        [RegularExpression(@"^[A-Ža-ž]+$", ErrorMessage = "Format nije validan. " +
+
+        [StringLength(20)]
+        [RegularExpression(@"[A-Ža-ž]+$", ErrorMessage = "Format nije validan. " +
          "Dozvoljena su samo slova")]
         public string Boja { get; set; }
+
         public bool Novo { get; set; }
         public string SlikaURL { get; set; }
         public bool Dostupan { get; set; }

@@ -29,6 +29,8 @@
                 <div class="form-group col-sm-5 mt-2 mr-5">
                     <label asp-for="ProizvodjacID">Proizvođač automobila :</label>
                     <select asp-for="ProizvodjacID" asp-items="Model.Proizvodjaci" class="form-control"></select>
+                    <span asp-validation-for="Model" class="text-danger"></span>
+
                 </div>
                 <div class="form-group col-sm-5 mt-2 mr-5">
                     <label asp-for="Model">Model automobila :</label>
@@ -39,7 +41,7 @@
 
                 <div class="form-group col-sm-5 mt-2 mr-5">
                     <label asp-for="GodinaProizvodnje">Godina proizvodnje  :</label>
-                    <input asp-for="GodinaProizvodnje" class="form-control" />
+                    <input asp-for="GodinaProizvodnje"  class="form-control" value=""/>
                     <span asp-validation-for="GodinaProizvodnje" class="text-danger"></span>
 
                 </div>
@@ -52,13 +54,12 @@
 
                 <div class="form-group col-sm-5 mt-2 mr-5">
                     <label asp-for="Cijena">Cijena automobila :</label>
-                    <input asp-for="Cijena" class="form-control" />
+                    <input asp-for="Cijena" class="form-control" value=""/>
                     <span asp-validation-for="Cijena" class="text-danger"></span>
-
                 </div>
                 <div class="form-group col-sm-5 mt-2 mr-5">
                     <label asp-for="Kilometraza">Kilometraza automobila :</label>
-                    <input asp-for="Kilometraza" class="form-control" />
+                    <input asp-for="Kilometraza" class="form-control" value=""/>
                     <span asp-validation-for="Kilometraza" class="text-danger"></span>
 
                 </div>
@@ -108,7 +109,7 @@
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="Kilovati">Snaga (u kW) :</label>
-                    <input asp-for="Kilovati" class="form-control" />
+                    <input asp-for="Kilovati" class="form-control" value=""/>
                     <span asp-validation-for="Kilovati" class="text-danger"></span>
 
                 </div>
@@ -120,13 +121,13 @@
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="Tezina">Tezina :</label>
-                    <input asp-for="Tezina" class="form-control" />
+                    <input asp-for="Tezina" class="form-control" value=""/>
                     <span asp-validation-for="Tezina" class="text-danger"></span>
 
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="BrojSjedista">Broj sjedišta :</label>
-                    <input asp-for="BrojSjedista" class="form-control" />
+                    <input asp-for="BrojSjedista" class="form-control" value=""/>
                     <span asp-validation-for="BrojSjedista" class="text-danger"></span>
 
                 </div>
@@ -138,8 +139,8 @@
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="Kubikaza">Kubikaža automobila :</label>
-                    <input asp-for="Kubikaza" class="form-control" />
-                    <span asp-validation-for="Kubikaza" class="text-danger"></span>
+                    <input asp-for="Kubikaza" class="form-control" value=""/>
+                    <span asp-validation-for="Kubikaza"   class="text-danger" ></span>
 
                 </div>
 
@@ -148,7 +149,7 @@
         </div>
     </div>
 
-    <input type="submit" value="Spremi" class="btn btn-lg btn-success ml-5" />
+    <input type="submit" value="Spremi" class="btn btn-lg btn-outline-success font-weight-bold ml-5" />
 </form>
 
 @section Scripts{

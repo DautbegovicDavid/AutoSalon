@@ -11,7 +11,7 @@ using System;
 namespace AutoSalon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190101164352_Initial")]
+    [Migration("20190104195229_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,13 +29,23 @@ namespace AutoSalon.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("Adresa");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<DateTime>("DatumRodjenja");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<int>("GradID");
+
+                    b.Property<string>("Ime")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -53,6 +63,10 @@ namespace AutoSalon.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<string>("Prezime")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -61,6 +75,8 @@ namespace AutoSalon.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GradID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -78,13 +94,16 @@ namespace AutoSalon.Migrations
                     b.Property<int>("AutomobilID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Boja");
+                    b.Property<string>("Boja")
+                        .HasMaxLength(20);
 
                     b.Property<bool>("Dostupan");
 
                     b.Property<int>("GodinaProizvodnje");
 
-                    b.Property<string>("Model");
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
                     b.Property<bool>("Novo");
 
@@ -106,40 +125,43 @@ namespace AutoSalon.Migrations
 
                     b.Property<int>("AutomobilID");
 
-                    b.Property<int>("BrojBrzina");
+                    b.Property<string>("BrojSjedista")
+                        .HasMaxLength(5);
 
-                    b.Property<int>("BrojSjedista");
-
-                    b.Property<string>("BrojVrata");
+                    b.Property<string>("BrojVrata")
+                        .HasMaxLength(5);
 
                     b.Property<double>("Cijena");
 
                     b.Property<double>("CijenaRentanja");
 
-                    b.Property<string>("EmisioniStandard");
+                    b.Property<string>("EmisioniStandard")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Gorivo")
-                        .IsRequired();
+                        .HasMaxLength(20);
 
-                    b.Property<float>("Kilometraza");
+                    b.Property<int>("Kilometraza");
 
                     b.Property<int>("Kilovati");
 
                     b.Property<int>("KonjskeSnage");
 
-                    b.Property<string>("Kubikaza");
+                    b.Property<float>("Kubikaza");
 
                     b.Property<string>("Pogon")
-                        .IsRequired();
+                        .HasMaxLength(20);
 
-                    b.Property<float>("Tezina");
+                    b.Property<int>("Tezina");
 
-                    b.Property<string>("Tip");
+                    b.Property<string>("Tip")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Transmisija")
-                        .IsRequired();
+                        .HasMaxLength(20);
 
-                    b.Property<string>("VelicinaFelgi");
+                    b.Property<string>("VelicinaFelgi")
+                        .HasMaxLength(20);
 
                     b.HasKey("AutomobilDetaljiID");
 
@@ -252,7 +274,8 @@ namespace AutoSalon.Migrations
 
                     b.Property<int>("GradID");
 
-                    b.Property<string>("KontaktTelefon");
+                    b.Property<string>("KontaktTelefon")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Naziv")
                         .IsRequired()
@@ -483,6 +506,14 @@ namespace AutoSalon.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("UserToken");
+                });
+
+            modelBuilder.Entity("AutoSalon.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("AutoSalon.Models.Grad", "Grad")
+                        .WithMany()
+                        .HasForeignKey("GradID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Automobil", b =>

@@ -132,7 +132,7 @@ namespace AutoSalon.Controllers
                 Adresa = poslovnica.Adresa,
                 Naziv = poslovnica.Naziv,
                 KontaktTelefon = poslovnica.KontaktTelefon,
-                SlikaUrl = poslovnica.SlikaURL
+                SlikaURL = poslovnica.SlikaURL
             };
 
             return View( model);
@@ -148,7 +148,7 @@ namespace AutoSalon.Controllers
             poslovnica.KontaktTelefon = model.KontaktTelefon;
             poslovnica.Adresa = model.Adresa;
             poslovnica.Naziv = model.Naziv;
-            poslovnica.SlikaURL = model.SlikaUrl;
+            poslovnica.SlikaURL = model.SlikaURL;
 
             if (ModelState.IsValid)
             {

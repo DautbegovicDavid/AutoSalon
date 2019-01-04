@@ -65,32 +65,6 @@ namespace AutoSalon.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    UserID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.UserID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Grad",
                 columns: table => new
                 {
@@ -149,6 +123,91 @@ namespace AutoSalon.Migrations
                         column: x => x.RoleID,
                         principalTable: "Role",
                         principalColumn: "RoleID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Poslovnica",
+                columns: table => new
+                {
+                    PoslovnicaID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Adresa = table.Column<string>(maxLength: 30, nullable: true),
+                    GradID = table.Column<int>(nullable: false),
+                    KontaktTelefon = table.Column<string>(maxLength: 30, nullable: true),
+                    Naziv = table.Column<string>(maxLength: 30, nullable: false),
+                    SlikaURL = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Poslovnica", x => x.PoslovnicaID);
+                    table.ForeignKey(
+                        name: "FK_Poslovnica_Grad_GradID",
+                        column: x => x.GradID,
+                        principalTable: "Grad",
+                        principalColumn: "GradID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    UserID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Adresa = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    DatumRodjenja = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    GradID = table.Column<int>(nullable: false),
+                    Ime = table.Column<string>(maxLength: 50, nullable: false),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    Prezime = table.Column<string>(maxLength: 50, nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.UserID);
+                    table.ForeignKey(
+                        name: "FK_User_Grad_GradID",
+                        column: x => x.GradID,
+                        principalTable: "Grad",
+                        principalColumn: "GradID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Automobil",
+                columns: table => new
+                {
+                    AutomobilID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Boja = table.Column<string>(maxLength: 20, nullable: true),
+                    Dostupan = table.Column<bool>(nullable: false),
+                    GodinaProizvodnje = table.Column<int>(nullable: false),
+                    Model = table.Column<string>(maxLength: 20, nullable: false),
+                    Novo = table.Column<bool>(nullable: false),
+                    ProizvodjacID = table.Column<int>(nullable: false),
+                    SlikaURL = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Automobil", x => x.AutomobilID);
+                    table.ForeignKey(
+                        name: "FK_Automobil_Proizvodjac_ProizvodjacID",
+                        column: x => x.ProizvodjacID,
+                        principalTable: "Proizvodjac",
+                        principalColumn: "ProizvodjacID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -238,76 +297,27 @@ namespace AutoSalon.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Poslovnica",
-                columns: table => new
-                {
-                    PoslovnicaID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Adresa = table.Column<string>(maxLength: 30, nullable: true),
-                    GradID = table.Column<int>(nullable: false),
-                    KontaktTelefon = table.Column<string>(nullable: true),
-                    Naziv = table.Column<string>(maxLength: 30, nullable: false),
-                    SlikaURL = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Poslovnica", x => x.PoslovnicaID);
-                    table.ForeignKey(
-                        name: "FK_Poslovnica_Grad_GradID",
-                        column: x => x.GradID,
-                        principalTable: "Grad",
-                        principalColumn: "GradID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Automobil",
-                columns: table => new
-                {
-                    AutomobilID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Boja = table.Column<string>(nullable: true),
-                    Dostupan = table.Column<bool>(nullable: false),
-                    GodinaProizvodnje = table.Column<int>(nullable: false),
-                    Model = table.Column<string>(nullable: true),
-                    Novo = table.Column<bool>(nullable: false),
-                    ProizvodjacID = table.Column<int>(nullable: false),
-                    SlikaURL = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Automobil", x => x.AutomobilID);
-                    table.ForeignKey(
-                        name: "FK_Automobil_Proizvodjac_ProizvodjacID",
-                        column: x => x.ProizvodjacID,
-                        principalTable: "Proizvodjac",
-                        principalColumn: "ProizvodjacID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AutomobilDetalji",
                 columns: table => new
                 {
                     AutomobilDetaljiID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AutomobilID = table.Column<int>(nullable: false),
-                    BrojBrzina = table.Column<int>(nullable: false),
-                    BrojSjedista = table.Column<int>(nullable: false),
-                    BrojVrata = table.Column<string>(nullable: true),
+                    BrojSjedista = table.Column<string>(maxLength: 5, nullable: true),
+                    BrojVrata = table.Column<string>(maxLength: 5, nullable: true),
                     Cijena = table.Column<double>(nullable: false),
                     CijenaRentanja = table.Column<double>(nullable: false),
-                    EmisioniStandard = table.Column<string>(nullable: true),
-                    Gorivo = table.Column<string>(nullable: false),
-                    Kilometraza = table.Column<float>(nullable: false),
+                    EmisioniStandard = table.Column<string>(maxLength: 20, nullable: true),
+                    Gorivo = table.Column<string>(maxLength: 20, nullable: true),
+                    Kilometraza = table.Column<int>(nullable: false),
                     Kilovati = table.Column<int>(nullable: false),
                     KonjskeSnage = table.Column<int>(nullable: false),
-                    Kubikaza = table.Column<string>(nullable: true),
-                    Pogon = table.Column<string>(nullable: false),
-                    Tezina = table.Column<float>(nullable: false),
-                    Tip = table.Column<string>(nullable: true),
-                    Transmisija = table.Column<string>(nullable: false),
-                    VelicinaFelgi = table.Column<string>(nullable: true)
+                    Kubikaza = table.Column<float>(nullable: false),
+                    Pogon = table.Column<string>(maxLength: 20, nullable: true),
+                    Tezina = table.Column<int>(nullable: false),
+                    Tip = table.Column<string>(maxLength: 20, nullable: true),
+                    Transmisija = table.Column<string>(maxLength: 20, nullable: true),
+                    VelicinaFelgi = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -349,7 +359,7 @@ namespace AutoSalon.Migrations
                         column: x => x.KlijentID,
                         principalTable: "User",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Kupovina_Poslovnica_PoslovnicaID",
                         column: x => x.PoslovnicaID,
@@ -402,7 +412,7 @@ namespace AutoSalon.Migrations
                         column: x => x.KlijentID,
                         principalTable: "User",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_RezervacijaRentanja_Poslovnica_PoslovnicaID",
                         column: x => x.PoslovnicaID,
@@ -451,7 +461,7 @@ namespace AutoSalon.Migrations
                         column: x => x.KlijentID,
                         principalTable: "User",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_RezervacijaTestiranja_Poslovnica_PoslovnicaID",
                         column: x => x.PoslovnicaID,
@@ -593,6 +603,11 @@ namespace AutoSalon.Migrations
                 name: "IX_RoleClaim_RoleID",
                 table: "RoleClaim",
                 column: "RoleID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_GradID",
+                table: "User",
+                column: "GradID");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",

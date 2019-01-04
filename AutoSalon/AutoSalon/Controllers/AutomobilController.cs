@@ -336,13 +336,7 @@ namespace AutoSalon.Controllers
             automobilDetalji.Transmisija = AutomobilDodajVM.Transmisija;
             automobilDetalji.VelicinaFelgi = AutomobilDodajVM.VelicinaFelgi;
 
-            if (automobilDetalji.Transmisija == "Manualni (5+R)")
-                automobilDetalji.BrojBrzina = 5;
-            if (automobilDetalji.Transmisija == "Manualni (6+R)")
-                automobilDetalji.BrojBrzina = 6;
-            if (automobilDetalji.Kilometraza == 0)
-                automobil.Novo = true;
-
+         
 
             var filePath = Path.Combine(he.WebRootPath+ "\\images\\Automobili", SlikaURL.FileName);
             SlikaURL.CopyTo(new FileStream(filePath, FileMode.Create));

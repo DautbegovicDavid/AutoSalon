@@ -21,10 +21,10 @@ namespace AutoSalon.Models.ViewModels
         public string Pogon { get; set; }
         public int Kilovati { get; set; }
         public string VelicinaFelgi { get; set; }
-        public float Tezina { get; set; }
-        public int BrojSjedista { get; set; }
+        public int Tezina { get; set; }
+        public string BrojSjedista { get; set; }
         public string BrojVrata { get; set; }
-        public string Kubikaza { get; set; }
+        public float Kubikaza { get; set; }
         public string Tip { get; set; }
         public string EmisioniStandard { get; set; }
         public int BrojBrzina { get; set; }
