@@ -7,6 +7,6 @@ namespace AutoSalon.Models
         [Key]
         public int RacunID { get; set; }
         public DateTime DatumIzdavanja { get; set; }
-        public float Iznos { get; set; }
+        public decimal Iznos { get; set; }
     }
 }

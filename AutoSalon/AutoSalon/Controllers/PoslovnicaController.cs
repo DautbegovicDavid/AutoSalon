@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoSalon.Data;
 using AutoSalon.Models;
-using AutoSalon.Models.ViewModels;
+using AutoSalon.Models.ViewModels.PoslovnicaViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,29 +31,16 @@ namespace AutoSalon.Controllers
             PoslovnicaIndexVM model = new PoslovnicaIndexVM();
             model.Gradovi = PripremaListItemGradovi();
             model.Gradovi.FirstOrDefault().Text = "(sve poslovnice)";
-            if (GradID != null) {
-                model.Rows = _context.Poslovnica.Where(y=> y.GradID==GradID).Select(x => new PoslovnicaIndexVM.Row()
-                {
-                    PoslovnicaId = x.PoslovnicaID,
-                    Naziv = x.Naziv,
-                    Grad = x.Grad.Naziv,
-                    Adresa = x.Adresa,
-                    KontaktTelefon = x.KontaktTelefon,
-                    SlikaUrl = x.SlikaURL
-                }).ToList();
-            }
-            else
+            model.Rows = _context.Poslovnica.Where(y => y.GradID == GradID || GradID==null).Select(x => new PoslovnicaIndexVM.Row()
             {
-                model.Rows = _context.Poslovnica.Select(x => new PoslovnicaIndexVM.Row()
-                {
-                    PoslovnicaId = x.PoslovnicaID,
-                    Naziv = x.Naziv,
-                    Grad = x.Grad.Naziv,
-                    Adresa = x.Adresa,
-                    KontaktTelefon = x.KontaktTelefon,
-                    SlikaUrl = x.SlikaURL
-                }).ToList();
-            }
+                PoslovnicaId = x.PoslovnicaID,
+                Naziv = x.Naziv,
+                Grad = x.Grad.Naziv,
+                Adresa = x.Adresa,
+                KontaktTelefon = x.KontaktTelefon,
+                SlikaUrl = x.SlikaURL
+            }).ToList();
+    
 
             return View( model);
         }

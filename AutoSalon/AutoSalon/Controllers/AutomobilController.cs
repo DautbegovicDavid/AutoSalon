@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels;
+using AutoSalon.Models.ViewModels.AutomobilViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,36 +30,21 @@ namespace AutoSalon.Controllers
             model.Proizvodjaci = PripremaListItemProizvodjaci();
             model.Proizvodjaci.FirstOrDefault().Text = "(Sva vozila)";
 
-            if (ProizvodjacID != null)  {
 
-                model.Rows = db.Automobil.Where(y => y.ProizvodjacID == ProizvodjacID).Select(x => new AutomobilIndexVM.Row()
+                model.Rows = db.Automobil.Where(y => y.ProizvodjacID == ProizvodjacID || ProizvodjacID==null)
+                                         .Select(x => new AutomobilIndexVM.Row()
                 {
                     AutomobilID = x.AutomobilID,
                     Boja = x.Boja,
                     Model = x.Model,
                     GodinaProizvodnje = x.GodinaProizvodnje,
                     Dostupan = x.Dostupan,
-                    Cijena = db.AutomobilDetalji.FirstOrDefault(s => s.AutomobilID == x.AutomobilID).Cijena,
+                    Cijena =string.Format("{0:C}" ,db.AutomobilDetalji.FirstOrDefault(s => s.AutomobilID == x.AutomobilID).Cijena),
                     Proizvodjac = x.Proizvodjac.Naziv,
                     SlikaURL = x.SlikaURL,
                     Stanje=x.Novo?"Novo":"Korišteno"
                 }).ToList();
-                }
-            else{
-                model.Rows = db.Automobil.Select(x => new AutomobilIndexVM.Row()
-                {
-                    AutomobilID = x.AutomobilID,
-                    Boja = x.Boja,
-                    Model = x.Model,
-                    GodinaProizvodnje = x.GodinaProizvodnje,
-                    Dostupan = x.Dostupan,
-                    Cijena = db.AutomobilDetalji.FirstOrDefault(s => s.AutomobilID == x.AutomobilID).Cijena,
-                    Proizvodjac = x.Proizvodjac.Naziv,
-                    SlikaURL = x.SlikaURL,
-                    Stanje = x.Novo ? "Novo" : "Korišteno"
-
-                }).ToList();
-                }
+        
 
             return View(model);
         }
@@ -312,7 +298,8 @@ namespace AutoSalon.Controllers
             automobil.Dostupan = AutomobilDodajVM.Dostupan;
             automobil.GodinaProizvodnje = AutomobilDodajVM.GodinaProizvodnje;
             automobil.Model = AutomobilDodajVM.Model;
-            automobil.Novo = AutomobilDodajVM.Novo;
+            if (AutomobilDodajVM.Kilometraza < 100)
+                automobil.Novo = true;
             automobil.ProizvodjacID = AutomobilDodajVM.ProizvodjacID;
             automobil.SlikaURL = SlikaURL.FileName;
 
@@ -324,6 +311,7 @@ namespace AutoSalon.Controllers
             automobilDetalji.BrojSjedista = AutomobilDodajVM.BrojSjedista;
             automobilDetalji.BrojVrata = AutomobilDodajVM.BrojVrata;
             automobilDetalji.Cijena = AutomobilDodajVM.Cijena;
+            automobilDetalji.CijenaRentanja = AutomobilDodajVM.CijenaRentanja;
             automobilDetalji.EmisioniStandard = AutomobilDodajVM.EmisioniStandard;
             automobilDetalji.Gorivo = AutomobilDodajVM.Gorivo;
             automobilDetalji.Kilometraza = AutomobilDodajVM.Kilometraza;
@@ -411,7 +399,8 @@ namespace AutoSalon.Controllers
             automobil.Dostupan = AutomobilUrediVM.Dostupan;
             automobil.GodinaProizvodnje = AutomobilUrediVM.GodinaProizvodnje;
             automobil.Model = AutomobilUrediVM.Model;
-            automobil.Novo = AutomobilUrediVM.Novo;
+            if (AutomobilUrediVM.Kilometraza < 100)
+                automobil.Novo = true;
             automobil.SlikaURL = AutomobilUrediVM.SlikaURL;
             automobil.ProizvodjacID = AutomobilUrediVM.ProizvodjacID;
             automobilDetalji.EmisioniStandard = AutomobilUrediVM.EmisioniStandard;
@@ -421,13 +410,14 @@ namespace AutoSalon.Controllers
             automobilDetalji.BrojVrata = AutomobilUrediVM.BrojVrata;
             automobilDetalji.Gorivo = AutomobilUrediVM.Gorivo;
             automobilDetalji.Kilovati = AutomobilUrediVM.Kilovati;
+            automobilDetalji.KonjskeSnage = (int)((float)AutomobilUrediVM.Kilovati * 1.359);
             automobilDetalji.VelicinaFelgi = AutomobilUrediVM.VelicinaFelgi;
             automobilDetalji.BrojSjedista = AutomobilUrediVM.BrojSjedista;
             automobilDetalji.Cijena = AutomobilUrediVM.Cijena;
             automobilDetalji.Kilometraza = AutomobilUrediVM.Kilometraza;
             automobilDetalji.Kubikaza = AutomobilUrediVM.Kubikaza;
             automobilDetalji.Tezina = AutomobilUrediVM.Tezina;
-            automobilDetalji.CijenaRentanja = AutomobilUrediVM.CijenaRentanja;
+            automobilDetalji.CijenaRentanja = AutomobilUrediVM.Cijena/365;
 
             if (ModelState.IsValid)
             {
@@ -470,6 +460,7 @@ namespace AutoSalon.Controllers
                 BrojVrata = automobilDetalji.BrojVrata,
                 Gorivo = automobilDetalji.Gorivo,
                 Kilovati = automobilDetalji.Kilovati,
+                KonjskeSnage=automobilDetalji.KonjskeSnage,
                 VelicinaFelgi = automobilDetalji.VelicinaFelgi,
                 BrojSjedista = automobilDetalji.BrojSjedista,
                 Cijena = automobilDetalji.Cijena,

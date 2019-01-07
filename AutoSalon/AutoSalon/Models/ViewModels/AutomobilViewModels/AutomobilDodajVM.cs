@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AutoSalon.Models.ViewModels
+namespace AutoSalon.Models.ViewModels.AutomobilViewModels
 {
     public class AutomobilDodajVM
     {
@@ -18,17 +18,20 @@ namespace AutoSalon.Models.ViewModels
         public List<SelectListItem> BrojeviVrata { get; set; }
 
         [Required(ErrorMessage = "Model je obavezno polje")]
-        [StringLength(20, MinimumLength = 4, ErrorMessage = "Dozvoljeni unos je minimalno 4 karaktera, maksimalno 20 karaktera")]
+        [MinLength(2, ErrorMessage = "Unos je prekratak")]
+        [MaxLength(30, ErrorMessage = "Unos je predug")]
+        [RegularExpression(@"[A-Ža-ž\s0-9]+$", ErrorMessage = "Format nije validan. " +
+         "Dozvoljeni format : Golf VI,Golf 6")]
         public string Model { get; set; }
 
         [Required(ErrorMessage = "Proizvođač je obavezno polje")]
         public int ProizvodjacID { get; set; }
 
         [Required(ErrorMessage = "Godina proizvodnje je obavezno polje")]
-        [MaxLength(4,ErrorMessage ="Unos je prekratak")]
         public int GodinaProizvodnje { get; set; }
 
-        [StringLength(20,MinimumLength =4,ErrorMessage = "Dozvoljeni unos je minimalno 4 karaktera, maksimalno 20 karaktera")]
+        [MinLength(4,ErrorMessage ="Unos je prekratak")]
+        [MaxLength(20,ErrorMessage ="Unos je predug")]
         [RegularExpression(@"[A-Ža-ž]+$", ErrorMessage = "Format nije validan. " +
          "Dozvoljena su samo slova")]
         public string Boja { get; set; }
@@ -38,65 +41,61 @@ namespace AutoSalon.Models.ViewModels
         public bool Dostupan { get; set; }
 
         [Required(ErrorMessage = "Vrsta goriva je obavezno polje")]
-        [StringLength(20, ErrorMessage = "Dozvoljeni unos je maksimalno 20 karaktera")]
-        [RegularExpression(@"^[A-Za-z]+$", ErrorMessage = "Format nije validan. " +
-         "Dozvoljena su samo slova")]
+    
         public string Gorivo { get; set; }
 
         [Required(ErrorMessage = "Vrsta transmisije je obavezno polje")]
-        [StringLength(20, ErrorMessage = "Dozvoljeni unos je maksimalno 20 karaktera")]
-        [RegularExpression(@"^[A-Za-z0-9\(\)]+$", ErrorMessage = "Format nije validan. " +
-        "Dozvoljena su samo slova")]
+   
         public string Transmisija { get; set; }
 
         [Required(ErrorMessage = "Tip pogona je obavezno polje")]
-        [StringLength(20, ErrorMessage = "Dozvoljeni unos je maksimalno 20 karaktera")]
-        [RegularExpression(@"^[A-Za-z0-9]+$", ErrorMessage = "Format nije validan. " +
-         "Dozvoljeni format : 4x4, Prednji")]
+   
         public string Pogon { get; set; }
 
         [Required(ErrorMessage = "Snaga (u kW) je obavezno polje")]
         public int Kilovati { get; set; }
 
-        [StringLength(20, ErrorMessage = "Dozvoljeni unos je maksimalno 20 karaktera")]
+        [MaxLength(20, ErrorMessage = "Unos je predug")]
+        [RegularExpression(@"^[0-9xX\s]+$", ErrorMessage = "Format nije validan. " +
+           "Dozvoljeni format: 14x14,14 x 14")]
         public string VelicinaFelgi { get; set; }
 
-        [Required(ErrorMessage = "Polje je obavezno")]
+        [Required(ErrorMessage = "Težina je obavezno polje")]
+       
         public int Tezina { get; set; }
-
-        
+        [StringLength(5, ErrorMessage = "Unos je predug")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. " +
+           "Dozvoljeni format: 5,7,9")]
         public string BrojSjedista { get; set; }
 
-        [StringLength(5)]
-        [RegularExpression(@"^[0-9\\/0-9]$", ErrorMessage = "Format nije validan. " +
-             "Dozvoljeni format je : 4/5")]
+    
         public string BrojVrata { get; set; }
 
-        
-        public float Kubikaza { get; set; }
+        [Required(ErrorMessage ="Kubikaža je obavezno polje")]
+        [MaxLength(5,ErrorMessage =("Unos je predug"))]
+       [RegularExpression(@"^[0-9]+(\.)[0-9]+$", ErrorMessage = "Format nije validan. " +
+     "Dozvoljeni format : 2.7,2.9,1.9 ")]
+        public string Kubikaza { get; set; }
 
-        [StringLength(20)]
-        [RegularExpression(@"^[A-ža-ž]+$", ErrorMessage = "Format nije validan. " +
-            "Dozvoljena su samo slova")]
+        [Required(ErrorMessage = "Tip je obavezno polje")]
         public string Tip { get; set; }
 
-        [StringLength(20)]
-        [RegularExpression(@"^[A-ža-ž0-9]+$", ErrorMessage = "Format nije validan. " +
-          "Dozvoljeni format : Euro 4, Euro 5")]
+        [Required(ErrorMessage = "Emisioni standard je obavezno polje")]
         public string EmisioniStandard { get; set; }
 
+       
         public int Kilometraza { get; set; }
-
 
         [Required(ErrorMessage = "Cijena je obavezno polje")]
         [DataType(DataType.Currency)]
-        [RegularExpression(@"^[0-9\.]+$", ErrorMessage = "Format nije validan. " +
-        "Dozvoljeni format : 12.500 ")]
-        public double Cijena { get; set; }
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. " +
+       "Dozvoljeni format : 12500,10850 ")]
+        public decimal Cijena { get; set; }
+
 
         [DataType(DataType.Currency)]
-        [RegularExpression(@"^[0-9\.]+$", ErrorMessage = "Format nije validan. " +
-       "Dozvoljeni format : 12.500 ")]
-        public double CijenaRentanja { get; set; }
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. " +
+       "Dozvoljeni format : 40,55 ")]
+        public decimal? CijenaRentanja { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace AutoSalon.Models.ViewModels
+namespace AutoSalon.Models.ViewModels.PoslovnicaViewModels
 {
     public class PoslovnicaIndexVM
     {

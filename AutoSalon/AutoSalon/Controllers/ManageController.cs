@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using AutoSalon.Models;
 using AutoSalon.Models.ManageViewModels;
 using AutoSalon.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using AutoSalon.Data;
 
 namespace AutoSalon.Controllers
 {
@@ -20,6 +22,7 @@ namespace AutoSalon.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
+        private ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -34,17 +37,41 @@ namespace AutoSalon.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder, ApplicationDbContext _db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            db = _db;
         }
 
         [TempData]
         public string StatusMessage { get; set; }
+
+        //Funkcija koja priprema listu gradova
+        public List<SelectListItem> PripremaListItemGradovi()
+        {
+            List<SelectListItem> listItems = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Value=string.Empty,
+                    Text="(Odaberite grad)"
+                }
+            };
+            listItems.AddRange(db.Grad.Select(x => new SelectListItem()
+            {
+                Value = x.GradID.ToString(),
+                Text = x.Naziv
+            }));
+
+            return listItems;
+        }
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -60,6 +87,12 @@ namespace AutoSalon.Controllers
                 Username = user.UserName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
+                Ime=user.Ime,
+                Prezime=user.Prezime,
+                DatumRodjenja=user.DatumRodjenja,
+                GradID=user.GradID,
+                Adresa=user.Adresa,
+                Gradovi=PripremaListItemGradovi(),
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
             };

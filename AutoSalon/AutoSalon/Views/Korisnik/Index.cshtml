@@ -1,0 +1,45 @@
+﻿@model KorisnikIndexVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<form class="form-inline mt-4" asp-action="Index" asp-route-RoleID="@Model.RoleID">
+    <span class="mr-2">Tip korisnika : </span>
+    <select asp-for="@Model.RoleID" asp-items="@Model.Role" class="form-control mr-3"></select>
+    <button type="submit" class="btn btn-outline-info ">Traži</button>
+</form>
+<br />
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tip korisnika</th>
+            <th>Ime i prezime</th>
+            <th>Korisničko ime</th>
+            <th>Email</th>
+            <th>Datum registracije</th>
+            <th>Grad</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Rows)
+        {
+        <tr>
+            <td>@item.TipKorisnika</td>
+            <td>@item.ImePrezime</td>
+            <td>@item.KorisnickoIme</td>
+            <td>@item.Email</td>
+            <td>@item.DatumRegistracije</td>
+            <td>@item.Grad</td>
+            <td>
+                <a asp-action="Detalji" asp-route-KorisnikID="@item.KorisnikID" class="btn btn-outline-danger">Detalji</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

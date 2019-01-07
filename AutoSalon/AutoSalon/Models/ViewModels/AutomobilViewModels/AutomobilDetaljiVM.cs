@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AutoSalon.Models.ViewModels
+namespace AutoSalon.Models.ViewModels.AutomobilViewModels
 {
     public class AutomobilDetaljiVM
     {
@@ -20,16 +20,16 @@ namespace AutoSalon.Models.ViewModels
         public string Transmisija { get; set; }
         public string Pogon { get; set; }
         public int Kilovati { get; set; }
+        public int KonjskeSnage { get; set; }
         public string VelicinaFelgi { get; set; }
         public int Tezina { get; set; }
         public string BrojSjedista { get; set; }
         public string BrojVrata { get; set; }
-        public float Kubikaza { get; set; }
+        public string Kubikaza { get; set; }
         public string Tip { get; set; }
         public string EmisioniStandard { get; set; }
-        public int BrojBrzina { get; set; }
         public float Kilometraza { get; set; }
-        public double Cijena { get; set; }
-        public double CijenaRentanja { get; set; }
+        public decimal Cijena { get; set; }
+        public decimal? CijenaRentanja { get; set; }
     }
 }

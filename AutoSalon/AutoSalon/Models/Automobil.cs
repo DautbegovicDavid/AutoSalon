@@ -12,7 +12,7 @@ namespace AutoSalon.Models
         [Key]
         public int AutomobilID { get; set; }
 
-        [StringLength(20)]
+        [StringLength(30)]
         [Required]
         public string  Model { get; set; }
 
@@ -21,8 +21,6 @@ namespace AutoSalon.Models
         public Proizvodjac Proizvodjac { get; set; }
 
         [Required]
-        [RegularExpression(@"[0-9]{4}$", ErrorMessage = "Format nije validan. " +
-          "Dozvoljeni su samo brojevi od 0 do 9")]
         public int  GodinaProizvodnje { get; set; }
 
         [StringLength(20)]

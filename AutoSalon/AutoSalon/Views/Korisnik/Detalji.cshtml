@@ -1,13 +1,15 @@
-﻿@model PoslovnicaDetaljiVM
+﻿@model KorisnikDetaljiVM
 @{
     ViewData["Title"] = "Detalji";
 }
+
+<h2>Detalji</h2>
 
 <div class="d-flex mt-4">
     <div class="w-50">
         <dl>
             <dt class="w-100">
-                <img src="~/images/Poslovnice/@Model.SlikaUrl" class="img-thumbnail" />
+                @*<img src="~/images/Poslovnice/@Model.SlikaUrl" class="img-thumbnail" />*@
             </dt>
         </dl>
     </div>
@@ -18,14 +20,32 @@
             <div class="row mb-3">
 
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Naziv)
+                    @Html.DisplayNameFor(model => model.Ime)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.Naziv)
+                    @Html.DisplayFor(model => model.Ime)
 
                 </dd>
             </div>
+            <div class="row mb-3">
 
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Prezime)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Prezime)
+
+                </dd>
+            </div>
+            <div class="row mb-3">
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.DatumRodjenja)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DatumRodjenja)
+                </dd>
+            </div>
             <div class="row mb-3">
 
                 <dt class="col-sm-4">
@@ -58,7 +78,6 @@
 
         </dl>
 
-        <a asp-action="Uredi" asp-route-PoslovnicaId="@Model.PoslovnicaID" class="btn btn-outline-warning ml-5">Uredi</a>
         <a asp-action="Index" class="float-lg-left btn btn-outline-danger mr-2">Vrati se nazad</a>
 
     </div>

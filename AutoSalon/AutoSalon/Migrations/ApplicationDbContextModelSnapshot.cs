@@ -33,6 +33,8 @@ namespace AutoSalon.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<DateTime>("DatumRegistracije");
+
                     b.Property<DateTime>("DatumRodjenja");
 
                     b.Property<string>("Email")
@@ -68,6 +70,8 @@ namespace AutoSalon.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<string>("SlikaURL");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
@@ -102,7 +106,7 @@ namespace AutoSalon.Migrations
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasMaxLength(20);
+                        .HasMaxLength(30);
 
                     b.Property<bool>("Novo");
 
@@ -130,9 +134,9 @@ namespace AutoSalon.Migrations
                     b.Property<string>("BrojVrata")
                         .HasMaxLength(5);
 
-                    b.Property<double>("Cijena");
+                    b.Property<decimal>("Cijena");
 
-                    b.Property<double>("CijenaRentanja");
+                    b.Property<decimal?>("CijenaRentanja");
 
                     b.Property<string>("EmisioniStandard")
                         .HasMaxLength(20);
@@ -146,7 +150,7 @@ namespace AutoSalon.Migrations
 
                     b.Property<int>("KonjskeSnage");
 
-                    b.Property<float>("Kubikaza");
+                    b.Property<string>("Kubikaza");
 
                     b.Property<string>("Pogon")
                         .HasMaxLength(20);
@@ -269,12 +273,13 @@ namespace AutoSalon.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Adresa")
-                        .HasMaxLength(30);
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<int>("GradID");
 
                     b.Property<string>("KontaktTelefon")
-                        .HasMaxLength(30);
+                        .HasMaxLength(50);
 
                     b.Property<string>("Naziv")
                         .IsRequired()
@@ -312,7 +317,7 @@ namespace AutoSalon.Migrations
 
                     b.Property<DateTime>("DatumIzdavanja");
 
-                    b.Property<float>("Iznos");
+                    b.Property<decimal>("Iznos");
 
                     b.HasKey("RacunID");
 
@@ -328,7 +333,7 @@ namespace AutoSalon.Migrations
 
                     b.Property<DateTime>("DatumKreiranja");
 
-                    b.Property<double>("Iznos");
+                    b.Property<decimal>("Iznos");
 
                     b.Property<int>("KlijentID");
 

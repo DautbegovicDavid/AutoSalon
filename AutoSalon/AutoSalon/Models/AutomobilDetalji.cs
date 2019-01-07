@@ -38,16 +38,16 @@ namespace AutoSalon.Models
         public int Tezina { get; set; }
 
         [StringLength(5)]
-        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. " +
+        [RegularExpression(@"^[0-9]{1,5}$", ErrorMessage = "Format nije validan. " +
              "Dozvoljeni su samo brojevi")]
         public string BrojSjedista { get; set; }
 
         [StringLength(5)]
-        [RegularExpression(@"^[0-9\\/0-9]$", ErrorMessage = "Format nije validan. " +
+        [RegularExpression(@"^[0-9\/0-9]{1,5}$", ErrorMessage = "Format nije validan. " +
              "Dozvoljeni format je : 4/5")]
         public string BrojVrata { get; set; }
 
-        public float Kubikaza { get; set; }
+        public string Kubikaza { get; set; }
 
         [StringLength(20)]
         [RegularExpression(@"^[A-ža-ž]+$", ErrorMessage = "Format nije validan. " +
@@ -63,13 +63,13 @@ namespace AutoSalon.Models
         public int Kilometraza { get; set; }
 
         [DataType(DataType.Currency)]
-        [RegularExpression(@"^[0-9\.]+$", ErrorMessage = "Format nije validan. " +
-        "Dozvoljeni format : 12.500 ")]
-        public double Cijena { get; set; }
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. " +
+       "Dozvoljeni format : 12,500 ")]
+        public decimal Cijena { get; set; }
 
         [DataType(DataType.Currency)]
-        [RegularExpression(@"^[0-9\.]+$", ErrorMessage = "Format nije validan. " +
-       "Dozvoljeni format : 12.500 ")]
-        public double CijenaRentanja { get; set; }
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. " +
+       "Dozvoljeni format : 12,500 ")]
+        public decimal? CijenaRentanja { get; set; }
     }
 }

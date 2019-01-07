@@ -15,16 +15,21 @@ namespace AutoSalon.Models
         [StringLength(50, MinimumLength = 2)]
         [RegularExpression(@"^[A-Ža-ž\s]+$")]
         public string Ime { get; set; }
+
         [Required(ErrorMessage = "Prezime je obavezno polje")]
         [StringLength(50, MinimumLength = 2)]
         [RegularExpression(@"^[A-Ža-ž\s]+$")]
         public string Prezime { get; set; }
+
         [Required(ErrorMessage = "Datum rođenja je obavezno polje")]
         [DataType(DataType.Date)]
         public DateTime DatumRodjenja { get; set; }
+
         public int GradID { get; set; }
         [ForeignKey("GradID")]
         public Grad Grad { get; set; }
         public string Adresa { get; set; }
+        public DateTime DatumRegistracije { get; set; }
+        public string SlikaURL { get; set; }
     }
 }

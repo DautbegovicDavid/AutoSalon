@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace AutoSalon.Models.ViewModels
+namespace AutoSalon.Models.ViewModels.AutomobilViewModels
 {
     public class AutomobilIndexVM
     {
@@ -22,7 +22,7 @@ namespace AutoSalon.Models.ViewModels
             public string Stanje { get; set; }
             public string SlikaURL { get; set; }
             public bool Dostupan { get; set; }
-            public double Cijena { get; set; }
+            public string Cijena { get; set; }
         }
     }
 }

@@ -11,7 +11,7 @@
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Username"></label>
+                <label asp-for="Username">Korisničko ime</label>
                 <input asp-for="Username" class="form-control" disabled />
             </div>
             <div class="form-group">
@@ -31,11 +31,34 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PhoneNumber"></label>
+                <label asp-for="Ime">Ime</label>
+                <input asp-for="Ime" class="form-control" />
+                <span asp-validation-for="Ime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prezime">Prezime</label>
+                <input asp-for="Prezime" class="form-control" />
+                <span asp-validation-for="Prezime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DatumRodjenja">Datum rođenja</label>
+                <input asp-for="DatumRodjenja" class="form-control" />
+                <span asp-validation-for="DatumRodjenja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GradID">Grad</label>
+                <select asp-for="GradID" asp-items="@Model.Gradovi" class="form-control" ></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adresa">Adresa</label>
+                <input asp-for="Adresa" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber">Broj telefona</label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default">Save</button>
+            <button type="submit" class="btn btn-outline-success btn-lg">Save</button>
         </form>
     </div>
 </div>

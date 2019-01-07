@@ -29,7 +29,7 @@
                 <div class="form-group col-sm-5 mt-2 mr-5">
                     <label asp-for="ProizvodjacID">Proizvođač automobila :</label>
                     <select asp-for="ProizvodjacID" asp-items="Model.Proizvodjaci" class="form-control"></select>
-                    <span asp-validation-for="Model" class="text-danger"></span>
+                    <span asp-validation-for="ProizvodjacID" class="text-danger"></span>
 
                 </div>
                 <div class="form-group col-sm-5 mt-2 mr-5">
@@ -58,16 +58,14 @@
                     <span asp-validation-for="Cijena" class="text-danger"></span>
                 </div>
                 <div class="form-group col-sm-5 mt-2 mr-5">
-                    <label asp-for="Kilometraza">Kilometraza automobila :</label>
-                    <input asp-for="Kilometraza" class="form-control" value=""/>
-                    <span asp-validation-for="Kilometraza" class="text-danger"></span>
+                    <label asp-for="Kilometraza">Kilometraža automobila :</label>
+                    <input asp-for="Kilometraza" class="form-control" value="" />
 
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="Tip">Tip vozila :</label>
                     <select asp-for="Tip" asp-items="Model.Tipovi" class="form-control"></select>
                     <span asp-validation-for="Tip" class="text-danger"></span>
-
                 </div>
 
                 <div class="form-group col-sm-5 ml-3 mt-5 custom-control custom-checkbox">
@@ -93,41 +91,35 @@
                     <label asp-for="Pogon">Pogon :</label>
                     <select asp-for="Pogon" asp-items="Model.Pogoni" class="form-control"></select>
                     <span asp-validation-for="Pogon" class="text-danger"></span>
-
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="EmisioniStandard">Emisioni standard :</label>
                     <select asp-for="EmisioniStandard" asp-items="Model.EmisioniStandardi" class="form-control"></select>
                     <span asp-validation-for="EmisioniStandard" class="text-danger"></span>
-
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="Gorivo">Gorivo :</label>
                     <select asp-for="Gorivo" asp-items="Model.Goriva" class="form-control"></select>
                     <span asp-validation-for="Gorivo" class="text-danger"></span>
-
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="Kilovati">Snaga (u kW) :</label>
-                    <input asp-for="Kilovati" class="form-control" value=""/>
+                    <input asp-for="Kilovati" class="form-control" value="" />
                     <span asp-validation-for="Kilovati" class="text-danger"></span>
-
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="VelicinaFelgi">Veličina felgi :</label>
                     <input asp-for="VelicinaFelgi" class="form-control" />
                     <span asp-validation-for="VelicinaFelgi" class="text-danger"></span>
-
                 </div>
                 <div class="form-group col-sm-5 mr-5">
-                    <label asp-for="Tezina">Tezina :</label>
-                    <input asp-for="Tezina" class="form-control" value=""/>
+                    <label asp-for="Tezina">Težina :</label>
+                    <input asp-for="Tezina" class="form-control" value="" />
                     <span asp-validation-for="Tezina" class="text-danger"></span>
-
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="BrojSjedista">Broj sjedišta :</label>
-                    <input asp-for="BrojSjedista" class="form-control" value=""/>
+                    <input asp-for="BrojSjedista" class="form-control" value="" />
                     <span asp-validation-for="BrojSjedista" class="text-danger"></span>
 
                 </div>
@@ -135,15 +127,17 @@
                     <label asp-for="BrojVrata">Broj vrata :</label>
                     <select asp-for="BrojVrata" asp-items="Model.BrojeviVrata" class="form-control"></select>
                     <span asp-validation-for="BrojVrata" class="text-danger"></span>
-
                 </div>
                 <div class="form-group col-sm-5 mr-5">
                     <label asp-for="Kubikaza">Kubikaža automobila :</label>
-                    <input asp-for="Kubikaza" class="form-control" value=""/>
-                    <span asp-validation-for="Kubikaza"   class="text-danger" ></span>
-
+                    <input asp-for="Kubikaza" class="form-control" value="" />
+                    <span asp-validation-for="Kubikaza" class="text-danger"></span>
                 </div>
-
+                <div class="form-group col-sm-5 mt-2 mr-5">
+                    <label asp-for="CijenaRentanja">Cijena automobila :</label>
+                    <input asp-for="CijenaRentanja" class="form-control" value="" />
+                    <span asp-validation-for="CijenaRentanja" class="text-danger"></span>
+                </div>
 
             </div>
         </div>

@@ -1,29 +1,25 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AutoSalon.Models
+namespace AutoSalon.Models.ViewModels.PoslovnicaViewModels
 {
-    public class Poslovnica
+    public class PoslovnicaDodajVM
     {
-        [Key]
-        public int PoslovnicaID { get; set; }
+        public List<SelectListItem> Gradovi { get; set; }
         [Required(ErrorMessage = "Grad je obavezno polje")]
-        [DisplayName("Grad")]
         public int GradID { get; set; }
-        [ForeignKey("GradID")]
-        public Grad Grad { get; set; }
 
         [Required(ErrorMessage = "Naziv je obavezno polje")]
-        [MinLength(5, ErrorMessage = "Unos je prekratak")]
-        [MaxLength(30, ErrorMessage = "Unos je predug")]
+        [MinLength(5,ErrorMessage ="Unos je prekratak")]
+        [MaxLength(30,ErrorMessage ="Unos je predug")]
         [RegularExpression(@"^[A-Ža-ž 0-9]+$", ErrorMessage = "Format nije validan. " +
-             "Dozvoljeni format je : MojAuto Mostar, MojAuto Sarajevo II")]
+            "Dozvoljeni format je : MojAuto Mostar, MojAuto Sarajevo II")]
         public string Naziv { get; set; }
-
-        [Required(ErrorMessage = "Adresa je obavezno polje")]
-        [MinLength(5, ErrorMessage = "Unos je prekratak")]
-        [MaxLength(50, ErrorMessage = "Unos je predug")]
+        
+        [Required(ErrorMessage ="Adresa je obavezno polje")]
+        [MinLength(5,ErrorMessage ="Unos je prekratak")]
+        [MaxLength(50,ErrorMessage ="Unos je predug")]
         [RegularExpression(@"^[A-Ža-ž 0-9\.]+$", ErrorMessage = "Format nije validan. " +
             "Dozvoljeni format je : Maršala Tita 26., Maršala Tita 26")]
         public string Adresa { get; set; }

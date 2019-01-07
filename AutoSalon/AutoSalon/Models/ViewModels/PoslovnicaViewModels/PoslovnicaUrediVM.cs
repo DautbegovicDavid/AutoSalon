@@ -1,19 +1,15 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AutoSalon.Models
+namespace AutoSalon.Models.ViewModels.PoslovnicaViewModels
 {
-    public class Poslovnica
+    public class PoslovnicaUrediVM
     {
-        [Key]
+        public List<SelectListItem> Gradovi { get; set; }
         public int PoslovnicaID { get; set; }
         [Required(ErrorMessage = "Grad je obavezno polje")]
-        [DisplayName("Grad")]
         public int GradID { get; set; }
-        [ForeignKey("GradID")]
-        public Grad Grad { get; set; }
-
         [Required(ErrorMessage = "Naziv je obavezno polje")]
         [MinLength(5, ErrorMessage = "Unos je prekratak")]
         [MaxLength(30, ErrorMessage = "Unos je predug")]

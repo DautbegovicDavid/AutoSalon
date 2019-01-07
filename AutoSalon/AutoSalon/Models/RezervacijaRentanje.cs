@@ -39,7 +39,7 @@ namespace Autosalon.Models
         public DateTime DatumKreiranja { get; set; }
         public DateTime RezervacijaOd { get; set; }
         public DateTime RezervacijaDo { get; set; }
-        public double Iznos { get; set; }
+        public decimal Iznos { get; set; }
         public double Popust { get; set; }
         public string Opis { get; set; }
 

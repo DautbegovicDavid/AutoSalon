@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +9,13 @@ namespace AutoSalon.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        public List<SelectListItem> Gradovi{ get; set; }
         public string Username { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public DateTime DatumRodjenja { get; set; }
+        public int GradID { get; set; }
+        public string Adresa { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
 

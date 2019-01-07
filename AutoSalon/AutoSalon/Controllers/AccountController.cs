@@ -13,13 +13,17 @@ using Microsoft.Extensions.Options;
 using AutoSalon.Models;
 using AutoSalon.Models.AccountViewModels;
 using AutoSalon.Services;
+using AutoSalon.Data;
 
 namespace AutoSalon.Controllers
 {
+
+  
     [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -29,12 +33,34 @@ namespace AutoSalon.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger, ApplicationDbContext _db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            db = _db;
+        }
+
+
+        //Funkcija koja priprema listu gradova
+        public List<SelectListItem> PripremaListItemGradovi()
+        {
+            List<SelectListItem> listItems = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Value=string.Empty,
+                    Text="(Odaberite grad)"
+                }
+            };
+            listItems.AddRange(db.Grad.Select(x => new SelectListItem()
+            {
+                Value = x.GradID.ToString(),
+                Text = x.Naziv
+            }));
+
+            return listItems;
         }
 
         [TempData]
@@ -209,7 +235,11 @@ namespace AutoSalon.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            RegisterViewModel model = new RegisterViewModel()
+            {
+                Gradovi = PripremaListItemGradovi()
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -220,18 +250,34 @@ namespace AutoSalon.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Ime+'.'+model.Prezime,
+                    Email = model.Email,
+                    Ime =model.Ime,
+                    Prezime =model.Prezime,
+                    DatumRodjenja =model.DatumRodjenja,
+                    GradID=model.GradID,
+                    Adresa=model.Adresa,
+                    DatumRegistracije=DateTime.Now
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                  
+                    db.UserRoles.Add(new IdentityUserRole<int>
+                    {
+                        RoleId = 1,
+                        UserId=user.Id
+                    });
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
+                    db.SaveChanges();
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

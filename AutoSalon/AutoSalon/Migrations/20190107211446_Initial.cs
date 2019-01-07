@@ -42,7 +42,7 @@ namespace AutoSalon.Migrations
                     RacunID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DatumIzdavanja = table.Column<DateTime>(nullable: false),
-                    Iznos = table.Column<float>(nullable: false)
+                    Iznos = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -132,9 +132,9 @@ namespace AutoSalon.Migrations
                 {
                     PoslovnicaID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Adresa = table.Column<string>(maxLength: 30, nullable: true),
+                    Adresa = table.Column<string>(maxLength: 50, nullable: false),
                     GradID = table.Column<int>(nullable: false),
-                    KontaktTelefon = table.Column<string>(maxLength: 30, nullable: true),
+                    KontaktTelefon = table.Column<string>(maxLength: 50, nullable: true),
                     Naziv = table.Column<string>(maxLength: 30, nullable: false),
                     SlikaURL = table.Column<string>(nullable: true)
                 },
@@ -158,6 +158,7 @@ namespace AutoSalon.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Adresa = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
+                    DatumRegistracije = table.Column<DateTime>(nullable: false),
                     DatumRodjenja = table.Column<DateTime>(nullable: false),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
@@ -172,6 +173,7 @@ namespace AutoSalon.Migrations
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     Prezime = table.Column<string>(maxLength: 50, nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
+                    SlikaURL = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true)
                 },
@@ -195,7 +197,7 @@ namespace AutoSalon.Migrations
                     Boja = table.Column<string>(maxLength: 20, nullable: true),
                     Dostupan = table.Column<bool>(nullable: false),
                     GodinaProizvodnje = table.Column<int>(nullable: false),
-                    Model = table.Column<string>(maxLength: 20, nullable: false),
+                    Model = table.Column<string>(maxLength: 30, nullable: false),
                     Novo = table.Column<bool>(nullable: false),
                     ProizvodjacID = table.Column<int>(nullable: false),
                     SlikaURL = table.Column<string>(nullable: true)
@@ -305,14 +307,14 @@ namespace AutoSalon.Migrations
                     AutomobilID = table.Column<int>(nullable: false),
                     BrojSjedista = table.Column<string>(maxLength: 5, nullable: true),
                     BrojVrata = table.Column<string>(maxLength: 5, nullable: true),
-                    Cijena = table.Column<double>(nullable: false),
-                    CijenaRentanja = table.Column<double>(nullable: false),
+                    Cijena = table.Column<decimal>(nullable: false),
+                    CijenaRentanja = table.Column<decimal>(nullable: true),
                     EmisioniStandard = table.Column<string>(maxLength: 20, nullable: true),
                     Gorivo = table.Column<string>(maxLength: 20, nullable: true),
                     Kilometraza = table.Column<int>(nullable: false),
                     Kilovati = table.Column<int>(nullable: false),
                     KonjskeSnage = table.Column<int>(nullable: false),
-                    Kubikaza = table.Column<float>(nullable: false),
+                    Kubikaza = table.Column<string>(nullable: true),
                     Pogon = table.Column<string>(maxLength: 20, nullable: true),
                     Tezina = table.Column<int>(nullable: false),
                     Tip = table.Column<string>(maxLength: 20, nullable: true),
@@ -388,7 +390,7 @@ namespace AutoSalon.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AutomobilID = table.Column<int>(nullable: false),
                     DatumKreiranja = table.Column<DateTime>(nullable: false),
-                    Iznos = table.Column<double>(nullable: false),
+                    Iznos = table.Column<decimal>(nullable: false),
                     KlijentID = table.Column<int>(nullable: false),
                     Opis = table.Column<string>(nullable: true),
                     Popust = table.Column<double>(nullable: false),
