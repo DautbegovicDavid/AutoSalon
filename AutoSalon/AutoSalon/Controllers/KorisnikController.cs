@@ -43,10 +43,13 @@ namespace AutoSalon.Controllers
         }
 
 
-        public IActionResult Index(int? RoleID)
+        public IActionResult Index(int? RoleID,string  kIme)
         {
             KorisnikIndexVM model = new KorisnikIndexVM();
             model.Role = PripremaListItemRole();
+            if (kIme != null)
+                kIme = kIme.ToLower();
+
 
             model.Rows = db.Users.Join(db.UserRoles, u => u.Id, ur => ur.UserId, 
                                                                        (u, ur) => new
@@ -62,7 +65,7 @@ namespace AutoSalon.Controllers
                                                                             tipKorisnika = (db.Roles.Where(y => y.Id == ur.RoleId).FirstOrDefault().Name),
                                                                             roleID = ur.RoleId
                                                                         })
-                                 .Where(g => g.roleID == RoleID || RoleID == null).Select(x => new KorisnikIndexVM.Row()
+                                 .Where(g => (g.roleID == RoleID || RoleID == null) && (g.korisnickoIme.ToLower().Contains(kIme) || kIme==null)).Select(x => new KorisnikIndexVM.Row()
                                  {
                                      KorisnikID = x.korisnikID,
                                      ImePrezime = x.imePrezime,
@@ -90,7 +93,8 @@ namespace AutoSalon.Controllers
                 DatumRodjenja=user.DatumRodjenja.ToShortDateString(),
                 Grad=user.Grad.Naziv,
                 Adresa =user.Adresa,
-                KontaktTelefon=user.PhoneNumber
+                KontaktTelefon=user.PhoneNumber,
+                SlikaURL=user.SlikaURL
             };
             return View(model);
         }

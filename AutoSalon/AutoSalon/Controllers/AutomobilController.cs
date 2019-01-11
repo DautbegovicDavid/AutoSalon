@@ -24,14 +24,16 @@ namespace AutoSalon.Controllers
             db = _db;
             he = _he;
         }
-        public IActionResult Index(int ? ProizvodjacID)
+        public IActionResult Index(int ? ProizvodjacID,string nazivModela)
         {
             AutomobilIndexVM model = new AutomobilIndexVM();
             model.Proizvodjaci = PripremaListItemProizvodjaci();
             model.Proizvodjaci.FirstOrDefault().Text = "(Sva vozila)";
 
+            if (nazivModela != null)
+                nazivModela = nazivModela.Replace(" ", "").ToLower();
 
-                model.Rows = db.Automobil.Where(y => y.ProizvodjacID == ProizvodjacID || ProizvodjacID==null)
+                model.Rows = db.Automobil.Where(y => (y.ProizvodjacID == ProizvodjacID || ProizvodjacID==null)&&(string.Concat( y.Proizvodjac.Naziv,y.Model).Replace(" ","").ToLower().Contains(nazivModela)|| nazivModela == null))
                                          .Select(x => new AutomobilIndexVM.Row()
                 {
                     AutomobilID = x.AutomobilID,

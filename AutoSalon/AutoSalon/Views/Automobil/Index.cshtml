@@ -8,9 +8,12 @@
 <br />
 <br />
 <br />
-<form class="form-inline" asp-action="Index" asp-route-ProizvodjacID="@Model.ProizvodjacID">
+
+<form class="form-inline" asp-action="Index" asp-route-ProizvodjacID="@Model.ProizvodjacID" asp-route-nazivModela="@Model.nazivModela">
     <span class="mr-2">Proizvođač : </span>
-    <select asp-for="@Model.ProizvodjacID" asp-items="@Model.Proizvodjaci" class="form-control mr-3"></select>
+    <select asp-for="ProizvodjacID" asp-items="@Model.Proizvodjaci" class="form-control mr-3"></select>
+    <span class="mr-2">Naziv modela : </span>
+    <input asp-for="nazivModela" class="form-control"/>
     <button type="submit" class="btn btn-outline-info">Traži</button>
 </form>
 <br />
@@ -27,7 +30,7 @@
 
                     <!--Card image-->
                     <div class="view overlay w-100 h-100">
-                        <img class="card-img-top w-100 h-100" src="~/images/Automobili/@item.SlikaURL" alt="@item.SlikaURL" >
+                        <img class="card-img-top w-100 h-100" src="~/images/Automobili/@item.SlikaURL" alt="@item.SlikaURL">
                         <a href="#!">
                             <div class="mask rgba-white-slight"></div>
                         </a>

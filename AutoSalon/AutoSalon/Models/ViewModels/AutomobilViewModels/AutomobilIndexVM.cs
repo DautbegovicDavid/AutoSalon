@@ -9,6 +9,7 @@ namespace AutoSalon.Models.ViewModels.AutomobilViewModels
     public class AutomobilIndexVM
     {
         public List<Row> Rows { get; set; }
+        public string nazivModela { get; set; }
         public int ProizvodjacID { get; set; }
         public List<SelectListItem> Proizvodjaci { get;  set; }
 

@@ -5,9 +5,11 @@
 
 
 
-<form class="form-inline mt-4" asp-action="Index" asp-route-RoleID="@Model.RoleID">
+<form class="form-inline mt-4" asp-action="Index" asp-route-RoleID="@Model.RoleID" asp-route-kIme="@Model.kIme">
     <span class="mr-2">Tip korisnika : </span>
-    <select asp-for="@Model.RoleID" asp-items="@Model.Role" class="form-control mr-3"></select>
+    <select asp-for="RoleID" asp-items="@Model.Role" class="form-control mr-3"></select>
+    <span class="mr-2">Korisničko ime : </span>
+    <input asp-for="kIme" class="form-control"/>
     <button type="submit" class="btn btn-outline-info ">Traži</button>
 </form>
 <br />

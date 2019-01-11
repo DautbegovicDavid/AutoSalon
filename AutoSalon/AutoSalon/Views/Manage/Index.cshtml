@@ -7,61 +7,76 @@
 <h4>@ViewData["Title"]</h4>
 @Html.Partial("_StatusMessage", Model.StatusMessage)
 <div class="row">
-    <div class="col-md-6">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username">Korisničko ime</label>
-                <input asp-for="Username" class="form-control" disabled />
-            </div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                @if (Model.IsEmailConfirmed)
-                {
-                    <div class="input-group">
-                        <input asp-for="Email" class="form-control" />
-                        <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+    <form method="post" class="w-100 h-100" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="container">
+            <div class="row">
+                    <div class="col-md">
+                        @if(Model.SlikaURL != null)
+                        {
+                            <img src="~/images/Korisnici/@Model.SlikaURL" class="h-50 img-thumbnail"/>
+                        }
+                        <input type="file" asp-for="SlikaURL" class="form-control"  />
                     </div>
-                }
-                else
-                {
-                    <input asp-for="Email" class="form-control" />
-                    <button asp-action="SendVerificationEmail" class="btn btn-link">Send verification email</button>
-                }
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label asp-for="Username">Korisničko ime</label>
+                        <input asp-for="Username" class="form-control" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        @if (Model.IsEmailConfirmed)
+                        {
+                            <div class="input-group">
+                                <input asp-for="Email" class="form-control" />
+                                <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <input asp-for="Email" class="form-control" />
+                            <button asp-action="SendVerificationEmail" class="btn btn-link">Pošalji verifikacijski email</button>
+                        }
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Ime">Ime</label>
+                        <input asp-for="Ime" class="form-control" />
+                        <span asp-validation-for="Ime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prezime">Prezime</label>
+                        <input asp-for="Prezime" class="form-control" />
+                        <span asp-validation-for="Prezime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DatumRodjenja">Datum rođenja</label>
+                        <input asp-for="DatumRodjenja" class="form-control" />
+                        <span asp-validation-for="DatumRodjenja" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GradID">Grad</label>
+                        <select asp-for="GradID" asp-items="@Model.Gradovi" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Adresa">Adresa</label>
+                        <input asp-for="Adresa" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber">Broj telefona</label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Ime">Ime</label>
-                <input asp-for="Ime" class="form-control" />
-                <span asp-validation-for="Ime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prezime">Prezime</label>
-                <input asp-for="Prezime" class="form-control" />
-                <span asp-validation-for="Prezime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DatumRodjenja">Datum rođenja</label>
-                <input asp-for="DatumRodjenja" class="form-control" />
-                <span asp-validation-for="DatumRodjenja" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GradID">Grad</label>
-                <select asp-for="GradID" asp-items="@Model.Gradovi" class="form-control" ></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Adresa">Adresa</label>
-                <input asp-for="Adresa" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber">Broj telefona</label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-outline-success btn-lg">Save</button>
-        </form>
-    </div>
+        </div>
+        <button type="submit" class="btn btn-outline-success btn-lg">Save</button>
+    </form>
 </div>
+
+
+
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

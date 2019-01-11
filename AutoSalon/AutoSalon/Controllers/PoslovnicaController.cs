@@ -26,12 +26,17 @@ namespace AutoSalon.Controllers
         }
 
         //Index
-        public IActionResult Index(int ? GradID)
+        public IActionResult Index(int ? GradID,string nazivPoslovnice)
         {
             PoslovnicaIndexVM model = new PoslovnicaIndexVM();
             model.Gradovi = PripremaListItemGradovi();
             model.Gradovi.FirstOrDefault().Text = "(sve poslovnice)";
-            model.Rows = _context.Poslovnica.Where(y => y.GradID == GradID || GradID==null).Select(x => new PoslovnicaIndexVM.Row()
+
+            if (nazivPoslovnice != null)
+                nazivPoslovnice = nazivPoslovnice.Replace(" ","").ToLower();
+
+            model.Rows = _context.Poslovnica.Where(y => (y.GradID == GradID || GradID==null)&& (y.Naziv.Replace(" ","").ToLower().Contains(nazivPoslovnice) || nazivPoslovnice==null))
+                                            .Select(x => new PoslovnicaIndexVM.Row()
             {
                 PoslovnicaId = x.PoslovnicaID,
                 Naziv = x.Naziv,

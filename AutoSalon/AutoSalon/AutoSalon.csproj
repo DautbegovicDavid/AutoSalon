@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\images\Automobili\" />
+    <Folder Include="wwwroot\images\Korisnici\" />
     <Folder Include="wwwroot\images\Poslovnice\" />
   </ItemGroup>
 

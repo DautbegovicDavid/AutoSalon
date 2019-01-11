@@ -11,6 +11,7 @@ namespace AutoSalon.Models.ViewModels.KorisnikViewModels
         public List<Row> Rows { get; set; }
         public List<SelectListItem> Role { get; set; }
         public int RoleID { get; set; }
+        public string kIme { get; set; }
         public class Row
         {
             public int KorisnikID { get; set; }

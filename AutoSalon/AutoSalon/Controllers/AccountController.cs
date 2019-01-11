@@ -282,7 +282,7 @@ namespace AutoSalon.Controllers
                 }
                 AddErrors(result);
             }
-
+            model.Gradovi = PripremaListItemGradovi();
             // If we got this far, something failed, redisplay form
             return View(model);
         }

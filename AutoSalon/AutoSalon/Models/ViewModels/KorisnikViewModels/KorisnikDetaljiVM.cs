@@ -14,5 +14,6 @@ namespace AutoSalon.Models.ViewModels.KorisnikViewModels
         public string Grad { get; set; }
         public string Adresa { get; set; }
         public string KontaktTelefon { get; set; }
+        public string SlikaURL { get; set; }
     }
 }

@@ -15,6 +15,9 @@ using AutoSalon.Models.ManageViewModels;
 using AutoSalon.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AutoSalon.Data;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AutoSalon.Controllers
 {
@@ -28,6 +31,7 @@ namespace AutoSalon.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private IHostingEnvironment he;
 
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
@@ -37,7 +41,7 @@ namespace AutoSalon.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder, ApplicationDbContext _db)
+          UrlEncoder urlEncoder, ApplicationDbContext _db, IHostingEnvironment _he)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,6 +49,7 @@ namespace AutoSalon.Controllers
             _logger = logger;
             _urlEncoder = urlEncoder;
             db = _db;
+            he = _he;
         }
 
         [TempData]
@@ -94,7 +99,8 @@ namespace AutoSalon.Controllers
                 Adresa=user.Adresa,
                 Gradovi=PripremaListItemGradovi(),
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                StatusMessage = StatusMessage,
+                SlikaURL=user.SlikaURL
             };
 
             return View(model);
@@ -102,7 +108,7 @@ namespace AutoSalon.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(IndexViewModel model)
+        public async Task<IActionResult> Index(IndexViewModel model,IFormFile SlikaURL)
         {
             if (!ModelState.IsValid)
             {
@@ -135,7 +141,20 @@ namespace AutoSalon.Controllers
                 }
             }
 
-            StatusMessage = "Your profile has been updated";
+            user.DatumRodjenja = model.DatumRodjenja;
+            user.GradID = model.GradID;
+            user.Adresa = model.Adresa;
+            user.DatumRodjenja = model.DatumRodjenja;
+
+            if (SlikaURL != null)
+            {
+                var filePath = Path.Combine(he.WebRootPath + "\\images\\Korisnici", SlikaURL.FileName);
+                SlikaURL.CopyTo(new FileStream(filePath, FileMode.Create));
+                user.SlikaURL = SlikaURL.FileName;
+                db.SaveChanges();
+            }
+            StatusMessage = "Vaš profil je uspješno izmjenjen";
+
             return RedirectToAction(nameof(Index));
         }
 

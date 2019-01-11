@@ -16,6 +16,7 @@ namespace AutoSalon.Models.ManageViewModels
         public DateTime DatumRodjenja { get; set; }
         public int GradID { get; set; }
         public string Adresa { get; set; }
+        public string SlikaURL { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
 
