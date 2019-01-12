@@ -87,7 +87,7 @@ namespace AutoSalon.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -252,7 +252,7 @@ namespace AutoSalon.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Ime+'.'+model.Prezime,
+                    UserName = model.Email.Substring(0,model.Email.IndexOf("@")),
                     Email = model.Email,
                     Ime =model.Ime,
                     Prezime =model.Prezime,
