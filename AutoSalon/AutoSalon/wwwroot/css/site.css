@@ -1,6 +1,7 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 45px;
     padding-bottom: 20px;
+    color: darkslategrey;
 }
 
 /* Wrapping element */
@@ -40,4 +41,7 @@
 .PoslovnicaDetalji{
     position:absolute;
     right:150px;
+}
+.navbar{
+    color:black;
 }
