@@ -1,0 +1,35 @@
+﻿@model ProizvodjacIndexVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a asp-action="Dodaj" class="btn btn-primary">Novi proizvođač</a>
+
+@*<form class="form-inline mt-4" asp-action="Index">
+        <button type="submit" class="btn btn-outline-info ">Traži</button>
+    </form>
+*@
+<br />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Proizvođač</th>
+            <th>Država</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Rows)
+        {
+            <tr>
+                <td>@item.Naziv</td>
+                <td>@item.Drzava</td>
+                <td>
+                    <a asp-action="Detalji" asp-route-ProizvodjacID="@item.ProizvodjacID" class="btn btn-outline-danger">Detalji</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
