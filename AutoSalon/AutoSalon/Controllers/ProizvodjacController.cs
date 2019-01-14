@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoSalon.Data;
+using AutoSalon.Models;
+using AutoSalon.Models.ViewModels.ProizvodjacViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace AutoSalon.Controllers
+{
+    public class ProizvodjacController : Controller
+    {
+        private ApplicationDbContext db;
+        public ProizvodjacController(ApplicationDbContext _db)
+        {
+            db = _db;
+        }
+        public IActionResult Index()
+        {
+            ProizvodjacIndexVM model = new ProizvodjacIndexVM()
+            {
+                Rows=db.Proizvodjac.Select(x=> new ProizvodjacIndexVM.Row {
+                    ProizvodjacID=x.ProizvodjacID,
+                    Naziv=x.Naziv,
+                    Drzava=x.Drzava.Naziv
+                }).ToList() 
+            };
+            return View(model);
+        }
+
+
+
+        //Funkcija koja priprema listu drzava
+        public List<SelectListItem> PripremaListItemDrzave()
+        {
+            List<SelectListItem> listItems = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Value=string.Empty,
+                    Text="(Odaberite državu)"
+                }
+            };
+            listItems.AddRange(db.Drzava.Select(x => new SelectListItem()
+            {
+                Value = x.DrzavaID.ToString(),
+                Text = x.Naziv
+            }));
+
+            return listItems;
+        }
+
+
+        //Get Dodaj
+        public IActionResult Dodaj()
+        {
+            ProizvodjacDodajVM model = new ProizvodjacDodajVM();
+            model.Drzave = PripremaListItemDrzave();
+            return View(model);
+        }
+
+        //Post Dodaj
+        [HttpPost]
+        public async Task<IActionResult> Dodaj(ProizvodjacDodajVM model)
+        {
+            Proizvodjac proizvodjac = new Proizvodjac()
+            {
+                Naziv=model.Naziv,
+                DrzavaID=model.DrzavaID
+            };
+            db.Proizvodjac.Add(proizvodjac);
+            await db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+    }
+}
