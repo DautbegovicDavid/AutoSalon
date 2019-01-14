@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace AutoSalon.Models.ViewModels
 {
     public class GradDodajVM
     {
-
+        public List<SelectListItem> Drzava { get; set; }
+        public Grad Grad { get; set; }
     }
 }

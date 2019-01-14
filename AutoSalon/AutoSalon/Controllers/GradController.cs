@@ -8,6 +8,7 @@ using AutoSalon.Models;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AutoSalon.Controllers
 {
@@ -33,8 +34,7 @@ namespace AutoSalon.Controllers
 
             return View();
         }
-
-        public IActionResult Izbrisi(int id)
+        public IActionResult Izbrisi(int id, bool ajaxPoziv = false)
         {
             Grad g = _context.Grad.SingleOrDefault(x => x.GradID == id);
 
@@ -43,11 +43,15 @@ namespace AutoSalon.Controllers
 
             _context.Remove(g);
             _context.SaveChanges();
-
+            if (ajaxPoziv)
+                return PartialView("Index");
             return Redirect("/grad/index");
         }
         public IActionResult Dodaj()
         {
+            List<SelectListItem> drzave = _context.Drzava.Select(d => new SelectListItem { Text = d.Naziv.ToString(), Value = d.DrzavaID.ToString() }).ToList();
+            
+            //DrzavaDodajVM m
             List<Drzava> podaci = _context.Drzava.ToList();
             ViewData["kljuc"] = podaci;
             return View();

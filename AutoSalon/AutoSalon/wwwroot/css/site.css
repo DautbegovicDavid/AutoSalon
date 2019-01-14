@@ -45,3 +45,26 @@
 .navbar{
     color:black;
 }
+.kramarSlika {
+    width: 100%;
+    height: 1000px;
+    background: url(../images/kramar.jpg);
+    width: 1400px;
+    height: 1000px;
+    padding:10%;
+}
+#popularSaloni{
+    color:darkred;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:140%;
+    background-color:lightgrey;
+    position:fixed;
+    bottom:0;
+   
+ 
+    
+}
+.ss {
+    padding: 10px;
+    
+}

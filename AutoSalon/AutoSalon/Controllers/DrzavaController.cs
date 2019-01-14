@@ -2,8 +2,8 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using AutoSalon.Data;
-using AutoSalon.Models.ViewModels;
 using AutoSalon.Models;
+using AutoSalon.Models.ViewModels;
 
 
 
@@ -17,6 +17,7 @@ namespace AutoSalon.Controllers
         {
             _context = context;
         }
+        
         public IActionResult Index()
         {
             List<DrzavaVM> podaci = _context.Drzava.Select(x => new DrzavaVM
@@ -47,7 +48,7 @@ namespace AutoSalon.Controllers
         {
             return View();
         }
-
+       
         public IActionResult Snimi(int DrzavaID, string Naziv)
         {
             Drzava d = _context.Drzava.Find(DrzavaID);

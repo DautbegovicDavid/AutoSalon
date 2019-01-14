@@ -71,6 +71,9 @@ body {
   text-align: left;
   background-color: white;
   background: url('background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center left top;
 }
 
 [tabindex="-1"]:focus {
@@ -548,11 +551,14 @@ pre code {
 }
 
 .container {
+
+  position:relative;
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  margin-top:2%;
 }
 
 @media (min-width: 576px) {
@@ -9444,6 +9450,9 @@ button.bg-dark:focus {
   .mt-md-n5,
   .my-md-n5 {
     margin-top: -3rem !important;
+    position:  fixed;
+    z-index:1;
+    width: 100%;
   }
   .mr-md-n5,
   .mx-md-n5 {
