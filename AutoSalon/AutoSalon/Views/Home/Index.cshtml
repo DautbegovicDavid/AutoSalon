@@ -2,23 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container active font-weight-bold p-xl-5" >
+<div class="container active font-weight-bold p-xl-5" style="text-align:right;" >
     <a asp-action="Index" asp-controller="KupiAutomobil" class="pb-xl-1">Kupi Automobil</a>
     <br />
     <br />
-    <a asp-action="Index" asp-controller="Automobil"class="pb-xl-1">Rentaj Automobil</a>
+    <a asp-action="Index" asp-controller="Automobil"class="pb-xl-1">Iznajmi Automobil</a>
 
 </div>
+<div id="kupi"></div>
 <div id="popularSaloni" class="container ">
-    <p class="p-xl-5 font-weight-bold ">Najpopularnije lokacije</p>
-    <div id="popularSalonSlike">
-        <div class="ss">
-            Sarajevo
-        </div>
-        <div class="ss"><a>Mostar</a></div>
-        <div class="ss"><a>Berlin</a></div>
-        <div class="ss"><a>Pariz</a></div>
-        <div class="ss"><a>Amsterdam</a></div>
+    <p class="p-xl-2 font-weight-bold m-1">Najpopularnije lokacije</p>
 
+    <div id="popularSalonSlike" class="constainer">
+        <div class="slika sa"><a>Sarajevo</a> </div>
+        <div class="slika mo"><a>Mostar</a></div>
+        <div class="slika be"><a>Berlin</a></div>
+    </div>
+    <div id="popularSalonSlike" class="constainer">
+        <div class="slika pa"><a>Pariz</a></div>
+        <div class="slika am"><a>Amsterdam</a></div>
+        <div class="slika bg"><a>Beograd</a></div>
     </div>
 </div>
+<div id="oNama">
+
+
+</div>
+    
