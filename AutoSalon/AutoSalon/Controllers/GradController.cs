@@ -19,6 +19,7 @@ namespace AutoSalon.Controllers
         {
             _context = context;
         }
+
         public IActionResult Index()
         {
             List<GradVM> podaci = _context.Grad.Select(x => new GradVM
@@ -34,6 +35,7 @@ namespace AutoSalon.Controllers
 
             return View();
         }
+
         public IActionResult Izbrisi(int id, bool ajaxPoziv = false)
         {
             Grad g = _context.Grad.SingleOrDefault(x => x.GradID == id);
@@ -45,46 +47,46 @@ namespace AutoSalon.Controllers
             _context.SaveChanges();
             if (ajaxPoziv)
                 return PartialView("Index");
-            return Redirect("/grad/index");
-        }
-        public IActionResult Dodaj()
-        {
-            List<SelectListItem> drzave = _context.Drzava.Select(d => new SelectListItem { Text = d.Naziv.ToString(), Value = d.DrzavaID.ToString() }).ToList();
-            
-            //DrzavaDodajVM m
-            List<Drzava> podaci = _context.Drzava.ToList();
-            ViewData["kljuc"] = podaci;
-            return View();
+            TempData["porukaSuccess"] = "Uspjesno je izbrisan zapis";
+            return RedirectToAction("index");
         }
 
-        public IActionResult Snimi(int gradID, string Naziv,int DrzavaID,string PostanskiBroj)
+        public IActionResult UrediDodaj(int? id)
         {
-            Grad g = _context.Grad.Find(gradID);
+            Grad g = _context.Grad.SingleOrDefault(i => i.GradID == id);
+            List<SelectListItem> drzave = _context.Drzava.Select(d => new SelectListItem { Text = d.Naziv.ToString(), Value = d.DrzavaID.ToString() }).ToList();
+           
+                GradDodajVM model = new GradDodajVM
+                {
+                    Drzava = drzave,
+                    Grad = _context.Grad.Find(id)
+
+                };
+                return View(model); 
+        }
+
+        public IActionResult Snimi(GradDodajVM model)
+        {
+            Grad g = _context.Grad.Find(model.Grad.GradID);
 
             if (g == null)
             {
-                g = new Grad { Naziv = Naziv,DrzavaID=DrzavaID,PostanskiBroj=PostanskiBroj };
+                g = new Grad { Naziv = model.Grad.Naziv,DrzavaID= model.Grad.DrzavaID,PostanskiBroj= model.Grad.PostanskiBroj };
                 _context.Add(g);
                 _context.SaveChanges();
             }
             else
             {
-                g.Naziv = Naziv;
-                g.DrzavaID = DrzavaID;
-                g.PostanskiBroj = PostanskiBroj;
+                g.Naziv = model.Grad.Naziv;
+                g.DrzavaID = model.Grad.DrzavaID;
+                g.PostanskiBroj = model.Grad.PostanskiBroj;
                 _context.SaveChanges();
             }
+            TempData["porukaSuccess"] = "Uspjesno je snimljen/dodat zapis";
 
-            return Redirect("/grad/index");
+            return RedirectToAction("Index");
+            
         }
-        public IActionResult Uredi(int id)
-        {
-            Grad g = _context.Grad.Find(id);
-            List<Drzava> drzave = _context.Drzava.ToList();
-            ViewData["kljuc"] = g;
-            ViewData["kljuc1"] = drzave;
-
-            return View();
-        }
+        
     }
 }

@@ -1,0 +1,16 @@
+﻿@model DrzavaDodajVM
+@{
+    Layout = null;
+}
+<br />
+<h3>Dodaj - uredi drzavu</h3>
+
+
+<form asp-action="Snimi" ajax-poziv="da" ajax-rezultat="xx" style="margin:2%;">
+
+    <input asp-for="Drzava.DrzavaID" type="hidden" />
+    <label>Naziv</label>
+    <input asp-for="Drzava.Naziv" />
+    <br />
+    <button type="submit" class="btn btn-success" style="margin-top:1%;">Sacuvaj</button>
+</form>

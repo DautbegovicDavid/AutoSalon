@@ -20,19 +20,30 @@ namespace AutoSalon.Controllers
         
         public IActionResult Index()
         {
-            List<DrzavaVM> podaci = _context.Drzava.Select(x => new DrzavaVM
+            int brG = 0;
+            List<Drzave> podaci = _context.Drzava.Select(x => new Drzave
             {
+
                 DrzavaID = x.DrzavaID,
-                Naziv = x.Naziv
+                Naziv = x.Naziv,
+                brGradova = _context.Grad.Where(g => g.Drzava.Naziv == x.Naziv).Count()
 
             }).ToList();
-
-            ViewData["drzave"] = podaci;
-
-            return View();
+            foreach(Drzave x in podaci)
+            {
+                brG += x.brGradova;
+            }
+            DrzavaVM model = new DrzavaVM
+            {
+                podaci = podaci,
+                ukupanBrUnesenihGradova = brG
+               
+            };
+            
+            return View(model);
         }
 
-        public IActionResult Izbrisi(int id)
+        public IActionResult Izbrisi(int id, bool ajaxPoziv = false)
         {
             Drzava d = _context.Drzava.SingleOrDefault(x => x.DrzavaID == id);
 
@@ -41,37 +52,38 @@ namespace AutoSalon.Controllers
 
             _context.Remove(d);
             _context.SaveChanges();
+            if (ajaxPoziv)
+                return PartialView("Index");
+            TempData["porukaSuccess"] = "Uspjesno je obrisan zapis";
+            return RedirectToAction("Index");
+            
 
-            return Redirect("/Drzava/Index");
-        }
-        public IActionResult Dodaj()
-        {
-            return View();
         }
        
-        public IActionResult Snimi(int DrzavaID, string Naziv)
+        public IActionResult Snimi(DrzavaDodajVM model)
         {
-            Drzava d = _context.Drzava.Find(DrzavaID);
+            Drzava d = _context.Drzava.Find(model.Drzava.DrzavaID);
 
             if (d == null)
             {
-                d = new Drzava { Naziv = Naziv };
+                d = new Drzava { Naziv = model.Drzava.Naziv };
                 _context.Add(d);
                 _context.SaveChanges();
             }
             else
             {
-                d.Naziv = Naziv;
+                d.Naziv = model.Drzava.Naziv;
                 _context.SaveChanges();
             }
+            TempData["porukaSuccess"] = "Uspjesno je snimljen/dodat zapis"; 
+            
+            return RedirectToAction("Index");
 
-            return Redirect("/Drzava/index");
         }
-        public IActionResult Uredi(int id)
-        {
-            Drzava d = _context.Drzava.Find(id);
-            ViewData["kljuc"] = d;
-            return View();
+        public IActionResult UrediDodaj(int? id)
+        { 
+            DrzavaDodajVM model = new DrzavaDodajVM { Drzava = _context.Drzava.Find(id) };
+            return View(model);
         }
 
 

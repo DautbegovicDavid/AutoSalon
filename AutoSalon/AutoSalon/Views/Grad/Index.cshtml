@@ -3,46 +3,70 @@
     ViewData["Title"] = "Index";
     List<GradVM> podaci = ViewData["gradovi"] as List<GradVM>;
     int g = 0;
+    var porukaSuccess = TempData["porukaSuccess"] as string;
+    var porukaWarning = TempData["porukaWarning"] as string;
+    var porukaError = TempData["porukaError"] as string;
+}
+@if (porukaSuccess != null)
+{
+    <div class="alert alert-success" role="alert">
+        <strong>Well done!</strong> @porukaSuccess
+    </div>
+}
+
+@if (porukaWarning != null)
+{
+    <div class="alert alert-warning" role="alert">
+        <strong>Well done!</strong> @porukaWarning
+    </div>
 }
 
 
+@if (porukaError != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Well done!</strong> @porukaError
+    </div>
+}
+
 <h2>Lista Gradova</h2>
 
-    <table class="table table-bordered table-hover table-dark table-active ">
+<table class="table table-bordered table-hover table-dark table-active ">
 
-        <thead>
+    <thead>
+        <tr>
+            <th>rBR</th>
+            <th>Naziv</th>
+            <th>Drzava</th>
+            <th>Postanski broj</th>
+            <th colspan="2" style="text-align:center">Akcija</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (GradVM x in podaci)
+        {
+            g++;
             <tr>
-                <th>rBR</th>
-                <th>Naziv</th>
-                <th>Drzava</th>
-                <th>Postanski broj</th>
-                <th colspan="2" style="text-align:center">Akcija</th>
+
+                <td>@g</td>
+                <td>@x.Naziv</td>
+                <td>@x.Drzava</td>
+                <td>@x.PostanskiBroj</td>
+                <td style="text-align:center">
+                    <a asp-action="Izbrisi" asp-route-id="@x.GradID" class="btn btn-danger" ajax-poziv="da" ajax-rezultat="xx">Obrisi</a>
+                </td>
+                <td style="text-align:center">
+                    <a asp-action="UrediDodaj" asp-route-id="@x.GradID" class="btn btn-warning" ajax-poziv="da" ajax-rezultat="divRez">Uredi</a>
+                </td>
             </tr>
-        </thead>
+        }
 
-        <tbody>
+    </tbody>
 
-            @foreach (GradVM x in podaci)
-            {
-                <tr>
-                    @{ g++;}
-                    <td>@g</td>
-                    <td>@x.Naziv</td>
-                    <td>@x.Drzava</td>
-                    <td>@x.PostanskiBroj</td>
-                    <td style="text-align:center">
-                        <a asp-action="Izbrisi" asp-route-id="@x.GradID"class="btn btn-danger" ajax-poziv="da" ajax-rezultat="xx" >Obrisi</a>
-                    </td>
-                    <td style="text-align:center">
-                        <a asp-action="Uredi" asp-route-id="@x.GradID" class="btn btn-warning" ajax-poziv="da" ajax-rezultat="divRez">Uredi</a>
-                    </td>
-                </tr>
-            }
+</table>
 
-        </tbody>
-
-    </table>
-
-<a asp-action="Dodaj" class="btn btn-info" ajax-poziv="da" ajax-rezultat="divRez">Dodaj Grad</a>
+<a asp-action="UrediDodaj" asp-route-id="0"class="btn btn-info" ajax-poziv="da" ajax-rezultat="divRez">Dodaj Grad</a>
 <div id="divRez"> </div>
 

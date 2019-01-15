@@ -1,0 +1,33 @@
+﻿@model GradDodajVM
+@{
+    ViewData["Title"] = "Dodaj";
+    //List<Drzava> podaci=ViewData["kljuc"] as List<Drzava>;
+    Layout = null;
+}
+
+<h2>Unesi grad</h2>
+
+<form asp-action="Snimi"  ajax-poziv="da" ajax-rezultat="xx" >
+
+    <input asp-for="Grad.GradID" type="hidden" />
+    <label>Naziv grada</label>
+    <br />
+    <input asp-for="Grad.Naziv" />
+    <br />
+    <label>Naziv drzave</label>
+    <br />
+    <select asp-for="Grad.DrzavaID" asp-items="Model.Drzava" ></select>
+    <br />
+    <label>Postanski broj</label>
+    <br />
+    <input asp-for="Grad.PostanskiBroj"  />
+    <br />
+    <button type="submit" class="btn btn-success" style="margin-top:1%" >Sacuvaj</button>
+
+
+</form>
+<a asp-action="Dodaj" asp-controller="Drzava" ajax-poziv="da" ajax-rezultat="divReza" ajax-jedan="da">Zeljeni grad se ne nalazi u navedenim drzava ?</a>
+<div id="divReza"> </div>
+<!--<div id="divRez"></div><!--Nema logike stavljati u novi div rezultat Forme - Istraziti !-->
+
+

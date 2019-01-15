@@ -1,9 +1,38 @@
 ﻿@using AutoSalon.Models.ViewModels;
+@model DrzavaVM
 @{
     ViewData["Title"] = "Lista";
-    var podaci = (List<DrzavaVM>)ViewData["drzave"];
+    //var podaci = (List<DrzavaVM>)ViewData["drzave"];
     int r = 0;
+    var porukaSuccess = TempData["porukaSuccess"] as string;
+    var porukaWarning = TempData["porukaWarning"] as string;
+    var porukaError = TempData["porukaError"] as string;
+   
+
 }
+
+@if (porukaSuccess != null)
+{
+    <div class="alert alert-success" role="alert">
+        <strong>Well done!</strong> @porukaSuccess
+    </div>
+}
+
+@if (porukaWarning != null)
+{
+    <div class="alert alert-warning" role="alert">
+        <strong>Well done!</strong> @porukaWarning
+    </div>
+}
+
+
+@if (porukaError != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Well done!</strong> @porukaError
+    </div>
+}
+
 <h2>Lista drzava</h2>
 
 <table class="table table-bordered table-hover table-active table-dark ">
@@ -12,31 +41,39 @@
         <tr>
             <th>rBR</th>
             <th>Naziv</th>
+            <th>Br gradova</th>
+
             <th colspan="2" style="text-align:center">Akcija</th>
         </tr>
     </thead>
 
     <tbody>
 
-        @foreach (DrzavaVM x in podaci)
+        @foreach (Drzave x in Model.podaci)
         {
+            r++;
             <tr>
 
-                @{ r++;}
+
                 <td>@r</td>
                 <td>@x.Naziv</td>
+                <td>@x.brGradova</td>
                 <td style="text-align:center">
                     <a asp-action="Izbrisi" asp-route-id="@x.DrzavaID" class="btn btn-danger" ajax-poziv="da" ajax-rezultat="xx ">Obrisi</a>
-                </td> 
-                <td style="text-align:center">
-                    <a asp-action="Uredi" asp-route-id="@x.DrzavaID" class="btn btn-warning"  ajax-poziv="da" ajax-rezultat="divRez">Uredi</a>
                 </td>
-  
+                <td style="text-align:center">
+                    <a asp-action="UrediDodaj" asp-route-id="@x.DrzavaID" class="btn btn-warning" ajax-poziv="da" ajax-rezultat="divRez">Uredi</a>
+                </td>
+
             </tr>
         }
 
     </tbody>
+    <tfoot>
+        <tr><td>Ukupan broj unesenih Gradova </td><td></td><td>@Model.ukupanBrUnesenihGradova</td></tr>
+
+    </tfoot>
 
 </table>
-<a href="/drzava/dodaj" class="btn btn-info"  ajax-poziv="da" ajax-rezultat="divRez" >Dodaj drzavu</a>
+<a asp-action="UrediDodaj" asp-route-id="0" class="btn btn-info" ajax-poziv="da" ajax-rezultat="divRez">Dodaj drzavu</a>
 <div id="divRez"></div>

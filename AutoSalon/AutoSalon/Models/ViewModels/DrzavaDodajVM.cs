@@ -7,6 +7,6 @@ namespace AutoSalon.Models.ViewModels
 {
     public class DrzavaDodajVM
     {
-
+        public Drzava Drzava { get; set; }
     }
 }
