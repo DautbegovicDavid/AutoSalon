@@ -26,7 +26,7 @@ namespace AutoSalon.Controllers
         }
 
         //Index
-        public IActionResult Index(int ? GradID,string nazivPoslovnice)
+        public IActionResult Index(int ? GradID,string nazivPoslovnice,string partial)
         {
             PoslovnicaIndexVM model = new PoslovnicaIndexVM();
             model.Gradovi = PripremaListItemGradovi();
@@ -46,8 +46,11 @@ namespace AutoSalon.Controllers
                 SlikaUrl = x.SlikaURL
             }).ToList();
     
+            if(partial=="true")
+            return PartialView( model);
+            return View(model);
 
-            return View( model);
+
         }
 
 

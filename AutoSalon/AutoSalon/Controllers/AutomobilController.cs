@@ -440,7 +440,7 @@ namespace AutoSalon.Controllers
             return View(AutomobilUrediVM);
         }
 
-        public IActionResult Detalji(int AutomobilID)
+        public IActionResult Detalji(int AutomobilID,string partial)
         {
             Automobil automobil = db.Automobil.Include(y=> y.Proizvodjac).FirstOrDefault(x => x.AutomobilID == AutomobilID);
             AutomobilDetalji automobilDetalji = db.AutomobilDetalji.FirstOrDefault(x => x.AutomobilID == automobil.AutomobilID);
@@ -472,6 +472,8 @@ namespace AutoSalon.Controllers
                 CijenaRentanja = automobilDetalji.CijenaRentanja
                
             };
+            if (partial == "true")
+                return PartialView(model);
             return View(model);
         }
 

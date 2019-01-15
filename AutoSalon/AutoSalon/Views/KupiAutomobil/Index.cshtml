@@ -5,11 +5,12 @@
 
 <h2 class="text-success">Kakvog  limenog ljubimca zelite ?</h2>
 <hr />
-<a class="btn btn-group btn-secondary btn-link m-3 btn-outline-success "asp-action="index" asp-controller="Automobil" >Nova vozila</a>
+<a class="btn btn-group btn-secondary btn-info m-3 "asp-action="NovaVozila" asp-controller="KupiAutomobil" >Nova vozila</a>
 <br />
-<a class="btn btn-group btn-secondary btn-link m-3 btn-outline-warning" asp-action="index" asp-controller="Automobil">Polovna vozila</a>
+<a class="btn btn-group btn-secondary btn-info m-3 " asp-action="PolovnaVozila" asp-controller="KupiAutomobil">Polovna vozila</a>
 <br />
-<a class="btn btn-group btn-secondary btn-link m-3 btn-outline-info" asp-action="index" asp-controller="Poslovnica" ajax-poziv="da" ajax-rezultat="xx">Pretraga po poslovnicama</a>
+<a class="btn btn-group btn-secondary btn-info m-3 " asp-action="index" asp-controller="Poslovnica" asp-route-partial="true" ajax-poziv="da" ajax-rezultat="divRez">Pretraga po poslovnicama</a>
+<div id="divRez"></div>
 
-<div id="rez"></div>
+
 
