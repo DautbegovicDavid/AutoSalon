@@ -52,6 +52,31 @@ namespace AutoSalon.Controllers
 
 
         }
+        public IActionResult PoslovnicaGrad(string Grad, string partial)
+        {
+            PoslovnicaIndexVM model = new PoslovnicaIndexVM();
+            model.Gradovi = PripremaListItemGradovi();
+            
+
+            
+
+            model.Rows = _context.Poslovnica.Where(y => (y.Grad.Naziv == Grad))
+                                            .Select(x => new PoslovnicaIndexVM.Row()
+                                            {
+                                                PoslovnicaId = x.PoslovnicaID,
+                                                Naziv = x.Naziv,
+                                                Grad = x.Grad.Naziv,
+                                                Adresa = x.Adresa,
+                                                KontaktTelefon = x.KontaktTelefon,
+                                                SlikaUrl = x.SlikaURL
+                                            }).ToList();
+
+            if (partial == "true")
+                return PartialView(model);
+            return View(model);
+
+
+        }
 
 
         //Funkcija koja priprema listu gradova

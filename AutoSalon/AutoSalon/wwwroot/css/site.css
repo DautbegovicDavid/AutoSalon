@@ -1,7 +1,9 @@
 ﻿body {
     padding-top: 45px;
+    padding-bottom: 45px;
     padding-bottom: 20px;
     color: darkslategrey;
+    height:1000px;
 }
 
 /* Wrapping element */
@@ -42,14 +44,7 @@
     position:absolute;
     right:150px;
 }
-.navbar{
-    color:black;
 
-}
-.navbar:hover {
-    color: darkred;
-    background-color:black;
-}
 .kramarSlika {
     width: 100%;
     height: 1000px;
@@ -63,13 +58,12 @@
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 140%;
-    background-color: transparent;
-    position: fixed;
-    bottom: 0;
+
+    
     
 }
-
-#popularSalonSlike {
+    
+    #popularSalonSlike {
     width: 100%;
     height: 100%;
     display: flex; 
@@ -99,4 +93,77 @@
 }
 .mo {
     background: url('../images/mostar.jpg') repeat-x center; 
+}
+
+.transparent_class {
+    background-color:black;
+    opacity: 0.5;
+}
+.slika a {
+    color: darkred;
+    background-color: white;
+    border-radius: 3px;
+    padding: 1%;
+}
+.slika a:hover {
+    color: white;
+    background-color: darkred;
+    border-radius: 3px;
+    text-decoration:none;
+}
+#kupi a:hover {
+    color: white;
+    background-color: darkred;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.aRW {
+    color: darkred;
+    background-color: white;
+    border-radius: 3px;
+    padding: 1%;
+}
+.aRW:hover {
+    color: white;
+    background-color: darkred;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.aRWa {
+    color: darkred;
+    
+    padding: 1%;
+}
+
+    .aRWa:hover {
+        color: white;
+     
+        text-decoration: none;
+    }
+    .aRWa:active {
+        color: black;
+        text-decoration: none;
+    }
+
+#PoslovnicaDivShared {
+    height: 200px;
+}
+#oNama {
+    height: auto;
+}
+
+.navbar-dark .navbar-nav .active > .nav-link{
+    color:black;
+    font-family:'Times New Roman', Times, serif;
+    font-size:1.3rem;
+}
+ 
+.navbar-nav :hover {
+    background-color:white;
+    border-radius:3px;
+}
+ul.navbar-nav a:hover {
+    color: black;
+    border-radius: 3px;
 }

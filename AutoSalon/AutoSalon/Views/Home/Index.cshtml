@@ -2,30 +2,34 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container active font-weight-bold p-xl-5" style="text-align:right;" >
-    <a asp-action="Index" asp-controller="KupiAutomobil"  style="color:black;"><h3>Kupi Automobil</h3></a>
+<div class="container active font-weight-bold p-xl-5" style="text-align:right;">
+    <a asp-action="Index" asp-controller="KupiAutomobil" class="aRWa"><h3>Kupi Automobil</h3></a>
     <br />
     <br />
-    <a asp-action="Index" asp-controller="Automobil"class="pb-xl-1" style="color:black;"><h3>Iznajmi Automobil</h3></a>
+    <a asp-action="Index" asp-controller="Automobil" class="aRWa"><p><h3>Iznajmi Automobil</h3></p></a>
 
-</div>
-<div id="kupi"></div>
-<div id="popularSaloni" class="container ">
-    <p class="p-xl-2 font-weight-bold m-1">Najpopularniji Saloni</p>
-
-    <div id="popularSalonSlike" class="constainer">
-        <div class="slika sa"><a>Sarajevo</a> </div>
-        <div class="slika mo"><a>Mostar</a></div>
-        <div class="slika be"><a>Berlin</a></div>
-    </div>
-    <div id="popularSalonSlike" class="constainer">
-        <div class="slika pa"><a>Pariz</a></div>
-        <div class="slika am"><a>Amsterdam</a></div>
-        <div class="slika bg"><a>Beograd</a></div>
-    </div>
 </div>
 <div id="oNama">
 
 
 </div>
-    
+<div id="kupi"></div>
+<div id="popularSaloni" class="container ">
+    <p class="p-xl-2 font-weight-bold m-1" style="position:inherit"><h3>Najpopularniji Saloni</h3></p>
+
+    <div id="popularSalonSlike" class="constainer">
+        <div class="slika sa"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo" asp-route-partial="true" ajax-poziv="da" ajax-rezultat="oNama">Sarajevo</a> </div>
+        <div class="slika mo"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo">Mostar</a></div>
+        <div class="slika be"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo">Berlin</a></div>
+    </div>
+    <div id="popularSalonSlike" class="constainer">
+        <div class="slika pa"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Pariz">Pariz</a></div>
+        <div class="slika am"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo">Amsterdam</a></div>
+        <div class="slika bg"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo">Beograd</a></div>
+    </div>
+</div>
+<div id="PoslovnicaDivShared">
+
+
+</div>
+
