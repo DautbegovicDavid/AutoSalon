@@ -218,8 +218,10 @@
 
 
         </div>
-
+        @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
+        {
         <a asp-action="Uredi" asp-route-AutomobilID="@Model.AutomobilID" class="btn btn-outline-warning ml-5">Uredi</a>
+        }
         <a asp-action="Index" class="float-lg-left btn btn-outline-danger mr-2">Vrati se nazad</a>
     </div>
 </div>

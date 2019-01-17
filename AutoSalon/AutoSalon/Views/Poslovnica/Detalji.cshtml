@@ -57,8 +57,10 @@
             </div>
 
         </dl>
-
+        @if (User.IsInRole("Administrator"))
+        {
         <a asp-action="Uredi" asp-route-PoslovnicaId="@Model.PoslovnicaID" class="btn btn-outline-warning ml-5">Uredi</a>
+        }
         <a asp-action="Index" class="float-lg-left btn btn-outline-danger mr-2">Vrati se nazad</a>
 
     </div>

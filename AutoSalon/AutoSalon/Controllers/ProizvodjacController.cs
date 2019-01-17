@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels.ProizvodjacViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AutoSalon.Controllers
 {
+    [Authorize(Roles = "Administrator, Uposlenik, Klijent")]
     public class ProizvodjacController : Controller
     {
         private ApplicationDbContext db;
@@ -53,7 +55,9 @@ namespace AutoSalon.Controllers
         }
 
 
+
         //Get Dodaj
+        [Authorize(Roles = "Administrator, Uposlenik")]
         public IActionResult Dodaj()
         {
             ProizvodjacDodajVM model = new ProizvodjacDodajVM();
@@ -63,6 +67,7 @@ namespace AutoSalon.Controllers
 
         //Post Dodaj
         [HttpPost]
+        [Authorize(Roles = "Administrator, Uposlenik")]
         public async Task<IActionResult> Dodaj(ProizvodjacDodajVM model)
         {
             Proizvodjac proizvodjac = new Proizvodjac()

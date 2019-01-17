@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels;
-
-
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoSalon.Controllers
 {
+    [Authorize(Roles = "Administrator, Uposlenik")]
+
     public class DrzavaController : Controller
     {
         public ApplicationDbContext _context;

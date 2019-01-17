@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels.PoslovnicaViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoSalon.Controllers
 {
+    [Authorize(Roles = "Administrator, Uposlenik, Klijent")]
     public class PoslovnicaController : Controller
     {
         private ApplicationDbContext _context;
@@ -100,7 +102,7 @@ namespace AutoSalon.Controllers
         }
 
 
-
+        [Authorize(Roles = "Administrator")]
         //Get Dodaj
         public IActionResult Dodaj()
         {
@@ -112,6 +114,7 @@ namespace AutoSalon.Controllers
 
         //Post Dodaj
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Dodaj(PoslovnicaDodajVM model,IFormFile SlikaUrl)
         {
@@ -137,7 +140,7 @@ namespace AutoSalon.Controllers
         }
 
 
-
+        [Authorize(Roles = "Administrator")]
         //Get Uredi
         public IActionResult Uredi(int  PoslovnicaID)
         {
@@ -160,6 +163,7 @@ namespace AutoSalon.Controllers
 
         //Post Uredi
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Uredi(PoslovnicaUrediVM model)
         {
@@ -183,7 +187,6 @@ namespace AutoSalon.Controllers
 
 
 
-
         //Detalji
         public IActionResult Detalji(int PoslovnicaID)
         {
@@ -204,6 +207,7 @@ namespace AutoSalon.Controllers
 
 
 
+        [Authorize(Roles = "Administrator")]
         //Get Ukloni
         public IActionResult Ukloni(int PoslovnicaID)
         {
@@ -223,6 +227,7 @@ namespace AutoSalon.Controllers
 
         //Post Ukloni
         [HttpPost,ActionName("Ukloni")]
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UkloniPotvrda(int PoslovnicaID)
         {

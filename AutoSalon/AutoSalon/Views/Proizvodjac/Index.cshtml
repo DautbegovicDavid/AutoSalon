@@ -2,13 +2,18 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h1></h1>
 
-<a asp-action="Dodaj" class="btn btn-primary">Novi proizvođač</a>
-
+@if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
+{
+    <a asp-action="Dodaj" class="btn btn-primary">Novi proizvođač</a>
+}
 @*<form class="form-inline mt-4" asp-action="Index">
         <button type="submit" class="btn btn-outline-info ">Traži</button>
     </form>
 *@
+<br />
+<br />
 <br />
 
 <table class="table table-bordered">
@@ -16,20 +21,26 @@
         <tr>
             <th>Proizvođač</th>
             <th>Država</th>
-            <th></th>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
+            {
+                <th></th>
+            }
         </tr>
     </thead>
 
     <tbody>
         @foreach (var item in Model.Rows)
         {
-            <tr>
-                <td>@item.Naziv</td>
-                <td>@item.Drzava</td>
+        <tr>
+            <td>@item.Naziv</td>
+            <td>@item.Drzava</td>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
+            {
                 <td>
                     <a asp-action="Detalji" asp-route-ProizvodjacID="@item.ProizvodjacID" class="btn btn-outline-danger">Detalji</a>
                 </td>
-            </tr>
+            }
+         </tr>
         }
     </tbody>
 </table>

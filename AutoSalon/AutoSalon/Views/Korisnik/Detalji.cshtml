@@ -4,8 +4,10 @@
 }
 
 <h2>Detalji</h2>
+<a asp-action="Index" class="btn btn-outline-danger mr-2">Vrati se nazad</a>
 
 <div class="d-flex mt-4">
+
     <div class="w-50">
         <dl>
             <dt class="w-100">
@@ -75,10 +77,58 @@
                     @Html.DisplayFor(model => model.KontaktTelefon)
                 </dd>
             </div>
+            <div class="row mb-3">
 
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.BrojKupovina)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.BrojKupovina)
+                </dd>
+            </div>
+            <div class="row mb-3">
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.BrojIznajmljivanja)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.BrojIznajmljivanja)
+                </dd>
+            </div>
+            @if (Model.TipKorisnika == "Klijent")
+            {
+                <div class="row mb-3">
+
+
+                    <dd>
+                        <a asp-action="DodijelaRole" asp-route-KorisnikID="@Model.KorisnikID" class="btn btn-outline-danger mr-2">Dodijeli rolu "Uposlenik"</a>
+
+                    </dd>
+                </div>
+            }
+            @if (Model.TipKorisnika=="Uposlenik")
+            {
+                <div class="row mb-3">
+
+
+                    <dd>
+                        <a asp-action="UkloniRole" asp-route-KorisnikID="@Model.KorisnikID" class="btn btn-outline-danger mr-2">Ukloni rolu "Uposlenik"</a>
+
+                    </dd>
+                </div>
+            }
         </dl>
 
-        <a asp-action="Index" class="float-lg-left btn btn-outline-danger mr-2">Vrati se nazad</a>
 
     </div>
 </div>
+
+<div class="AjaxDiv">
+
+</div>
+
+<script>
+    $.ajax({
+        url:"@Url.Action()"
+    })
+</script>

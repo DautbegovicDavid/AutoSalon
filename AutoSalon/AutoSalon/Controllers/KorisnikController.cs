@@ -5,12 +5,16 @@ using System.Threading.Tasks;
 using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels.KorisnikViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutoSalon.Controllers
 {
+    [Authorize(Roles = "Administrator")]
+
     public class KorisnikController : Controller
     {
         private ApplicationDbContext db;
@@ -84,6 +88,7 @@ namespace AutoSalon.Controllers
         public IActionResult Detalji(int KorisnikID)
         {
             ApplicationUser user = db.Users.Include(y=> y.Grad).FirstOrDefault(x => x.Id == KorisnikID);
+            int RoleID = db.UserRoles.FirstOrDefault(x => x.UserId == user.Id).RoleId;
 
             KorisnikDetaljiVM model = new KorisnikDetaljiVM()
             {
@@ -94,9 +99,50 @@ namespace AutoSalon.Controllers
                 Grad=user.Grad.Naziv,
                 Adresa =user.Adresa,
                 KontaktTelefon=user.PhoneNumber,
-                SlikaURL=user.SlikaURL
+                BrojKupovina=db.Kupovina.Count(z=> z.KlijentID==user.Id),
+                BrojIznajmljivanja = db.RezervacijaRentanja.Count(z => z.KlijentID == user.Id),
+                SlikaURL =user.SlikaURL,
+                TipKorisnika = db.Roles.Where(y => y.Id == RoleID).FirstOrDefault().Name
+
             };
             return View(model);
+        }
+
+        public async Task<IActionResult> DodijelaRole(int KorisnikID)
+        {
+            int userID = KorisnikID;
+            int roleID = db.Roles.Where(x => x.Name == "Uposlenik").FirstOrDefault().Id;
+           var UserRole= db.UserRoles.Where(x => x.UserId == userID).FirstOrDefault();
+            db.UserRoles.Remove(UserRole);
+
+            IdentityUserRole<int> newUserRole = new IdentityUserRole<int>
+            {
+                RoleId = roleID,
+                UserId = userID,
+                
+            };
+            db.UserRoles.Add(newUserRole);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Detalji), new { KorisnikID = userID });
+        }
+        public async Task<IActionResult> UkloniRole(int KorisnikID)
+        {
+            int userID = KorisnikID;
+            int roleID = db.Roles.Where(x => x.Name == "Klijent").FirstOrDefault().Id;
+            var UserRole = db.UserRoles.Where(x => x.UserId == userID).FirstOrDefault();
+            db.UserRoles.Remove(UserRole);
+
+            IdentityUserRole<int> newUserRole = new IdentityUserRole<int>
+            {
+                RoleId = roleID,
+                UserId = userID,
+
+            };
+            db.UserRoles.Add(newUserRole);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Detalji), new { KorisnikID = userID });
         }
     }
 }

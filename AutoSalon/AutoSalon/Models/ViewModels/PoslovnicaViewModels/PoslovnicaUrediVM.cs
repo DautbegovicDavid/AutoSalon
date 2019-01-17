@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace AutoSalon.Models.ViewModels.PoslovnicaViewModels
@@ -26,6 +27,7 @@ namespace AutoSalon.Models.ViewModels.PoslovnicaViewModels
 
         [MinLength(5, ErrorMessage = "Unos je prekratak")]
         [MaxLength(50, ErrorMessage = "Unos je predug")]
+        [DisplayName("Kontakt telefon")]
         [RegularExpression(@"^[A-Ža-ž 0-9\+]+$", ErrorMessage = "Format nije validan. " +
            "Dozvoljeni format je : 0038765304022,+387 65 304 022")]
         public string KontaktTelefon { get; set; }

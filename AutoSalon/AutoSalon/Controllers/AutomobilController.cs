@@ -7,6 +7,7 @@ using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels;
 using AutoSalon.Models.ViewModels.AutomobilViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoSalon.Controllers
 {
+    [Authorize(Roles = "Administrator, Uposlenik, Klijent")]
     public class AutomobilController : Controller
     {
         private ApplicationDbContext db;
@@ -277,7 +279,8 @@ namespace AutoSalon.Controllers
             return listItems;
         }
 
-
+        //Dodaj Get
+        [Authorize(Roles = "Administrator,Uposlenik")]
         public IActionResult Dodaj()
         {
             AutomobilDodajVM model = new AutomobilDodajVM();
@@ -292,7 +295,9 @@ namespace AutoSalon.Controllers
             return View(model);
         }
 
+        //Dodaj Post
         [HttpPost]
+        [Authorize(Roles = "Administrator, Uposlenik")]
         public async Task< IActionResult > Dodaj(AutomobilDodajVM AutomobilDodajVM, IFormFile SlikaURL)
         {
             Automobil automobil = new Automobil();
@@ -350,7 +355,8 @@ namespace AutoSalon.Controllers
             return View(AutomobilDodajVM);
         }
 
-
+        //Uredi Get
+        [Authorize(Roles = "Administrator, Uposlenik")]
         public IActionResult Uredi(int AutomobilID)
         {
             Automobil automobil = db.Automobil.FirstOrDefault(x => x.AutomobilID == AutomobilID);
@@ -391,7 +397,9 @@ namespace AutoSalon.Controllers
             return View(model);
         }
 
+        //Uredi Post
         [HttpPost]
+        [Authorize(Roles = "Administrator, Uposlenik")]
         public async Task<IActionResult> Uredi(AutomobilUrediVM AutomobilUrediVM)
         {
             Automobil automobil = db.Automobil.FirstOrDefault(x => x.AutomobilID == AutomobilUrediVM.AutomobilID);
@@ -479,6 +487,7 @@ namespace AutoSalon.Controllers
 
 
         //Get Ukloni
+        [Authorize(Roles = "Administrator, Uposlenik")]
         public IActionResult Ukloni(int AutomobilID)
         {
             Automobil automobil = db.Automobil.Include(s=> s.Proizvodjac).FirstOrDefault(x => x.AutomobilID == AutomobilID);
@@ -495,7 +504,9 @@ namespace AutoSalon.Controllers
         }
 
         //Post Ukloni
+
         [HttpPost, ActionName("Ukloni")]
+        [Authorize(Roles = "Administrator, Uposlenik")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UkloniPotvrda(int AutomobilID)
         {

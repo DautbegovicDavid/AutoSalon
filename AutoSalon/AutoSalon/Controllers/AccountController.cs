@@ -265,19 +265,22 @@ namespace AutoSalon.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                  
-                    db.UserRoles.Add(new IdentityUserRole<int>
+
+
+                    IdentityUserRole<int> newUserRole = new IdentityUserRole<int>
                     {
                         RoleId = 1,
-                        UserId=user.Id
-                    });
+                        UserId = user.Id,
+
+                    };
+                    db.UserRoles.Add(newUserRole);
+                    await db.SaveChangesAsync();
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    db.SaveChanges();
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

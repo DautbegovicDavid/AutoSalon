@@ -28,12 +28,17 @@
                 <li class="nav-item active"><a asp-area="" asp-controller="Poslovnica" asp-action="Index" class="nav-link">Poslovnica</a></li>
                 <li class="nav-item active"><a asp-area="" asp-controller="Automobil" asp-action="Index" class="nav-link">Automobil</a></li>
                 <li class="nav-item active"><a asp-area="" asp-controller="Proizvodjac" asp-action="Index" class="nav-link">Proizvođači</a></li>
-                <li class="nav-item active"><a asp-area="" asp-controller="Korisnik" asp-action="Index" class="nav-link">Korisnici</a></li>
-                <li class="nav-item active"><a asp-area="" asp-controller="Drzava" asp-action="Index" class="nav-link">Drzava</a></li>
-                <li class="nav-item active"><a asp-area="" asp-controller="Grad" asp-action="Index" class="nav-link">Grad</a></li>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <li class="nav-item active"><a asp-area="" asp-controller="Korisnik" asp-action="Index" class="nav-link">Korisnici</a></li>
+                }
+                @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
+                {
+                    <li class="nav-item active"><a asp-area="" asp-controller="Drzava" asp-action="Index" class="nav-link">Drzava</a></li>
+                    <li class="nav-item active"><a asp-area="" asp-controller="Grad" asp-action="Index" class="nav-link">Grad</a></li>
+                }
 
-
-            </ul>
+                </ul>
 
         </div>
         @await Html.PartialAsync("_LoginPartial")
