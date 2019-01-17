@@ -129,6 +129,19 @@
     border-radius: 3px;
     text-decoration: none;
 }
+.aWR {
+    color: white;
+    background-color: darkred;
+    border-radius: 3px;
+    padding: 1%;
+}
+
+    .aWR:hover {
+        color: darkred;
+        background-color: white;
+        border-radius: 3px;
+        text-decoration: none;
+    }
 
 .aRWa {
     color: darkred;
@@ -159,11 +172,20 @@
     font-size:1.3rem;
 }
  
-.navbar-nav :hover {
+.navbar-nav a:hover {
     background-color:white;
     border-radius:3px;
 }
-ul.navbar-nav a:hover {
-    color: black;
+.navbar-nav a :link {
+    background-color: 
+        darkred;
     border-radius: 3px;
+}
+.kontrast {
+    background-color: black;
+    border-radius:10px;
+}
+.kontrast p {
+    color: wheat;
+    
 }
