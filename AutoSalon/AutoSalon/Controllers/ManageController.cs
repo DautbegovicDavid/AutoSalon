@@ -178,7 +178,7 @@ namespace AutoSalon.Controllers
             var email = user.Email;
             await _emailSender.SendEmailConfirmationAsync(email, callbackUrl);
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "Verifikacijski email poslan. Molimo provjerite email.";
             return RedirectToAction(nameof(Index));
         }
 

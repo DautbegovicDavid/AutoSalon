@@ -25,7 +25,7 @@ namespace AutoSalon.Models
         [DataType(DataType.Date)]
         public DateTime DatumRodjenja { get; set; }
 
-        public int GradID { get; set; }
+        public int? GradID { get; set; }
         [ForeignKey("GradID")]
         public Grad Grad { get; set; }
         public string Adresa { get; set; }
