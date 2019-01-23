@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Services;
+using AutoSalon.Hubs;
 
 namespace AutoSalon
 {
@@ -35,7 +36,7 @@ namespace AutoSalon
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddSignalR();
             services.AddMvc();
         }
 
@@ -56,7 +57,10 @@ namespace AutoSalon
             app.UseStaticFiles();
 
             app.UseAuthentication();
-
+            app.UseSignalR(route =>
+            {
+                route.MapHub<SignalRHub>("/signalRHub");
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

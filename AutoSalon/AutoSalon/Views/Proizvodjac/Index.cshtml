@@ -8,10 +8,13 @@
 {
     <a asp-action="Dodaj" class="btn btn-primary">Novi proizvođač</a>
 }
-@*<form class="form-inline mt-4" asp-action="Index">
-        <button type="submit" class="btn btn-outline-info ">Traži</button>
-    </form>
-*@
+<form class="form-inline" asp-action="Index" asp-route-DrzavaID="@Model.DrzavaID" asp-route-nazivProizvodjaca="@Model.nazivProizvodjaca">
+    <span class="mr-2">Država : </span>
+    <select asp-for="DrzavaID" asp-items="@Model.Drzave" class="form-control mr-3"></select>
+    <span class="mr-2">Naziv : </span>
+    <input asp-for="nazivProizvodjaca" class="form-control" />
+    <button type="submit" class="ml-3 btn btn-outline-info">Traži</button>
+</form>
 <br />
 <br />
 <br />
@@ -31,16 +34,16 @@
     <tbody>
         @foreach (var item in Model.Rows)
         {
-        <tr>
-            <td>@item.Naziv</td>
-            <td>@item.Drzava</td>
-            @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
-            {
-                <td>
-                    <a asp-action="Detalji" asp-route-ProizvodjacID="@item.ProizvodjacID" class="btn btn-outline-danger">Detalji</a>
-                </td>
-            }
-         </tr>
+            <tr>
+                <td>@item.Naziv</td>
+                <td>@item.Drzava</td>
+                @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
+                {
+                    <td>
+                        <a asp-action="Detalji" asp-route-ProizvodjacID="@item.ProizvodjacID" class="btn btn-outline-danger">Detalji</a>
+                    </td>
+                }
+            </tr>
         }
     </tbody>
 </table>

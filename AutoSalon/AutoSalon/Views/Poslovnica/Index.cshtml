@@ -12,12 +12,12 @@
     <br />
     <br />
     <br />
-    <form class="form-inline" asp-action="Index" asp-route-GradID="@Model.GradID">
+    <form class="form-inline" asp-action="Index" asp-route-GradID="@Model.GradID" asp-route-nazivPoslovnice="@Model.nazivPoslovnice">
         <span class="mr-2">Grad : </span>
         <select asp-for="GradID" asp-items="@Model.Gradovi" class="form-control mr-3"></select>
         <span class="mr-2">Naziv : </span>
         <input asp-for="nazivPoslovnice" class="form-control" />
-        <button type="submit" class="btn btn-outline-info">Traži</button>
+        <button type="submit" class="ml-3 btn btn-outline-info">Traži</button>
     </form>
     <br />
 

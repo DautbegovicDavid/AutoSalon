@@ -19,16 +19,22 @@ namespace AutoSalon.Controllers
         {
             db = _db;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? DrzavaID, string nazivProizvodjaca)
         {
-            ProizvodjacIndexVM model = new ProizvodjacIndexVM()
+
+            ProizvodjacIndexVM model = new ProizvodjacIndexVM();
+            model.Drzave = PripremaListItemDrzave();
+            if (nazivProizvodjaca != null)
+                nazivProizvodjaca = nazivProizvodjaca.Replace(" ", "").ToLower();
+
+            model.Rows = db.Proizvodjac.Where(y => (y.DrzavaID == DrzavaID || DrzavaID == null) && (y.Naziv.Replace(" ", "").ToLower().Contains(nazivProizvodjaca) || nazivProizvodjaca == null))
+            .Select(x => new ProizvodjacIndexVM.Row
             {
-                Rows=db.Proizvodjac.Select(x=> new ProizvodjacIndexVM.Row {
-                    ProizvodjacID=x.ProizvodjacID,
-                    Naziv=x.Naziv,
-                    Drzava=x.Drzava.Naziv
-                }).ToList() 
-            };
+                ProizvodjacID = x.ProizvodjacID,
+                Naziv = x.Naziv,
+                Drzava = x.Drzava.Naziv
+            }).ToList();
+           
             return View(model);
         }
 
