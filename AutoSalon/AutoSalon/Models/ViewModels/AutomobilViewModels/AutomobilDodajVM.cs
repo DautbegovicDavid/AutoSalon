@@ -96,6 +96,6 @@ namespace AutoSalon.Models.ViewModels.AutomobilViewModels
         [DataType(DataType.Currency)]
         [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. " +
        "Dozvoljeni format : 40,55 ")]
-        public decimal? CijenaRentanja { get; set; }
+        public decimal? CijenaRentanja { get; set; } = 0;
     }
 }

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoSalon.Data;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels.ProizvodjacViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -15,9 +18,12 @@ namespace AutoSalon.Controllers
     public class ProizvodjacController : Controller
     {
         private ApplicationDbContext db;
-        public ProizvodjacController(ApplicationDbContext _db)
+        private IHostingEnvironment he;
+
+        public ProizvodjacController(ApplicationDbContext _db, IHostingEnvironment _he)
         {
             db = _db;
+            he = _he;
         }
         public IActionResult Index(int? DrzavaID, string nazivProizvodjaca)
         {
@@ -32,7 +38,8 @@ namespace AutoSalon.Controllers
             {
                 ProizvodjacID = x.ProizvodjacID,
                 Naziv = x.Naziv,
-                Drzava = x.Drzava.Naziv
+                Drzava = x.Drzava.Naziv,
+                SlikaURL=x.SlikaURL
             }).ToList();
            
             return View(model);
@@ -74,13 +81,17 @@ namespace AutoSalon.Controllers
         //Post Dodaj
         [HttpPost]
         [Authorize(Roles = "Administrator, Uposlenik")]
-        public async Task<IActionResult> Dodaj(ProizvodjacDodajVM model)
+        public async Task<IActionResult> Dodaj(ProizvodjacDodajVM model, IFormFile SlikaUrl)
         {
             Proizvodjac proizvodjac = new Proizvodjac()
             {
                 Naziv=model.Naziv,
-                DrzavaID=model.DrzavaID
+                DrzavaID=model.DrzavaID,
+                SlikaURL=SlikaUrl.FileName
             };
+            var filePath = Path.Combine(he.WebRootPath + "\\images\\Proizvodjaci", SlikaUrl.FileName);
+            SlikaUrl.CopyTo(new FileStream(filePath, FileMode.Create));
+
             db.Proizvodjac.Add(proizvodjac);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

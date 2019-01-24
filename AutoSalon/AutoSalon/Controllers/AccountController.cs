@@ -259,7 +259,8 @@ namespace AutoSalon.Controllers
                     DatumRodjenja =model.DatumRodjenja,
                     GradID=model.GradID,
                     Adresa=model.Adresa,
-                    DatumRegistracije=DateTime.Now
+                    DatumRegistracije=DateTime.Now,
+                    SlikaURL="blank-profile.png"
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

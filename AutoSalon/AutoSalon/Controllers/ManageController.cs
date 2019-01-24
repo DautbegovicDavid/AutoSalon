@@ -145,6 +145,7 @@ namespace AutoSalon.Controllers
             user.GradID = model.GradID;
             user.Adresa = model.Adresa;
             user.DatumRodjenja = model.DatumRodjenja;
+            db.SaveChanges();
 
             if (SlikaURL != null)
             {

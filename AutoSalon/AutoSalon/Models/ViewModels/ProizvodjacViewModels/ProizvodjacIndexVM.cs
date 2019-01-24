@@ -17,6 +17,8 @@ namespace AutoSalon.Models.ViewModels.ProizvodjacViewModels
             public int ProizvodjacID { get; set; }
             public string Naziv { get; set; }
             public string Drzava { get; set; }
+            public string SlikaURL { get; set; }
+
         }
     }
 }

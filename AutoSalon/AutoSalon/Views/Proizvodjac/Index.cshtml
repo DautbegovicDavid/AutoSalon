@@ -6,12 +6,12 @@
 
 @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
 {
-    <a asp-action="Dodaj" class="btn btn-primary">Novi proizvođač</a>
+    <a asp-action="Dodaj" class="btn btn-primary mb-3">Novi proizvođač</a>
 }
 <form class="form-inline" asp-action="Index" asp-route-DrzavaID="@Model.DrzavaID" asp-route-nazivProizvodjaca="@Model.nazivProizvodjaca">
     <span class="mr-2">Država : </span>
     <select asp-for="DrzavaID" asp-items="@Model.Drzave" class="form-control mr-3"></select>
-    <span class="mr-2">Naziv : </span>
+    <span class="mr-2">Naziv proizvođača: </span>
     <input asp-for="nazivProizvodjaca" class="form-control" />
     <button type="submit" class="ml-3 btn btn-outline-info">Traži</button>
 </form>
@@ -19,31 +19,46 @@
 <br />
 <br />
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Proizvođač</th>
-            <th>Država</th>
-            @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
-            {
-                <th></th>
-            }
-        </tr>
-    </thead>
 
-    <tbody>
+
+
+<div class="container">
+    <div class="row">
+
         @foreach (var item in Model.Rows)
         {
-            <tr>
-                <td>@item.Naziv</td>
-                <td>@item.Drzava</td>
-                @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
-                {
-                    <td>
-                        <a asp-action="Detalji" asp-route-ProizvodjacID="@item.ProizvodjacID" class="btn btn-outline-danger">Detalji</a>
-                    </td>
-                }
-            </tr>
+
+            <div class="card-deck col-sm-3">
+
+                <!-- Card -->
+                <div class="card  ml-0 mb-4">
+
+                    <!--Card image-->
+                    <div class="view overlay w-100 h-100">
+                        <img class="card-img-top w-100 h-100" src="~/images/Proizvodjaci/@item.SlikaURL" alt="@item.SlikaURL">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body ">
+
+                        <!--Title-->
+                        <h4 class="card-title text-white">@item.Naziv</h4>
+                        <!--Text-->
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Država: @item.Drzava</li>
+                           
+
+                        </ul>
+                    
+                    </div>
+
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+    <!--/row-->
+</div>
+<!--/container-->

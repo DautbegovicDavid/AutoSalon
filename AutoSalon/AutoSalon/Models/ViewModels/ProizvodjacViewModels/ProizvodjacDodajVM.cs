@@ -18,5 +18,7 @@ namespace AutoSalon.Models.ViewModels.ProizvodjacViewModels
         [Required(ErrorMessage = "Država je obavezno polje")]
         public int DrzavaID { get; set; }
         public List<SelectListItem> Drzave { get; set; }
+        public string SlikaURL { get; set; }
+
     }
 }
