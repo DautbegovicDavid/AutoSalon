@@ -8,7 +8,7 @@
 
 @foreach (AutomobilRent.Auto x in Model.auta)
 {
-<div class="d-flex mt-4">
+<div class="d-flex mt-4 bijela">
 
     <div class="w-50">
         <dl>
@@ -19,8 +19,8 @@
     </div>
     
     <div class="ml-5 w-50">
-        <div class="container w-100 h-100">
-            <div class="row w-100 h-100 kontrast">
+        <div class="container w-100 h-100 mt">
+            <div class="row w-100 h-100 kontrast ">
 
 
                 <div class="col-sm-4 ">
@@ -61,14 +61,7 @@
                         </dd>
                     </div>
 
-                    <div>
-                        <dt>
-                            <label class="text-white">Pogon: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.Pogon</p>
-                        </dd>
-                    </div>
+                    
 
                     <div>
                         <dt>
@@ -84,6 +77,14 @@
 
 
                 <div class="col-sm-4">
+                    <div>
+                        <dt>
+                            <label class="text-white">Pogon: </label>
+                        </dt>
+                        <dd>
+                            <p>@x.Pogon</p>
+                        </dd>
+                    </div>
                     <div>
                         <dt>
                             <label class="text-white">Model: </label>
@@ -127,6 +128,10 @@
 
 
 
+                    
+                </div>
+
+                <div class="col-sm-4">
                     <div>
                         <dt>
                             <label class="text-white">Kubikaža: </label>
@@ -136,10 +141,7 @@
 
                         </dd>
                     </div>
-                </div>
 
-                <div class="col-sm-4">
-                    
                     <div>
                         <dt>
                             <label class="text-white">Emisioni standard: </label>
@@ -161,8 +163,21 @@
 
                     </dd>
                     <div>
-                        <a asp-action="Uredi" asp-route-AutomobilID="@x.AutomobilID" class=" btn aWR m-3">Kreiraj rezervaciju</a>
-                        <a asp-action="Index" class=" btn aRW m-3">Iznajmi danas !</a>
+                        @{ if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-action="Uredi" asp-route-AutomobilID="@x.AutomobilID" class=" btn aRW m-3">Kreiraj rezervaciju</a>
+                                <a asp-action="Index" class=" btn aRW m-3">Iznajmi danas !</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Register" asp-controller="Account" asp-route-korisnik="true" class=" btn aRW m-3">Registruj se i napravi rezervaciju</a>
+
+                            }
+
+
+                        }
+
+
                     </div>
                 </div>
             </div>

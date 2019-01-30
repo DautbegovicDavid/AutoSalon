@@ -245,8 +245,10 @@ namespace AutoSalon.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null,string korisnik=null)
         {
+            
+
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
@@ -267,13 +269,32 @@ namespace AutoSalon.Controllers
                     _logger.LogInformation("User created a new account with password.");
 
 
-                    IdentityUserRole<int> newUserRole = new IdentityUserRole<int>
+                    if (korisnik != null)
                     {
-                        RoleId = 1,
-                        UserId = user.Id,
+                        IdentityRole<int> Klijent = db.Roles.Where(x => x.Name == "Klijent" && x.NormalizedName == "Klijent").FirstOrDefault();
 
-                    };
-                    db.UserRoles.Add(newUserRole);
+                        IdentityUserRole<int> newUserRole = new IdentityUserRole<int>
+                        {
+                            RoleId = Klijent.Id,
+                            UserId = user.Id,
+
+                        };
+                        db.UserRoles.Add(newUserRole);
+                    }
+
+
+                    else
+                    {
+                        IdentityUserRole<int> newUserRole = new IdentityUserRole<int>
+                        {
+                            RoleId = 1,
+                            UserId = user.Id,
+
+                        };
+                        db.UserRoles.Add(newUserRole);
+
+                    }
+
                     await db.SaveChangesAsync();
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);

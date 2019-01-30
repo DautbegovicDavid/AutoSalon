@@ -48,5 +48,11 @@ namespace AutoSalon.Controllers
 
             return View(model);
         }
+        public IActionResult KreirajRezervaciju()
+        {
+           
+
+            return View();
+        }
     }
 }

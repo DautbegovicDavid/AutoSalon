@@ -188,4 +188,16 @@
 .kontrast p {
     color: wheat;
     
+    
+}
+.bijela{
+    background-color:darkred;
+    padding:1%;
+}
+.mt {
+    margin-top: 0 !important;
+    padding-right: 0 !important;
+}
+.RegisterInput{
+    color:white;
 }
