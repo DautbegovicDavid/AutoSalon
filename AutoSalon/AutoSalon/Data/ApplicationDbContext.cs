@@ -22,6 +22,7 @@ namespace AutoSalon.Data
         public DbSet<RezervacijaRentanje> RezervacijaRentanja { get; set; }
         public DbSet<RezervacijaTestiranje> RezervacijaTestiranja { get; set; }
         public DbSet<Notifikacija> Notifikacija { get; set; }
+        public DbSet<RezervacijaRentanjaDodatnaOprema> RezervacijaRentanjaDodatnaOprema { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -86,11 +87,7 @@ namespace AutoSalon.Data
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
             });
-            //builder.Entity<Automobil>()
-            //       .HasOne(s => s.AutoDetalji)
-            //       .WithOne(sd=> sd.Automobil)
-            //       .HasForeignKey<AutoDetalji>(ad=> ad.AutomobilID);
-
+          
 
 
         }

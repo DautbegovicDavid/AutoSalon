@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AutoSalon.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Autosalon.Models
     {
@@ -8,7 +10,8 @@ namespace Autosalon.Models
             public int DodatnaOpremaID { get; set; }
             public string Naziv { get; set; }
 
-        }
+
     }
+}
 
 
