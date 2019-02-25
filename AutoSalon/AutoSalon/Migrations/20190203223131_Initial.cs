@@ -92,7 +92,8 @@ namespace AutoSalon.Migrations
                     ProizvodjacID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DrzavaID = table.Column<int>(nullable: false),
-                    Naziv = table.Column<string>(nullable: true)
+                    Naziv = table.Column<string>(nullable: true),
+                    SlikaURL = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,7 +163,7 @@ namespace AutoSalon.Migrations
                     DatumRodjenja = table.Column<DateTime>(nullable: false),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
-                    GradID = table.Column<int>(nullable: false),
+                    GradID = table.Column<int>(nullable: true),
                     Ime = table.Column<string>(maxLength: 50, nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
@@ -185,7 +186,7 @@ namespace AutoSalon.Migrations
                         column: x => x.GradID,
                         principalTable: "Grad",
                         principalColumn: "GradID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -211,6 +212,35 @@ namespace AutoSalon.Migrations
                         principalTable: "Proizvodjac",
                         principalColumn: "ProizvodjacID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifikacija",
+                columns: table => new
+                {
+                    NotifikacijaID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DatumKreiranja = table.Column<DateTime>(nullable: false),
+                    PosiljaocID = table.Column<int>(nullable: false),
+                    PrimalacID = table.Column<int>(nullable: false),
+                    Sadrzaj = table.Column<string>(nullable: true),
+                    Status = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifikacija", x => x.NotifikacijaID);
+                    table.ForeignKey(
+                        name: "FK_Notifikacija_User_PosiljaocID",
+                        column: x => x.PosiljaocID,
+                        principalTable: "User",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Notifikacija_User_PrimalacID",
+                        column: x => x.PrimalacID,
+                        principalTable: "User",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -361,7 +391,7 @@ namespace AutoSalon.Migrations
                         column: x => x.KlijentID,
                         principalTable: "User",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Kupovina_Poslovnica_PoslovnicaID",
                         column: x => x.PoslovnicaID,
@@ -414,7 +444,7 @@ namespace AutoSalon.Migrations
                         column: x => x.KlijentID,
                         principalTable: "User",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RezervacijaRentanja_Poslovnica_PoslovnicaID",
                         column: x => x.PoslovnicaID,
@@ -463,7 +493,7 @@ namespace AutoSalon.Migrations
                         column: x => x.KlijentID,
                         principalTable: "User",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RezervacijaTestiranja_Poslovnica_PoslovnicaID",
                         column: x => x.PoslovnicaID,
@@ -492,6 +522,33 @@ namespace AutoSalon.Migrations
                     table.PrimaryKey("PK_Ocjena", x => x.RezervacijaRentanjaID);
                     table.ForeignKey(
                         name: "FK_Ocjena_RezervacijaRentanja_RezervacijaRentanjaID",
+                        column: x => x.RezervacijaRentanjaID,
+                        principalTable: "RezervacijaRentanja",
+                        principalColumn: "RezervacijaRentanjaID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RezervacijaRentanjaDodatnaOprema",
+                columns: table => new
+                {
+                    RezervacijaRentanjaDodatnaOpremaID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Cijena = table.Column<double>(nullable: false),
+                    DodatnaOpremaID = table.Column<int>(nullable: false),
+                    RezervacijaRentanjaID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RezervacijaRentanjaDodatnaOprema", x => x.RezervacijaRentanjaDodatnaOpremaID);
+                    table.ForeignKey(
+                        name: "FK_RezervacijaRentanjaDodatnaOprema_DodatnaOprema_DodatnaOpremaID",
+                        column: x => x.DodatnaOpremaID,
+                        principalTable: "DodatnaOprema",
+                        principalColumn: "DodatnaOpremaID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RezervacijaRentanjaDodatnaOprema_RezervacijaRentanja_RezervacijaRentanjaID",
                         column: x => x.RezervacijaRentanjaID,
                         principalTable: "RezervacijaRentanja",
                         principalColumn: "RezervacijaRentanjaID",
@@ -540,6 +597,16 @@ namespace AutoSalon.Migrations
                 column: "UposlenikID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Notifikacija_PosiljaocID",
+                table: "Notifikacija",
+                column: "PosiljaocID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifikacija_PrimalacID",
+                table: "Notifikacija",
+                column: "PrimalacID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Poslovnica_GradID",
                 table: "Poslovnica",
                 column: "GradID");
@@ -573,6 +640,16 @@ namespace AutoSalon.Migrations
                 name: "IX_RezervacijaRentanja_UposlenikID",
                 table: "RezervacijaRentanja",
                 column: "UposlenikID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RezervacijaRentanjaDodatnaOprema_DodatnaOpremaID",
+                table: "RezervacijaRentanjaDodatnaOprema",
+                column: "DodatnaOpremaID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RezervacijaRentanjaDodatnaOprema_RezervacijaRentanjaID",
+                table: "RezervacijaRentanjaDodatnaOprema",
+                column: "RezervacijaRentanjaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RezervacijaTestiranja_AutomobilID",
@@ -645,13 +722,16 @@ namespace AutoSalon.Migrations
                 name: "AutomobilDetalji");
 
             migrationBuilder.DropTable(
-                name: "DodatnaOprema");
-
-            migrationBuilder.DropTable(
                 name: "Kupovina");
 
             migrationBuilder.DropTable(
+                name: "Notifikacija");
+
+            migrationBuilder.DropTable(
                 name: "Ocjena");
+
+            migrationBuilder.DropTable(
+                name: "RezervacijaRentanjaDodatnaOprema");
 
             migrationBuilder.DropTable(
                 name: "RezervacijaTestiranja");
@@ -670,6 +750,9 @@ namespace AutoSalon.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserToken");
+
+            migrationBuilder.DropTable(
+                name: "DodatnaOprema");
 
             migrationBuilder.DropTable(
                 name: "RezervacijaRentanja");

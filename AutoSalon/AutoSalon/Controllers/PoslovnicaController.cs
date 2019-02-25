@@ -172,7 +172,6 @@ namespace AutoSalon.Controllers
             poslovnica.KontaktTelefon = model.KontaktTelefon;
             poslovnica.Adresa = model.Adresa;
             poslovnica.Naziv = model.Naziv;
-            poslovnica.SlikaURL = model.SlikaURL;
 
             if (ModelState.IsValid)
             {

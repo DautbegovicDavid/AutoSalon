@@ -11,7 +11,7 @@ using System;
 namespace AutoSalon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190107211446_Initial")]
+    [Migration("20190203223131_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace AutoSalon.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("GradID");
+                    b.Property<int?>("GradID");
 
                     b.Property<string>("Ime")
                         .IsRequired()
@@ -253,6 +253,30 @@ namespace AutoSalon.Migrations
                     b.ToTable("Kupovina");
                 });
 
+            modelBuilder.Entity("AutoSalon.Models.Notifikacija", b =>
+                {
+                    b.Property<int>("NotifikacijaID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DatumKreiranja");
+
+                    b.Property<int>("PosiljaocID");
+
+                    b.Property<int>("PrimalacID");
+
+                    b.Property<string>("Sadrzaj");
+
+                    b.Property<bool>("Status");
+
+                    b.HasKey("NotifikacijaID");
+
+                    b.HasIndex("PosiljaocID");
+
+                    b.HasIndex("PrimalacID");
+
+                    b.ToTable("Notifikacija");
+                });
+
             modelBuilder.Entity("Autosalon.Models.Ocjena", b =>
                 {
                     b.Property<int>("RezervacijaRentanjaID");
@@ -304,6 +328,8 @@ namespace AutoSalon.Migrations
 
                     b.Property<string>("Naziv");
 
+                    b.Property<string>("SlikaURL");
+
                     b.HasKey("ProizvodjacID");
 
                     b.HasIndex("DrzavaID");
@@ -323,6 +349,26 @@ namespace AutoSalon.Migrations
                     b.HasKey("RacunID");
 
                     b.ToTable("Racun");
+                });
+
+            modelBuilder.Entity("AutoSalon.Models.RezervacijaRentanjaDodatnaOprema", b =>
+                {
+                    b.Property<int>("RezervacijaRentanjaDodatnaOpremaID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("Cijena");
+
+                    b.Property<int>("DodatnaOpremaID");
+
+                    b.Property<int>("RezervacijaRentanjaID");
+
+                    b.HasKey("RezervacijaRentanjaDodatnaOpremaID");
+
+                    b.HasIndex("DodatnaOpremaID");
+
+                    b.HasIndex("RezervacijaRentanjaID");
+
+                    b.ToTable("RezervacijaRentanjaDodatnaOprema");
                 });
 
             modelBuilder.Entity("Autosalon.Models.RezervacijaRentanje", b =>
@@ -517,8 +563,7 @@ namespace AutoSalon.Migrations
                 {
                     b.HasOne("AutoSalon.Models.Grad", "Grad")
                         .WithMany()
-                        .HasForeignKey("GradID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GradID");
                 });
 
             modelBuilder.Entity("AutoSalon.Models.Automobil", b =>
@@ -573,6 +618,19 @@ namespace AutoSalon.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("AutoSalon.Models.Notifikacija", b =>
+                {
+                    b.HasOne("AutoSalon.Models.ApplicationUser", "Posiljaoc")
+                        .WithMany()
+                        .HasForeignKey("PosiljaocID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AutoSalon.Models.ApplicationUser", "Primalac")
+                        .WithMany()
+                        .HasForeignKey("PrimalacID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Autosalon.Models.Ocjena", b =>
                 {
                     b.HasOne("Autosalon.Models.RezervacijaRentanje", "RezervacijaRentanja")
@@ -594,6 +652,19 @@ namespace AutoSalon.Migrations
                     b.HasOne("AutoSalon.Models.Drzava", "Drzava")
                         .WithMany()
                         .HasForeignKey("DrzavaID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AutoSalon.Models.RezervacijaRentanjaDodatnaOprema", b =>
+                {
+                    b.HasOne("Autosalon.Models.DodatnaOprema", "DodatnaOprema")
+                        .WithMany()
+                        .HasForeignKey("DodatnaOpremaID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Autosalon.Models.RezervacijaRentanje", "RezervacijaRentanja")
+                        .WithMany()
+                        .HasForeignKey("RezervacijaRentanjaID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
