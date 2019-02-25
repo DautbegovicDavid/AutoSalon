@@ -12,6 +12,6 @@ namespace AutoSalon.Models
         public int DrzavaID { get; set; }
         [ForeignKey("DrzavaID")]
         public Drzava Drzava { get; set; }
-
+        public string SlikaURL { get; set; }
     }
 }

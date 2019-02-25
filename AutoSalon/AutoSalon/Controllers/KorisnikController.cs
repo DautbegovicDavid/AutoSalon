@@ -96,7 +96,7 @@ namespace AutoSalon.Controllers
                 Ime=user.Ime,
                 Prezime=user.Prezime,
                 DatumRodjenja=user.DatumRodjenja.ToShortDateString(),
-                Grad=user.Grad.Naziv,
+                Grad=user.GradID!=null?user.Grad.Naziv:"",
                 Adresa =user.Adresa,
                 KontaktTelefon=user.PhoneNumber,
                 BrojKupovina=db.Kupovina.Count(z=> z.KlijentID==user.Id),

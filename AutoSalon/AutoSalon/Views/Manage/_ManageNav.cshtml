@@ -8,22 +8,22 @@
 <ul class="nav flex-column">
 
     <li class="nav-item">
-        <a class="nav-link active" asp-action="Index">Profil</a>
+        <a class="nav-link  btn-outline-primary" asp-action="Index">Profil</a>
     </li>
 
 
 
     <li class="nav-item">
-        <a class="nav-link" asp-action="ChangePassword">Lozinka</a>
+        <a class="nav-link btn-outline-primary" asp-action="ChangePassword">Lozinka</a>
     </li>
     @if (hasExternalLogins)
     {
         <li class="nav-item">
-           <a class="nav-link" asp-action="ExternalLogins">External logins</a>
+           <a class="nav-link btn-outline-primary" asp-action="ExternalLogins">External logins</a>
         </li>
     }
     <li class="nav-item">
-    <a class="nav-link" asp-action="TwoFactorAuthentication">Two-factor autentifikacija</a>
+    <a class="nav-link btn-outline-primary" asp-action="TwoFactorAuthentication">Two-factor autentifikacija</a>
     </li>
 
 

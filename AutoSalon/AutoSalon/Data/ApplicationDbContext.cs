@@ -21,7 +21,8 @@ namespace AutoSalon.Data
         public DbSet<Racun> Racun { get; set; }
         public DbSet<RezervacijaRentanje> RezervacijaRentanja { get; set; }
         public DbSet<RezervacijaTestiranje> RezervacijaTestiranja { get; set; }
-        
+        public DbSet<Notifikacija> Notifikacija { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
