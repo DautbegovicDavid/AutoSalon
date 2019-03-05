@@ -69,8 +69,8 @@ body {
   line-height: 1.5;
   color: #839496;
   text-align: left;
-  background-color: white;
-  background: url('background.jpg');
+  background-color: black;
+  
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center left top;
