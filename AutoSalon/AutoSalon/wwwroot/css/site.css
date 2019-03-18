@@ -2,8 +2,9 @@
     padding-top: 45px;
     padding-bottom: 45px;
     padding-bottom: 20px;
-    color: darkslategrey;
+    color: black;
     height:1000px;
+    /*background-color:black;*/
 }
 
 /* Wrapping element */
@@ -74,6 +75,7 @@
     padding: 10px;
     margin: 10px;
     color: white;
+    border:3px solid darkslategrey;
 }
 
 .sa {
@@ -150,7 +152,7 @@
 }
 
     .aRWa:hover {
-        color: white;
+        color: darkslategrey;
      
         text-decoration: none;
     }
