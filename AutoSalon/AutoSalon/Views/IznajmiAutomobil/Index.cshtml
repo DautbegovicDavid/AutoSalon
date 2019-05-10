@@ -4,190 +4,193 @@
 }
 
 <h2>Izaberite jedan od ponudjenih automobila i krenite na nezaboravnu avanturu !</h2>
-
+<hr />
 
 @foreach (AutomobilRent.Auto x in Model.auta)
 {
-<div class="d-flex mt-4 bijela">
+    <div class="d-flex mt-4 bijela">
 
-    <div class="w-50">
-        <dl>
-            <dt class="w-100">
-                <img src="~/images/Automobili/@x.SlikaURL" class="img-thumbnail" />
-            </dt>
-        </dl>
-    </div>
-    
-    <div class="ml-5 w-50">
-        <div class="container w-100 h-100 mt">
-            <div class="row w-100 h-100 kontrast ">
+        <div class="w-50">
+            <dl>
+                <dt class="w-100">
+                    <img src="~/images/Automobili/@x.SlikaURL" class="img-thumbnail" />
+                </dt>
+            </dl>
+        </div>
 
-
-                <div class="col-sm-4 ">
-
-                    <div>
-                        <dt>
-                            <label class="text-white">Proizvođač: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.Proizvodjac</p>
-                        </dd>
-                    </div>
-
-                    <div>
-                        <dt>
-                            <label class="text-white">Godište: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.GodinaProizvodnje</p>
-                        </dd>
-                    </div>
-
-                    <div>
-                        <dt>
-                            <label class="text-white">Gorivo: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.Gorivo</p>
-                        </dd>
-                    </div>
-
-                    <div>
-                        <dt>
-                            <label class="text-white">Transmisija: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.Transmisija</p>
-                        </dd>
-                    </div>
-
-                    
-
-                    <div>
-                        <dt>
-                            <label class="text-white">Kilovati: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.Kilovati</p>
-                        </dd>
-                    </div>
+        <div class="ml-5 w-50">
+            <div class="container w-100 h-100 mt">
+                <div class="row w-100 h-100 kontrast ">
 
 
-                </div>
+                    <div class="col-sm-4 ">
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Proizvođač: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Proizvodjac</p>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Godište: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.GodinaProizvodnje</p>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Gorivo: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Gorivo</p>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Transmisija: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Transmisija</p>
+                            </dd>
+                        </div>
 
 
-                <div class="col-sm-4">
-                    <div>
-                        <dt>
-                            <label class="text-white">Pogon: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.Pogon</p>
-                        </dd>
-                    </div>
-                    <div>
-                        <dt>
-                            <label class="text-white">Model: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.Model</p>
 
-                        </dd>
-                    </div>
-                    <div>
-                        <dt>
-                            <label class="text-white">Boja: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.Boja</p>
+                        <div>
+                            <dt>
+                                <label class="text-white">Kilovati: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Kilovati</p>
+                            </dd>
+                        </div>
 
-                        </dd>
+
                     </div>
 
 
+                    <div class="col-sm-4">
+                        <div>
+                            <dt>
+                                <label class="text-white">Pogon: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Pogon</p>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt>
+                                <label class="text-white">Model: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Model</p>
 
-                    <div>
-                        <dt>
-                            <label class="text-white">Broj sjedišta: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.BrojSjedista</p>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt>
+                                <label class="text-white">Boja: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Boja</p>
 
-                        </dd>
+                            </dd>
+                        </div>
+
+
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Broj sjedišta: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.BrojSjedista</p>
+
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Broj vrata: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.BrojVrata</p>
+
+                            </dd>
+                        </div>
+
+
+
+
                     </div>
 
-                    <div>
+                    <div class="col-sm-4">
+                        <div>
+                            <dt>
+                                <label class="text-white">Kubikaža: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Kubikaza</p>
+
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Emisioni standard: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.EmisioniStandard</p>
+
+                            </dd>
+                        </div>
+
+
+
+
                         <dt>
-                            <label class="text-white">Broj vrata: </label>
+                            <label class="text-white">Cijena po danu: </label>
                         </dt>
                         <dd>
-                            <p>@x.BrojVrata</p>
+                            <p>@x.CijenaRentanja</p>
 
                         </dd>
-                    </div>
+                        <div>
+                            @{ if (User.Identity.IsAuthenticated)
+                                {
+                                    <a asp-action="KreirajRezervaciju" asp-route-AutomobilID="@x.AutomobilID" class=" btn aRW m-3">Kreiraj rezervaciju</a>
+                                    <a asp-action="IznamiDanas" asp-route-AutomobilID="@x.AutomobilID" class=" btn aRW m-3">Iznajmi danas !</a>
+                                }
+                                else
+                                {
+                                    <a asp-action="Register" asp-controller="Account" asp-route-korisnik="true" class=" btn aRW m-3">Registruj se i napravi rezervaciju</a>
 
 
 
-                    
-                </div>
-
-                <div class="col-sm-4">
-                    <div>
-                        <dt>
-                            <label class="text-white">Kubikaža: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.Kubikaza</p>
-
-                        </dd>
-                    </div>
-
-                    <div>
-                        <dt>
-                            <label class="text-white">Emisioni standard: </label>
-                        </dt>
-                        <dd>
-                            <p>@x.EmisioniStandard</p>
-
-                        </dd>
-                    </div>
+                                }
 
 
-
-
-                    <dt>
-                        <label class="text-white">Cijena po danu: </label>
-                    </dt>
-                    <dd>
-                        <p>@x.CijenaRentanja</p>
-
-                    </dd>
-                    <div>
-                        @{ if (User.Identity.IsAuthenticated)
-                            {
-                                <a asp-action="Uredi" asp-route-AutomobilID="@x.AutomobilID" class=" btn aRW m-3">Kreiraj rezervaciju</a>
-                                <a asp-action="Index" class=" btn aRW m-3">Iznajmi danas !</a>
                             }
-                            else
-                            {
-                                <a asp-action="Register" asp-controller="Account" asp-route-korisnik="true" class=" btn aRW m-3">Registruj se i napravi rezervaciju</a>
-
-                            }
 
 
-                        }
-
-
+                        </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
 
 
     </div>
-
-
-</div>
 }
+<div id="kraj"><button id="BtnVrh" onclick="VrhFunkcija()" >Vrati se gore !</button></div>
 
 

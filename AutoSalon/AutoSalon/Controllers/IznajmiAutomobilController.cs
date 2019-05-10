@@ -8,11 +8,32 @@ using AutoSalon.Models.ViewModels.AutomobilViewModels;
 using AutoSalon.Models;
 using AutoSalon.Data;
 using Microsoft.EntityFrameworkCore;
+using AutoSalon.Models.ViewModels.PoslovnicaViewModels;
+using AutoSalon.Models.AccountViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AutoSalon.Controllers
 {
     public class IznajmiAutomobilController : Controller
     {
+        public List<SelectListItem> PripremaListItemGradovi()
+        {
+            List<SelectListItem> listItems = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Value=string.Empty,
+                    Text="(Odaberite grad)"
+                }
+            };
+            listItems.AddRange(db.Grad.Select(x => new SelectListItem()
+            {
+                Value = x.GradID.ToString(),
+                Text = x.Naziv
+            }));
+
+            return listItems;
+        }
         public ApplicationDbContext db;
         public IznajmiAutomobilController (ApplicationDbContext context)
         {
@@ -50,9 +71,13 @@ namespace AutoSalon.Controllers
         }
         public IActionResult KreirajRezervaciju()
         {
-           
+            RegisterViewModel model = new RegisterViewModel()   
+            {
+                Gradovi = PripremaListItemGradovi()
+            };
+            return View(model);
 
-            return View();
+            
         }
     }
 }

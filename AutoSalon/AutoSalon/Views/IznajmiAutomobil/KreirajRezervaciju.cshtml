@@ -1,7 +1,23 @@
-﻿
+﻿@model RegisterViewModel
+
 @{
     ViewData["Title"] = "KreirajRezervaciju";
 }
 
-<h2>KreirajRezervaciju</h2>
+<h2>Kreiranje rezervacije</h2>
+<hr />
+<div class="form-group">
+    <label>Izaberite datum preuzimanja :</label>
+    <input class="form-control" type="date" />
+</div>
 
+    <div class="form-group">
+        <label asp-for="GradID">Mjesto preuzimanja </label>
+        <select asp-for="GradID" asp-items="@Model.Gradovi" class="form-control"></select>
+    </div>
+
+
+    <div class="form-group">
+        <label>Izaberite datum vracanja :</label>
+        <input class="form-control" type="date" />
+    </div>
