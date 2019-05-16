@@ -23,7 +23,8 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Proizvodjac" class="text-white">Proizvođač: </label>
+
+                            <label asp-for="Proizvodjac" class="text-dark">Proizvođač: </label>
                         </dt>
                         <dd>
                             <p>@Model.Proizvodjac</p>
@@ -32,7 +33,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="GodinaProizvodnje" class="text-white">Godište: </label>
+                            <label asp-for="GodinaProizvodnje" class="text-dark">Godište: </label>
                         </dt>
                         <dd>
                             <p>@Model.GodinaProizvodnje</p>
@@ -41,7 +42,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Gorivo" class="text-white">Gorivo: </label>
+                            <label asp-for="Gorivo" class="text-dark">Gorivo: </label>
                         </dt>
                         <dd>
                             <p>@Model.Gorivo</p>
@@ -50,7 +51,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Transmisija" class="text-white">Transmisija: </label>
+                            <label asp-for="Transmisija" class="text-dark">Transmisija: </label>
                         </dt>
                         <dd>
                             <p>@Model.Transmisija</p>
@@ -59,7 +60,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Pogon" class="text-white">Pogon: </label>
+                            <label asp-for="Pogon" class="text-dark">Pogon: </label>
                         </dt>
                         <dd>
                             <p>@Model.Pogon</p>
@@ -68,19 +69,19 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Kilovati" class="text-white">Kilovati: </label>
+                            <label asp-for="Kilovati" class="text-dark">Kilovati: </label>
                         </dt>
                         <dd>
-                            <p>@Model.Kilovati</p>
+                            <p>@Model.Kilovati kW</p>
                         </dd>
                     </div>
 
                     <div>
                         <dt>
-                            <label asp-for="Kilometraza" class="text-white">Kilometraža: </label>
+                            <label asp-for="Kilometraza" class="text-dark">Kilometraža: </label>
                         </dt>
                         <dd>
-                            <p>@Model.Kilometraza</p>
+                            <p>@Model.Kilometraza KM</p>
                         </dd>
                     </div>
                 </div>
@@ -89,7 +90,7 @@
                 <div class="col-sm-4">
                     <div>
                         <dt>
-                            <label asp-for="Model" class="text-white">Model: </label>
+                            <label asp-for="Model" class="text-dark">Model: </label>
                         </dt>
                         <dd>
                             <p>@Model.Model</p>
@@ -98,7 +99,7 @@
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="Boja" class="text-white">Boja: </label>
+                            <label asp-for="Boja" class="text-dark">Boja: </label>
                         </dt>
                         <dd>
                             <p>@Model.Boja</p>
@@ -108,17 +109,17 @@
 
                     <div>
                         <dt>
-                            <label asp-for="VelicinaFelgi" class="text-white">Veličina felgi: </label>
+                            <label asp-for="VelicinaFelgi" class="text-dark">Veličina felgi: </label>
                         </dt>
                         <dd>
-                            <p>@Model.VelicinaFelgi</p>
+                            <p>@Model.VelicinaFelgi "</p>
 
                         </dd>
                     </div>
 
                     <div>
                         <dt>
-                            <label asp-for="BrojSjedista" class="text-white">Broj sjedišta: </label>
+                            <label asp-for="BrojSjedista" class="text-dark">Broj sjedišta: </label>
                         </dt>
                         <dd>
                             <p>@Model.BrojSjedista</p>
@@ -128,7 +129,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="BrojVrata" class="text-white">Broj vrata: </label>
+                            <label asp-for="BrojVrata" class="text-dark">Broj vrata: </label>
                         </dt>
                         <dd>
                             <p>@Model.BrojVrata</p>
@@ -138,20 +139,20 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Tezina" class="text-white">Težina: </label>
+                            <label asp-for="Tezina" class="text-dark">Težina: </label>
                         </dt>
                         <dd>
-                            <p>@Model.Tezina</p>
+                            <p>@Model.Tezina kg</p>
 
                         </dd>
                     </div>
 
                     <div>
                         <dt>
-                            <label asp-for="Kubikaza" class="text-white">Kubikaža: </label>
+                            <label asp-for="Kubikaza" class="text-dark">Kubikaža: </label>
                         </dt>
                         <dd>
-                            <p>@Model.Kubikaza</p>
+                            <p>@Model.Kubikaza </p>
 
                         </dd>
                     </div>
@@ -160,7 +161,7 @@
                 <div class="col-sm-4">
                     <div>
                         <dt>
-                            <label asp-for="Tip" class="text-white">Tip: </label>
+                            <label asp-for="Tip" class="text-dark">Tip: </label>
                         </dt>
                         <dd>
                             <p>@Model.Tip</p>
@@ -169,7 +170,7 @@
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="EmisioniStandard" class="text-white">Emisioni standard: </label>
+                            <label asp-for="EmisioniStandard" class="text-dark">Emisioni standard: </label>
                         </dt>
                         <dd>
                             <p>@Model.EmisioniStandard</p>
@@ -179,25 +180,39 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Dostupan" class="text-white">Dostupan: </label>
+                            <label asp-for="Dostupan" class="text-dark">Dostupan: </label>
                         </dt>
                         <dd>
-                            <p>@Model.Dostupan</p>
+                            <p>@{
+                                if(Model.Dostupan==true)
+                                { <span>DA</span>}
+                                else { <span>NE</span>}
+                            } 
+                            </p>
 
                         </dd>
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="Novo" class="text-white">Novo: </label>
+                            <label asp-for="Novo" class="text-dark">Novo: </label>
                         </dt>
                         <dd>
-                            <p>@Model.Novo</p>
+                            <p>
+                                @{
+                                    if (Model.Novo == true)
+                                    {<span>DA</span>}
+                                    else
+                                    { <span> NE </span>}
+
+                                 }
+                            </p>
+                            
 
                         </dd>
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="Cijena" class="text-white">Cijena: </label>
+                            <label asp-for="Cijena" class="text-dark">Cijena: </label>
                         </dt>
                         <dd>
                             <p>@Model.Cijena</p>
@@ -206,7 +221,7 @@
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="CijenaRentanja" class="text-white">Cijena rentanja: </label>
+                            <label asp-for="CijenaRentanja" class="text-dark">Cijena rentanja: </label>
                         </dt>
                         <dd>
                             <p>@Model.CijenaRentanja</p>

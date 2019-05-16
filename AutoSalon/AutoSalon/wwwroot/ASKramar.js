@@ -80,21 +80,13 @@ function VrhFunkcija() {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 } 
 
-function prikaziIducuSliku() {
-    x = (x === images.length - 1) ? 0 : x + 1;
-    document.getElementById("novaVozilaDiv").src = images[x];
+function prikaziDiv() {
+    var x = document.getElementById("prikaziSakrijDIV");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
 }
 
-function prikaziProsluSliku() {
-    x = (x <= 0) ? images.length - 1 : x - 1;
-    document.getElementById("novaVozilaDiv").src = images[x];
-}
 
-function pokreniTimer() {
-    setInterval(prikaziIducuSliku, 3000);
-}
-
-var xxx = [], x = -1;
-images[0] = 
-images[1] = 
-images[2] = 

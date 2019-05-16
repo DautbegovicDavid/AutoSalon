@@ -9,7 +9,7 @@ namespace AutoSalon.Models
         public int AutomobilDetaljiID { get; set; }
         public int AutomobilID { get; set; }
         [ForeignKey("AutomobilID")]
-        public  Automobil Automobil{get;set;}
+        public  Automobil Automobil {get;set;}
 
         [StringLength(20)]
         [RegularExpression(@"^[A-Za-z]+$", ErrorMessage = "Format nije validan. " +
@@ -71,5 +71,10 @@ namespace AutoSalon.Models
         [RegularExpression(@"^[0-9]+$", ErrorMessage = "Format nije validan. " +
        "Dozvoljeni format : 12,500 ")]
         public decimal? CijenaRentanja { get; set; }
+
+        public int PoslovnicaID { get; set; }
+        [ForeignKey("PoslovnicaID")]
+        public Poslovnica Poslovnica { get; set; }
+
     }
 }

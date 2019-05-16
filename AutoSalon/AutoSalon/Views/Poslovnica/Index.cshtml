@@ -21,7 +21,7 @@
     </form>
     <br />
 
-    <div class="container">
+    <div class="container" style="color:black">
         <div class="row">
 
             @foreach (var item in Model.Rows)
@@ -44,7 +44,7 @@
                         <div class="card-body ">
 
                             <!--Title-->
-                            <h4 class="card-title text-white">@item.Naziv</h4>
+                            <h4 class="card-title text-dark">@item.Naziv</h4>
                             <!--Text-->
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">Grad: @item.Grad</li>
@@ -54,7 +54,7 @@
                             </ul>
                             <div class="mt-3 ml-5">
                                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                <a asp-action="Detalji" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-outline-dark text-white ml-5">Detalji</a>
+                                <a asp-action="Detalji" asp-route-PoslovnicaID="@item.PoslovnicaId" class="btn btn-outline-info text-dark ml-5">Detalji</a>
                             </div>
                         </div>
 

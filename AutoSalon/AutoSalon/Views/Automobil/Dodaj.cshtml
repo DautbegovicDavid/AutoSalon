@@ -41,7 +41,7 @@
 
                 <div class="form-group col-sm-5 mt-2 mr-5">
                     <label asp-for="GodinaProizvodnje">Godina proizvodnje  :</label>
-                    <input asp-for="GodinaProizvodnje"  class="form-control" value=""/>
+                    <input asp-for="GodinaProizvodnje" class="form-control" value="" />
                     <span asp-validation-for="GodinaProizvodnje" class="text-danger"></span>
 
                 </div>
@@ -54,7 +54,7 @@
 
                 <div class="form-group col-sm-5 mt-2 mr-5">
                     <label asp-for="Cijena">Cijena automobila :</label>
-                    <input asp-for="Cijena" class="form-control" value=""/>
+                    <input asp-for="Cijena" class="form-control" value="" />
                     <span asp-validation-for="Cijena" class="text-danger"></span>
                 </div>
                 <div class="form-group col-sm-5 mt-2 mr-5">
@@ -68,10 +68,17 @@
                     <span asp-validation-for="Tip" class="text-danger"></span>
                 </div>
 
+                <div class="form-group col-sm-5 mt-2 mr-5">
+                    <label asp-for="PoslovnicaID">Poslovnica :</label>
+                    <select asp-for="PoslovnicaID" asp-items="Model.Poslovnice" class="form-control"></select>
+                    <span asp-validation-for="PoslovnicaID" class="text-danger"></span>
+
+                </div>
                 <div class="form-group col-sm-5 ml-3 mt-5 custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck2" asp-for="Dostupan">
                     <label class="custom-control-label " for="customCheck2" asp-for="Dostupan">Dostupan</label>
                 </div>
+
 
             </div>
         </div>

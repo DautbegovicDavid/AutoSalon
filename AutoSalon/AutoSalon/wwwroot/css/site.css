@@ -67,7 +67,7 @@
     #popularSalonSlike {
     width: 100%;
     height: 100%;
-    display: flex; //jedan pored druge
+    display: flex; /*//jedan pored druge*/
 }
 .slika {
     width: 33%;
@@ -127,14 +127,18 @@
     text-decoration: none;
 }
 .aRW {
-    color: darkred;
-    background-color: white;
-    border-radius: 3px;
-    padding: 1%;
-}
-.aRW:hover {
     color: white;
     background-color: darkred;
+    border-radius: 3px;
+    border-bottom:3px solid white;
+    padding: 1%;
+    width:100%;
+    margin-bottom:0%;
+    font-size:x-large
+}
+.aRW:hover {
+    color: darkred;
+    background-color: white;
     border-radius: 3px;
     text-decoration: none;
 }
@@ -178,19 +182,12 @@
     height: auto;
     margin:20px;
 }
-#InfoGradovi p {
-    color:darkred;
-    font:italic 30px italic;
-    padding:5px;
-}
-#InfoGradoviDva {
-    width:128px;
-    height:128px;
-    float:right;
-    margin-right:10%;
-    margin-top:1%;
-    background: url('../images/kljuc.png') repeat-x center;
-}
+    #InfoGradovi p {
+        color: darkred;
+        font: italic 30px italic;
+        padding: 5px;
+    }
+
 #InfoGradoviJedan{
     
     text-align:center;
@@ -267,9 +264,57 @@
 }
 
 
-#novaVozilaDiv {
-   
+
+.navbar-fixed-left {
+    width: 140px;
+    position: fixed;
+    border-radius: 0;
+    height: 100%;
 }
-#polovnaVozilaDiv {
-   
+
+    .navbar-fixed-left .navbar-nav > li {
+        float: none; /* Cancel default li float: left */
+        width: 139px;
+    }
+
+    .navbar-fixed-left + .container {
+        padding-left: 160px;
+    }
+
+    /* On using dropdown menu (To right shift popuped) */
+    .navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+        margin-top: -50px;
+        margin-left: 140px;
+    }
+
+    .datumL,.datumD{
+        width:30%;
+        margin-bottom:10%;
+    }
+
+    
+
+#datumRezervacijeLD{
+    width:100%;
+    height:100px;
+}
+.datumL,.datumD{
+    margin:10px;
+    width:33%;
+}
+.datumD {
+    float: right;
+    
+}
+.datumL{
+    float:left;
+}
+
+#prikaziSakrijDIV {
+    width: 100%;
+    background-color: darkred;
+    height: auto;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    color:white;
 }

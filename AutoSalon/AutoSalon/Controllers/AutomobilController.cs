@@ -73,6 +73,25 @@ namespace AutoSalon.Controllers
 
             return listItems;
         }
+        //Priprema polosvnica
+        public List<SelectListItem> PripremaListItemPoslovnice()
+        {
+            List<SelectListItem> listItems = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Value=string.Empty,
+                    Text="(Odaberite poslovnicu)"
+                }
+            };
+            listItems.AddRange(db.Poslovnica.Select(x => new SelectListItem()
+            {
+                Value = x.PoslovnicaID.ToString(),
+                Text = x.Naziv
+            }));
+
+            return listItems;
+        }
 
         //Funkcija koja priprema listu tipova goriva
         public List<SelectListItem> PripremaListItemGoriva()
@@ -285,6 +304,7 @@ namespace AutoSalon.Controllers
         {
             AutomobilDodajVM model = new AutomobilDodajVM();
             model.Proizvodjaci = PripremaListItemProizvodjaci();
+            model.Poslovnice = PripremaListItemPoslovnice();
             model.EmisioniStandardi = PripremaListItemTipoviEStandardi();
             model.Transmisije = PripremaListItemTransmisije();
             model.Tipovi = PripremaListItemTipoviVozila();
@@ -308,12 +328,15 @@ namespace AutoSalon.Controllers
             if (AutomobilDodajVM.Kilometraza < 100)
                 automobil.Novo = true;
             automobil.ProizvodjacID = AutomobilDodajVM.ProizvodjacID;
+            
+
             automobil.SlikaURL = SlikaURL.FileName;
 
             if (ModelState.IsValid)
                 db.Automobil.Add(automobil);
 
                 AutomobilDetalji automobilDetalji = new AutomobilDetalji();
+            automobilDetalji.PoslovnicaID = AutomobilDodajVM.PoslovnicaID;
             automobilDetalji.AutomobilID = automobil.AutomobilID;
             automobilDetalji.BrojSjedista = AutomobilDodajVM.BrojSjedista;
             automobilDetalji.BrojVrata = AutomobilDodajVM.BrojVrata;
@@ -351,6 +374,8 @@ namespace AutoSalon.Controllers
             AutomobilDodajVM.Pogoni = PripremaListItemPogoni();
             AutomobilDodajVM.BrojeviVrata = PripremaListItemBrojVrata();
             AutomobilDodajVM.Goriva = PripremaListItemGoriva();
+            AutomobilDodajVM.Poslovnice = PripremaListItemPoslovnice();
+
 
             return View(AutomobilDodajVM);
         }
@@ -365,6 +390,7 @@ namespace AutoSalon.Controllers
             AutomobilUrediVM model = new AutomobilUrediVM()
             {
                 AutomobilID=AutomobilID,
+                PoslovnicaID=automobilDetalji.PoslovnicaID,
                 Boja=automobil.Boja,
                 Dostupan=automobil.Dostupan,
                 GodinaProizvodnje=automobil.GodinaProizvodnje,
@@ -392,7 +418,7 @@ namespace AutoSalon.Controllers
                 Tipovi = PripremaListItemTipoviVozila(),
                 Pogoni = PripremaListItemPogoni(),
                 BrojeviVrata = PripremaListItemBrojVrata(),
-                Goriva = PripremaListItemGoriva()
+                Goriva = PripremaListItemGoriva(),Poslovnice=PripremaListItemPoslovnice()
             };
             return View(model);
         }
@@ -427,7 +453,8 @@ namespace AutoSalon.Controllers
             automobilDetalji.Kilometraza = AutomobilUrediVM.Kilometraza;
             automobilDetalji.Kubikaza = AutomobilUrediVM.Kubikaza;
             automobilDetalji.Tezina = AutomobilUrediVM.Tezina;
-            automobilDetalji.CijenaRentanja = AutomobilUrediVM.Cijena/365;
+            automobilDetalji.CijenaRentanja = AutomobilUrediVM.Cijena;
+            automobilDetalji.PoslovnicaID = AutomobilUrediVM.PoslovnicaID;
 
             if (ModelState.IsValid)
             {
@@ -438,6 +465,8 @@ namespace AutoSalon.Controllers
             }
 
             AutomobilUrediVM.Proizvodjaci = PripremaListItemProizvodjaci();
+            AutomobilUrediVM.Poslovnice = PripremaListItemPoslovnice();
+
             AutomobilUrediVM.EmisioniStandardi = PripremaListItemTipoviEStandardi();
             AutomobilUrediVM.Transmisije = PripremaListItemTransmisije();
             AutomobilUrediVM.Tipovi = PripremaListItemTipoviVozila();

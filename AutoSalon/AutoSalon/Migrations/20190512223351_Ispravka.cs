@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AutoSalon.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Ispravka : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -346,6 +346,7 @@ namespace AutoSalon.Migrations
                     KonjskeSnage = table.Column<int>(nullable: false),
                     Kubikaza = table.Column<string>(nullable: true),
                     Pogon = table.Column<string>(maxLength: 20, nullable: true),
+                    PoslovnicaID = table.Column<int>(nullable: false),
                     Tezina = table.Column<int>(nullable: false),
                     Tip = table.Column<string>(maxLength: 20, nullable: true),
                     Transmisija = table.Column<string>(maxLength: 20, nullable: true),
@@ -360,6 +361,12 @@ namespace AutoSalon.Migrations
                         principalTable: "Automobil",
                         principalColumn: "AutomobilID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AutomobilDetalji_Poslovnica_PoslovnicaID",
+                        column: x => x.PoslovnicaID,
+                        principalTable: "Poslovnica",
+                        principalColumn: "PoslovnicaID",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -565,6 +572,11 @@ namespace AutoSalon.Migrations
                 table: "AutomobilDetalji",
                 column: "AutomobilID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AutomobilDetalji_PoslovnicaID",
+                table: "AutomobilDetalji",
+                column: "PoslovnicaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Grad_DrzavaID",

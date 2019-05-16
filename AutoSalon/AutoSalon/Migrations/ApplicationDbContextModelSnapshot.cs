@@ -155,6 +155,8 @@ namespace AutoSalon.Migrations
                     b.Property<string>("Pogon")
                         .HasMaxLength(20);
 
+                    b.Property<int>("PoslovnicaID");
+
                     b.Property<int>("Tezina");
 
                     b.Property<string>("Tip")
@@ -170,6 +172,8 @@ namespace AutoSalon.Migrations
 
                     b.HasIndex("AutomobilID")
                         .IsUnique();
+
+                    b.HasIndex("PoslovnicaID");
 
                     b.ToTable("AutomobilDetalji");
                 });
@@ -578,6 +582,11 @@ namespace AutoSalon.Migrations
                     b.HasOne("AutoSalon.Models.Automobil", "Automobil")
                         .WithOne("AutomobilDetalji")
                         .HasForeignKey("AutoSalon.Models.AutomobilDetalji", "AutomobilID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AutoSalon.Models.Poslovnica", "Poslovnica")
+                        .WithMany()
+                        .HasForeignKey("PoslovnicaID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

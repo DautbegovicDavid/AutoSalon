@@ -30,10 +30,7 @@
             <span class="sr-only">Next</span>
         </a>
         </div>
-        @*<p><a asp-action="Index" asp-controller="KupiAutomobil" class="aRWa"><h3>Kupi Automobil</h3></a></p>
-        <br />
-        <br />
-        <p><a asp-action="Index" asp-controller="IznajmiAutomobil" class="aRWa"><h3>Iznajmi Automobil</h3></a></p>*@
+       
 
     </div>
     <hr />
@@ -60,14 +57,14 @@
 
 
         <div id="popularSalonSlike" class="container">
-            <div class="slika sa"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo" asp-route-partial="true" ajax-poziv="da" ajax-rezultat="oNama">Sarajevo</a> </div>
-            <div class="slika mo"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo">Mostar</a></div>
-            <div class="slika be"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo">Berlin</a></div>
+            <div class="slika sa"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Sarajevo" asp-route-partial="true" ajax-poziv="da" ajax-rezultat="oNama">Sarajevo</a> </div>
+            <div class="slika mo"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Mostar" asp-route-turistickaDestinacija="da">Mostar</a></div>
+            <div class="slika be"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Berlin">Berlin</a></div>
         </div>
         <div id="popularSalonSlike" class="container">
-            <div class="slika pa"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Pariz">Pariz</a></div>
-            <div class="slika am"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo">Amsterdam</a></div>
-            <div class="slika bg"><a asp-action="PoslovnicaGrad" asp-controller="Poslovnica" asp-route-Grad="Sarajevo">Beograd</a></div>
+            <div class="slika pa"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Pariz">Pariz</a></div>
+            <div class="slika am"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Amsterdam">Amsterdam</a></div>
+            <div class="slika bg"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Beograd" asp-route-turistickaDestinacija="da">Beograd</a></div>
 
         </div>
     </div>

@@ -10,6 +10,8 @@ namespace AutoSalon.Models.ViewModels.AutomobilViewModels
     public class AutomobilUrediVM
     {
         public List<SelectListItem> Proizvodjaci { get; set; }
+        public List<SelectListItem> Poslovnice { get; set; }
+
         public List<SelectListItem> Goriva { get; set; }
         public List<SelectListItem> Transmisije { get; set; }
         public List<SelectListItem> Pogoni { get; set; }
@@ -28,6 +30,8 @@ namespace AutoSalon.Models.ViewModels.AutomobilViewModels
 
         [Required(ErrorMessage = "Proizvođač je obavezno polje")]
         public int ProizvodjacID { get; set; }
+        [Required(ErrorMessage = "Poslovnica je obavezno polje")]
+        public int PoslovnicaID { get; set; }
 
         [Required(ErrorMessage = "Godina proizvodnje je obavezno polje")]
         public int GodinaProizvodnje { get; set; }

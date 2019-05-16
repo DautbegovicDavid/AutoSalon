@@ -11,8 +11,8 @@ using System;
 namespace AutoSalon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190203223131_Initial")]
-    partial class Initial
+    [Migration("20190512223351_Ispravka")]
+    partial class Ispravka
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,6 +156,8 @@ namespace AutoSalon.Migrations
                     b.Property<string>("Pogon")
                         .HasMaxLength(20);
 
+                    b.Property<int>("PoslovnicaID");
+
                     b.Property<int>("Tezina");
 
                     b.Property<string>("Tip")
@@ -171,6 +173,8 @@ namespace AutoSalon.Migrations
 
                     b.HasIndex("AutomobilID")
                         .IsUnique();
+
+                    b.HasIndex("PoslovnicaID");
 
                     b.ToTable("AutomobilDetalji");
                 });
@@ -579,6 +583,11 @@ namespace AutoSalon.Migrations
                     b.HasOne("AutoSalon.Models.Automobil", "Automobil")
                         .WithOne("AutomobilDetalji")
                         .HasForeignKey("AutoSalon.Models.AutomobilDetalji", "AutomobilID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AutoSalon.Models.Poslovnica", "Poslovnica")
+                        .WithMany()
+                        .HasForeignKey("PoslovnicaID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
