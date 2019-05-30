@@ -14,6 +14,6 @@ namespace AutoSalon.Models
         public int DodatnaOpremaID { get; set; }
         [ForeignKey("DodatnaOpremaID")]
         public DodatnaOprema DodatnaOprema { get; set; }
-        public double Cijena { get; set; }
+        
     }
 }

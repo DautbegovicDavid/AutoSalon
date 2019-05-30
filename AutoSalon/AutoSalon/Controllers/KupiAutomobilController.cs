@@ -33,8 +33,9 @@ namespace AutoSalon.Controllers
         {
 
             AutomobilIndexVM model = new AutomobilIndexVM();
+            model.Stanje = "Novo";
 
-            model.Rows=db.Automobil.Where(q=>q.Novo==true && q.Dostupan==true)
+            model.Rows=db.Automobil.Where(q=>q.Novo==true && q.Dostupan==true   )
                 .Select(x=>new AutomobilIndexVM.Row
                 {
                 AutomobilID = x.AutomobilID,
@@ -56,6 +57,7 @@ namespace AutoSalon.Controllers
         {
 
             AutomobilIndexVM model = new AutomobilIndexVM();
+            model.Stanje = "Koristeno";
             model.Rows = db.Automobil.Where(q => q.Novo == false&&q.Dostupan==true).Select(x => new AutomobilIndexVM.Row
             {
                 AutomobilID = x.AutomobilID,

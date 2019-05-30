@@ -1,23 +1,115 @@
-﻿@model RegisterViewModel
-
+﻿@using AutoSalon.Models.ViewModels.IznajmiAutomobilViewModels;
+@model KreirajRezervacijuVM;
 @{
     ViewData["Title"] = "KreirajRezervaciju";
 }
 
 <h2>Kreiranje rezervacije</h2>
+@Html.HiddenFor(model => model.AutomobilID)
 <hr />
-<div class="form-group">
-    <label>Izaberite datum preuzimanja :</label>
-    <input class="form-control " type="date" />
-</div>
+<form asp-action="Snimi">
+
+    <input asp-for="AutomobilID" hidden />
+    <input asp-for="PoslovnicaID" hidden />
+    <input asp-for="KlijentID" hidden />
+    <input asp-for="UposlenikID" hidden />
+    
+
+
 
     <div class="form-group">
-        <label asp-for="GradID">Mjesto preuzimanja </label>
-        <select asp-for="GradID" asp-items="@Model.Gradovi" class="form-control"></select>
+        <label>Odaberite datum preuzimanja vozila</label>
+        <input asp-for="@Model.DatumPreuzimanja" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Odaberite datum vracanja vozila</label>
+        <input asp-for="@Model.DatumVracanja" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Mjesto preuzimanja vozila </label>
+        <label asp-for="@Model.PoslovnicaID" class="form-control">@Model.nazivPoslovnice</label>
+    </div>
+    <div class="form-group">
+        <label>Cijena po danu : </label>
+        <label asp-for="@Model.Iznos" class="form-control">@Model.Iznos</label>
+        <small>Cijene su izrazene u KM</small>
+    </div>
+    @*<p>KlijentID: @Model.KlijentID</p>
+        <p>UposlenikID: @Model.UposlenikID</p>
+        <p>PoslovnicaID: @Model.PoslovnicaID</p>*@
+
+
+
+    <div class="card-deck col-sm-3 w-100 h-100" style="float:right">
+
+        <!-- Card -->
+        <div class="card  ml-0 mb-4">
+
+            <!--Card image-->
+            <div class="view overlay w-100 h-100">
+                <img class="card-img-top w-100 h-100 " src="~/images/Automobili/@Model.SlikaURL" alt="@Model.SlikaURL">
+                <a href="#!">
+                    <div class="mask rgba-white-slight" style="color:black"></div>
+                </a>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body ">
+
+                <!--Title-->
+                <h4 class="card-title text-black-50">@Model.Proizvodjac - @Model.Model</h4>
+                <!--Text-->
+
+
+            </div>
+
+        </div>
+    </div>
+    <h5>Dodatna Oprema</h5>
+    
+    <div style="margin-top:2%;height:150px">
+        <div class="form-check form-check-inline">
+            <span class="form-check-input">@Html.CheckBoxFor(m => m.KrovniNosaci)</span>
+            <label class="form-check-label">Krovni nosaci</label>
+            <small>- 15KM</small>
+
+        </div>
+        
+        <div class="form-check form-check-inline">
+            <span class="form-check-input">@Html.CheckBoxFor(m => m.NosaciSkije)</span>
+            <label class="form-check-label">Nosaci za skije</label>
+            <small> - 30KM</small>
+
+        </div>
+        <br />
+        <br />
+        <div class="form-check form-check-inline">
+            <span class="form-check-input">@Html.CheckBoxFor(m => m.NosaciBicikla)</span>
+            <label class="form-check-label">Nosaci za bicikla</label>
+            <small>- 30KM</small>
+
+        </div>
+        
+        <div class="form-check form-check-inline">
+            <span class="form-check-input">@Html.CheckBoxFor(m => m.KrovniKofer)</span>
+            <label class="form-check-label">Krovni kofer</label>
+            <small>- 30KM</small>
+
+        </div>
+        <br />
+        <br />
+        
+        <div class="form-check form-check-inline">
+            <span class="form-check-input">@Html.CheckBoxFor(m => m.DjecijaSjedalica)</span>
+            <label class="form-check-label">Djecija sjedalica</label>
+            <small>- 20KM</small>
+        </div>
+        <br />
+       
+        <button type="submit" class="btn tPsS form-check" style="margin-top:50px;margin-left:0%">Potvrdi</button>
     </div>
 
 
-    <div class="form-group">
-        <label>Izaberite datum vracanja :</label>
-        <input class="form-control" type="date" />
-    </div>
+
+</form>
+

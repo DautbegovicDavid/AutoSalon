@@ -12,6 +12,10 @@ namespace AutoSalon.Models.ViewModels.AutomobilViewModels
         public string nazivModela { get; set; }
         public int ProizvodjacID { get; set; }
         public List<SelectListItem> Proizvodjaci { get;  set; }
+        public string Stanje { get; set; }
+        public string div { get; set; }
+
+
 
         public class Row
         {

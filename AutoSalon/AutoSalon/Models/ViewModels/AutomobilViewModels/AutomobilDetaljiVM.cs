@@ -8,6 +8,7 @@ namespace AutoSalon.Models.ViewModels.AutomobilViewModels
 {
     public class AutomobilDetaljiVM
     {
+        public string div { get; set; }
         public int AutomobilID { get; set; }
         public string Model { get; set; }
         public string Proizvodjac { get; set; }

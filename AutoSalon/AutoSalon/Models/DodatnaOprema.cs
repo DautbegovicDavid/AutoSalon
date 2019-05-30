@@ -9,6 +9,8 @@ namespace Autosalon.Models
             [Key]
             public int DodatnaOpremaID { get; set; }
             public string Naziv { get; set; }
+            public double Cijena { get; set; }
+
 
 
     }

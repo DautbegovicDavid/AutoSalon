@@ -8,6 +8,10 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-solar.css" /> @* Bijela stranica sve razbacano*@
         <link rel="stylesheet" href="~/css/site.css" />
+        @*<link  media="print" />*@
+
+
+
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -27,7 +31,6 @@
                 <li class="nav-item active"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Početna</a></li>
                 <li class="nav-item active"><a asp-action="Index" asp-controller="KupiAutomobil" class="nav-link">Kupi</a></li>
                 <li class="nav-item active"><a asp-action="Index" asp-controller="IznajmiAutomobil" class="nav-link">Iznajmi</a></li>
-                <li class="nav-item active"><a asp-controller="Poslovnica" asp-action="Index" class="nav-link">Saloni</a></li>
 
 
 
@@ -35,8 +38,10 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     @*<li class="nav-item active"><a asp-area="" asp-controller="Poslovnica" asp-action="Index" class="nav-link">Poslovnica</a></li>*@
-                    <li class="nav-item active"><a asp-area="" asp-controller="Automobil" asp-action="Index" class="nav-link">Automobil</a></li>
+                    @*<li class="nav-item active"><a asp-area="" asp-controller="Automobil" asp-action="Index" class="nav-link">Automobil</a></li>*@
                     <li class="nav-item active"><a asp-area="" asp-controller="Proizvodjac" asp-action="Index" class="nav-link">Proizvođači</a></li>
+                    <li class="nav-item active"><a asp-controller="Poslovnica" asp-action="Index" class="nav-link">Saloni</a></li>
+
                 }
                 @if (User.IsInRole("Administrator"))
                 {
@@ -90,8 +95,8 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
     <script src="~/ASKramar.js"></script>
-    <footer>
-
+    <footer style="height:50px">
+        
     </footer>
     @RenderSection("Scripts", required: false)
 

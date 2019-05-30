@@ -11,9 +11,10 @@ using System;
 namespace AutoSalon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190519233708_PoslovnicaUposlenikDodatnaOprema")]
+    partial class PoslovnicaUposlenikDodatnaOprema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -453,13 +454,13 @@ namespace AutoSalon.Migrations
                     b.Property<int>("UposlenikPoslovnicaID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("PoslovnicaID");
+                    b.Property<int>("KorisnikID");
 
                     b.Property<int>("UposlenikID");
 
                     b.HasKey("UposlenikPoslovnicaID");
 
-                    b.HasIndex("PoslovnicaID");
+                    b.HasIndex("KorisnikID");
 
                     b.HasIndex("UposlenikID");
 
@@ -746,9 +747,9 @@ namespace AutoSalon.Migrations
 
             modelBuilder.Entity("AutoSalon.Models.UposlenikPoslovnica", b =>
                 {
-                    b.HasOne("AutoSalon.Models.Poslovnica", "Poslovnica")
+                    b.HasOne("AutoSalon.Models.ApplicationUser", "Korisnik")
                         .WithMany()
-                        .HasForeignKey("PoslovnicaID")
+                        .HasForeignKey("KorisnikID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AutoSalon.Models.ApplicationUser", "Uposlenik")

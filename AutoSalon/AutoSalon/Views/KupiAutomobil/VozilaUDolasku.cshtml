@@ -47,7 +47,7 @@
                         </ul>
                         <div class="mt-3 ml-5">
                             <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                            <a asp-controller="Automobil" asp-action="Detalji" asp-route-AutomobilID="@item.AutomobilID" asp-route-partial="true" class="btn btn-outline-dark text-white ml-5" ajax-poziv="da" ajax-rezultat="divVUDD">Detalji</a>
+                            <a asp-controller="Automobil" asp-action="Detalji" asp-route-AutomobilID="@item.AutomobilID" asp-route-partial="true" asp-route-div="divVUDD" onclick="prikaziDiv('divVUDD')" class="btn btn-outline-dark text-dark ml-5" ajax-poziv="da" ajax-rezultat="divVUDD" >Detalji</a>
                         </div>
                     </div>
 
@@ -56,4 +56,5 @@
         }
     </div>
 </div>
+<div id="divVUDD"></div>
 

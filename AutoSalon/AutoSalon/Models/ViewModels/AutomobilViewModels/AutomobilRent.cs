@@ -25,11 +25,13 @@ namespace AutoSalon.Models.ViewModels.AutomobilViewModels
         
 
 
+
+
         public class Auto
         {
             public int AutomobilID { get; set; }
             public int AutomobilDetaljiID { get; set; }
-
+            public int PoslovnicaAutoID { get; set; }
             public string Model { get; set; }
             public string Proizvodjac { get; set; }
             public int GodinaProizvodnje { get; set; }

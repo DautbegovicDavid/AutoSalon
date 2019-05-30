@@ -1,6 +1,8 @@
 ﻿@model AutomobilDetaljiVM
 @{
     ViewData["Title"] = "Detalji";
+    string xy = Model.div;
+
 }
 
 <dd>
@@ -183,11 +185,13 @@
                             <label asp-for="Dostupan" class="text-dark">Dostupan: </label>
                         </dt>
                         <dd>
-                            <p>@{
-                                if(Model.Dostupan==true)
-                                { <span>DA</span>}
-                                else { <span>NE</span>}
-                            } 
+                            <p>
+                                @{
+                                    if (Model.Dostupan == true)
+                                    { <span>DA</span>}
+                                    else
+                                    { <span>NE</span>}
+                                }
                             </p>
 
                         </dd>
@@ -204,9 +208,9 @@
                                     else
                                     { <span> NE </span>}
 
-                                 }
+                                }
                             </p>
-                            
+
 
                         </dd>
                     </div>
@@ -235,8 +239,14 @@
         </div>
         @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
         {
-        <a asp-action="Uredi" asp-route-AutomobilID="@Model.AutomobilID" class="btn btn-outline-warning ml-5">Uredi</a>
+            <a asp-action="Uredi" asp-route-AutomobilID="@Model.AutomobilID" class="btn btn-outline-warning ml-5">Uredi</a>
+            <a asp-action="Index" class="float-lg-left btn btn-outline-danger mr-2">Vrati se nazad</a>
         }
-        <a asp-action="Index" class="float-lg-left btn btn-outline-danger mr-2">Vrati se nazad</a>
+        @if (User.IsInRole("Korisnik"))
+        {
+            
+            @*<button class="btn btn-outline-warning ml-5" onclick="sakrijDiv(xy)">Sakrij</button>*@
+        }
+
     </div>
 </div>

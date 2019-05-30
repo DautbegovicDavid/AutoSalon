@@ -80,13 +80,19 @@ function VrhFunkcija() {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 } 
 
-function prikaziDiv() {
-    var x = document.getElementById("prikaziSakrijDIV");
+function prikaziDiv(y) {
+    var x = document.getElementById(y);
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {
         x.style.display = "none";
     }
+}
+function sakrijDiv(y) {
+    var x = document.getElementById(y);
+   
+        x.style.display = "none";
+    
 }
 
 

@@ -57,11 +57,17 @@
             </div>
 
         </dl>
+        <a asp-action="Index" class="float-lg-left btn btn-dark mr-2">Vrati se nazad</a>
         @if (User.IsInRole("Administrator"))
         {
-        <a asp-action="Uredi" asp-route-PoslovnicaId="@Model.PoslovnicaID" class="btn btn-outline-warning ml-5">Uredi</a>
+            <a asp-action="Uredi" asp-route-PoslovnicaId="@Model.PoslovnicaID" class="btn btn-outline-warning ml-5">Uredi</a>
         }
-        <a asp-action="Index" class="float-lg-left btn btn-outline-danger mr-2">Vrati se nazad</a>
+        @if (User.IsInRole("Klijent"))
+        {
+            <a asp-controller="KupiAutomobil" asp-action="Index" class="btn SP ml-5">Kupi</a>
+            <a asp-controller="IznajmiAutomobil" asp-action="Index" asp-route-PoslovnicaID="@Model.PoslovnicaID" class="btn tPsS ml-5 tPsS">Iznajmi</a>
+        }
+
 
     </div>
 </div>

@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoSalon.Controllers
 {
-    [Authorize(Roles = "Administrator, Uposlenik, Klijent")]
+    [Authorize(Roles = "Administrator, Uposlenik, Korisnik")]
     public class AutomobilController : Controller
     {
         private ApplicationDbContext db;
@@ -453,7 +453,7 @@ namespace AutoSalon.Controllers
             automobilDetalji.Kilometraza = AutomobilUrediVM.Kilometraza;
             automobilDetalji.Kubikaza = AutomobilUrediVM.Kubikaza;
             automobilDetalji.Tezina = AutomobilUrediVM.Tezina;
-            automobilDetalji.CijenaRentanja = AutomobilUrediVM.Cijena;
+            automobilDetalji.CijenaRentanja = AutomobilUrediVM.CijenaRentanja;
             automobilDetalji.PoslovnicaID = AutomobilUrediVM.PoslovnicaID;
 
             if (ModelState.IsValid)
@@ -477,10 +477,11 @@ namespace AutoSalon.Controllers
             return View(AutomobilUrediVM);
         }
 
-        public IActionResult Detalji(int AutomobilID,string partial)
+        public IActionResult Detalji(int AutomobilID,string partial,string div)
         {
             Automobil automobil = db.Automobil.Include(y=> y.Proizvodjac).FirstOrDefault(x => x.AutomobilID == AutomobilID);
             AutomobilDetalji automobilDetalji = db.AutomobilDetalji.FirstOrDefault(x => x.AutomobilID == automobil.AutomobilID);
+            
 
             AutomobilDetaljiVM model = new AutomobilDetaljiVM()
             {
@@ -506,7 +507,8 @@ namespace AutoSalon.Controllers
                 Kilometraza = automobilDetalji.Kilometraza,
                 Kubikaza = automobilDetalji.Kubikaza,
                 Tezina = automobilDetalji.Tezina,
-                CijenaRentanja = automobilDetalji.CijenaRentanja
+                CijenaRentanja = automobilDetalji.CijenaRentanja,
+                div=div
                
             };
             if (partial == "true")

@@ -3,7 +3,7 @@
     padding-bottom: 45px;
     padding-bottom: 20px;
     color: black;
-    height:1000px;
+    /*height:1000px;*/
     /*background-color:black;*/
 }
 
@@ -59,9 +59,7 @@
     color: black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 140%;
-
-    
-    
+ 
 }
     
     #popularSalonSlike {
@@ -104,21 +102,20 @@
     opacity: 0.5;
 }
 .slika a {
-    color: darkred;
+    color: #89bdd3;
     background-color: white;
     border-radius: 3px;
     padding: 1%;
 }
     .slika a:hover {
-        color: white;
-        background-color: darkred;
+        
         border-radius: 3px;
         text-decoration: none;
-        border: 1px solid white;
+        border: 1px solid #89bdd3;
         border-radius: 3px;
-        
-  
-}
+        color: white;
+        background-color: #9ad3de;
+    }
     
 #kupi a:hover {
     color: white;
@@ -183,7 +180,7 @@
     margin:20px;
 }
     #InfoGradovi p {
-        color: darkred;
+        color: black;
         font: italic 30px italic;
         padding: 5px;
     }
@@ -205,7 +202,7 @@
     z-index: 99; /* Make sure it does not overlap */
     border: none; /* Remove borders */
     outline: none; /* Remove outline */
-    background-color: darkred; /* Set a background color */
+    background-color: #89bdd3; /* Set a background color */
     color: white; /* Text color */
     cursor: pointer; /* Add a mouse pointer on hover */
     padding: 15px; /* Some padding */
@@ -213,17 +210,17 @@
     font-size: 18px; /* Increase font size */
 }
     #BtnVrh:hover {
-   
-    background-color: white; /* Add a dark-grey background on hover */
-    color:darkred;
-    border:3px solid darkred;
-}
+        background-color: white; /* Add a dark-grey background on hover */
+        color: #89bdd3;
+        border: 2px solid #c9c9c9;
+    }
 
     
 .navbar-dark .navbar-nav .active > .nav-link:hover {
-    color: darkred;
+    color: #89bdd3;
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.3rem;
+    
 }
 .navbar-dark .navbar-nav .active > .nav-link {
     color: white;
@@ -243,17 +240,21 @@
     border-radius: 3px;
 }*/
 .kontrast {
-    background-color: black;
+    background-color: #89bdd3;
     border-radius:10px;
 }
-.kontrast p {
-    color: wheat;
-    
-    
-}
-.bijela{
-    background-color:darkred;
-    padding:1%;
+    .kontrast p {
+        color: ghostwhite;
+        border-bottom: 1px solid grey;
+        
+        padding: 1%;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+.bijela {
+    /*background-color: #c9c9c9;*/
+    padding: 1%;
+    background-color: #89bdd3;
+    border-radius:1%;
 }
 .mt {
     margin-top: 0 !important;
@@ -310,11 +311,49 @@
     float:left;
 }
 
+
+
+
+.tPsS{
+    background-color:#89bdd3;
+    color:white;
+}
+.SP {
+    background-color: #c9c9c9;
+    color: white;
+}
+.tPsS :hover{
+    background-color: #c9c9c9 !important;
+    color: white;
+}
+.filterDiv{
+    border:3px solid #89bdd3;
+    background-color:#c9c9c9;
+}
 #prikaziSakrijDIV {
+    /*border: 3px solid #89bdd3;*/
     width: 100%;
-    background-color: darkred;
-    height: auto;
+    /*background-color: #89bdd3;*/
+    background-color: #c9c9c9;
+    height: 266px;
     padding-top: 3%;
     padding-bottom: 3%;
-    color:white;
+    color: white;
+    border-radius:1%;
+}
+#FILTERI {
+    position: fixed;
+    top: 15%;
+    bottom: 15%;
+    right: 1%;
+    width: 17%;
+    height: 70%;
+    background-color: #e3e3e3;
+    color:white
+}
+#btnFilter{
+    position:relative;
+    width:96%;
+    bottom:0;
+    margin:2%;
 }

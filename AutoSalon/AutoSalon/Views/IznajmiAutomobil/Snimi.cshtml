@@ -1,0 +1,160 @@
+﻿@using AutoSalon.Models.ViewModels.IznajmiAutomobilViewModels;
+@model RacunVM;
+@{
+    ViewData["Title"] = "Snimi";
+    int br1 = 0;
+    int br2 = 0;
+}
+<media="print" />
+<div class="col-xs-6">
+    <img src="~/images/Logo/Logo.png">
+</div>
+<div class="col-xs-6 text-right" style="margin-top:-10%;">
+    <h1>POTVRDA</h1>
+    <h1><small>Racun #@Model.RacunID</small></h1>
+
+
+</div>
+<hr>
+
+<div class="row" style="padding-left:3%;padding-right:3%;padding-top:1%;position:relative;height:150px">
+    <div class="col-xs-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Izdavatelj: <a href="#">@Model.nazivPoslovnice</a></h4>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @Model.adresaPoslovnice <br>
+                    @Model.DrzavaGradPoslovnica <br>
+                    + 00 387 400 500 <br>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-5 col-xs-offset-2 text-right" style="display:inline-block;position:absolute;right:3%;   ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Za : <a asp-action="Index" asp-controller="Manage">@Model.KlijentImePrezime</a></h4>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @Model.KlijentGrad <br>
+                    @Model.KlijentEmail <br>
+                    Datum izdavanja : @Model.DatumKreiranja <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</div> <!-- / end client details section -->
+
+<table class="table table-bordered" style="position:relative;top:3%;">
+    <thead>
+        <tr>
+            <th><h4>Stavka</h4></th>
+            <th><h4>Opis</h4></th>
+            <th><h4>Vremenski period</h4></th>
+            <th><h4>Cijena po danu/stavci</h4></th>
+            <th><h4>Ukupno</h4></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="vertical-align:middle">
+            <td>Automobil</td>
+            <td>@Model.Automobil @Model.AutomobilDetalji</td>
+            <td class="text-left" rowspan="0" style="vertical-align:middle">
+                OD : <br />@Model.DatumPreuzimanja <br />
+                DO :<br /> @Model.DatumVracanja
+            </td>
+            <td class="text-right">@Model.cijenaPoDanu KM</td>
+            <td class="text-right">@Model.IznosbezOpreme KM</td>
+        </tr>
+        <tr style="vertical-align:middle">
+            <td style="vertical-align:middle">Dodatna oprema</td>
+            <td>
+                @{ if (Model.Oprema)
+                    {
+
+                        foreach (string x in Model.ListaOpremaNaziv)
+                        {
+                            br1++;
+                            @x;<br />
+                        }
+                    }
+                    else
+                    {
+                        <span>Nema</span>
+                    }
+                }
+            </td>
+            @*<td class="text-right">@Model.brojDana</td>*@
+            <td class="text-right">
+                @{ if (Model.Oprema)
+                    {
+
+                        foreach (string x in Model.ListaOpremaCijene)
+                        {
+                            @x<br />
+                        }
+                    }
+                    else
+                    {
+                        <span>/</span>
+                    }
+                }
+            </td>
+            <td class="text-right" style="vertical-align:bottom">@Model.CijenaOpreme.00 KM</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+<div class="row text-right" style="float:right;padding-right:1.5%;">
+    <div class="col-xs-2 col-xs-offset-8">
+        <p>
+            <medium>
+                Osnovna cijena : <br>
+                Popust : <br>
+                Ukupno : <br>
+            </medium>
+        </p>
+    </div>
+    <div class="col-xs-2">
+        <strong>
+            @Model.IznosbezPopusta KM<br>
+            @Model.Popust %<br>
+            @Model.Iznos KM<br>
+        </strong>
+
+    </div>
+
+</div>
+
+
+<div class="span7">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>Kontakt podaci</h4>
+        </div>
+        <div class="panel-body">
+            <p>
+                Email : rent4you@email.com <br><br>
+                Mobile : +060400500 <br> <br>
+                <div >Facebook  : <a href="https://www.facebook.com/">https://www.facebook.com/ </a> | Instagram : <a href="https://www.instagram.com/">https://www.instagram.com/</a></div>
+            </p>
+
+        </div>
+    </div>
+</div>
+<a asp-action="Index" asp-controller="Home" class="btn btn-info" style="float:right">Vrati se nazad</a>
+<a class="btn btn-outline-info" href="javascript:window.print()">Isprintaj</a>
+
+
+
+
+
+
+
+
+

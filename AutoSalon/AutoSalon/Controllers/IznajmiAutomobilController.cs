@@ -11,11 +11,17 @@ using Microsoft.EntityFrameworkCore;
 using AutoSalon.Models.ViewModels.PoslovnicaViewModels;
 using AutoSalon.Models.AccountViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using AutoSalon.Models.ViewModels.IznajmiAutomobilViewModels;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Principal;
+using System.Security.Claims;
 
 namespace AutoSalon.Controllers
 {
     public class IznajmiAutomobilController : Controller
     {
+
+
         public List<SelectListItem> PripremaListItemGradovi()
         {
             List<SelectListItem> listItems = new List<SelectListItem>()
@@ -51,8 +57,27 @@ namespace AutoSalon.Controllers
             }));
 
             return listItems;
+        } 
+        public List<SelectListItem> PripremaListItemPoslovnice(int id)
+        {
+            List<SelectListItem> listItems = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Value=string.Empty,
+                    Text="(Odaberite poslovnicu)",
+
+                }
+            };
+            listItems.AddRange(db.Poslovnica.Include(i => i.Grad.Drzava).Select(x => new SelectListItem()
+            {
+                Value = x.PoslovnicaID.ToString(),
+                Text = x.Naziv + " - " + x.Grad.Drzava.Naziv + ", " + x.Grad.Naziv + " - " + x.Adresa,
+                Selected = (x.PoslovnicaID == id)
+            }));
+
+            return listItems;
         }
-        //Priprema polosvnica
         public List<SelectListItem> PripremaListItemPoslovnice()
         {
             List<SelectListItem> listItems = new List<SelectListItem>()
@@ -60,19 +85,19 @@ namespace AutoSalon.Controllers
                 new SelectListItem()
                 {
                     Value=string.Empty,
-                    Text="(Odaberite poslovnicu)"
+                    Text="(Odaberite poslovnicu)",
+
                 }
             };
-            listItems.AddRange(db.Poslovnica.Include(i=>i.Grad.Drzava).Select(x => new SelectListItem()
+            listItems.AddRange(db.Poslovnica.Include(i => i.Grad.Drzava).Select(x => new SelectListItem()
             {
                 Value = x.PoslovnicaID.ToString(),
-                Text = x.Naziv +" - "+ x.Grad.Drzava.Naziv +", "+x.Grad.Naziv + " - " + x.Adresa
+                Text = x.Naziv + " - " + x.Grad.Drzava.Naziv + ", " + x.Grad.Naziv + " - " + x.Adresa,
+
             }));
 
             return listItems;
         }
-
-        //Funkcija koja priprema listu tipova goriva
         public List<SelectListItem> PripremaListItemGoriva()
         {
             List<SelectListItem> listItems = new List<SelectListItem>()
@@ -91,7 +116,7 @@ namespace AutoSalon.Controllers
             });
             listItems.Add(new SelectListItem()
             {
-                Value ="2",
+                Value = "2",
                 Text = "Benzin"
             });
             listItems.Add(new SelectListItem()
@@ -111,8 +136,6 @@ namespace AutoSalon.Controllers
             });
             return listItems;
         }
-
-        //Funkcija koja priprema listu tipova transmisije
         public List<SelectListItem> PripremaListItemTransmisije()
         {
             List<SelectListItem> listItems = new List<SelectListItem>()
@@ -141,8 +164,6 @@ namespace AutoSalon.Controllers
             });
             return listItems;
         }
-
-        //Funkcija koja priprema listu tipova pogona
         public List<SelectListItem> PripremaListItemPogoni()
         {
             List<SelectListItem> listItems = new List<SelectListItem>()
@@ -172,8 +193,6 @@ namespace AutoSalon.Controllers
 
             return listItems;
         }
-
-        //Funkcija koja priprema listu tipova pogona
         public List<SelectListItem> PripremaListItemTipoviVozila()
         {
             List<SelectListItem> listItems = new List<SelectListItem>()
@@ -213,8 +232,6 @@ namespace AutoSalon.Controllers
 
             return listItems;
         }
-
-        //Funkcija koja priprema listu tipova emistionog standarda
         public List<SelectListItem> PripremaListItemTipoviEStandardi()
         {
             List<SelectListItem> listItems = new List<SelectListItem>()
@@ -249,8 +266,6 @@ namespace AutoSalon.Controllers
 
             return listItems;
         }
-
-        //Funkcija koja priprema listu broja vrata
         public List<SelectListItem> PripremaListItemBrojVrata()
         {
             List<SelectListItem> listItems = new List<SelectListItem>()
@@ -276,18 +291,74 @@ namespace AutoSalon.Controllers
 
             return listItems;
         }
+
         public ApplicationDbContext db;
-        public IznajmiAutomobilController (ApplicationDbContext context)
+
+        public int getLokacijaID(int id)
+        {
+            Automobil a = db.Automobil.Include(i => i.AutomobilDetalji).Where(w => w.AutomobilID == id).First();
+            id = a.AutomobilDetalji.PoslovnicaID;
+            return id;
+        }
+        public string getImePoslvnice(int id)
+        {
+            Poslovnica p = db.Poslovnica.Include(i => i.Grad.Drzava).Where(w => w.PoslovnicaID == id).First();
+            string naziv = p.Grad.Drzava.Naziv.ToString() + ", " + p.Grad.Naziv.ToString() + "  " + p.Adresa + " - " + p.Naziv.ToString();
+            return naziv;
+        }
+        public decimal getCijenaRentanje(int id)
+        {
+            decimal rentCijena;
+            Automobil a = db.Automobil.Include(i => i.AutomobilDetalji).Where(w => w.AutomobilID == id).First();
+            rentCijena = a.AutomobilDetalji.CijenaRentanja.Value;
+            return rentCijena;
+        }
+        public Automobil getAuto(int id)
+        {
+            Automobil a = db.Automobil.Include(i => i.Proizvodjac).Where(w => w.AutomobilID == id).First();
+            return a;
+        }
+        public int getPoslovnicaID(string grad)
+        {
+            Poslovnica p = db.Poslovnica.Include(i => i.Grad).Where(w => w.Grad.Naziv == grad).FirstOrDefault();
+            int _ID = db.Poslovnica.Include(i => i.Grad).Where(w => w.Grad.Naziv == grad).Select(s => s.PoslovnicaID).FirstOrDefault();
+            _ID = p.PoslovnicaID;
+
+            return _ID;
+        }
+        public double getCijenaOpreme(string ime)
+        {
+            DodatnaOprema dOp = db.DodatnaOprema.Where(w => w.Naziv == ime).First();
+            return dOp.Cijena;
+        }
+        public int getIDOprema(string ime)
+        {
+            DodatnaOprema dOp = db.DodatnaOprema.Where(w => w.Naziv == ime).First();
+            return dOp.DodatnaOpremaID;
+        }
+        public int getUposlenika(int id)
+        {
+            UposlenikPoslovnica up = db.UposlenikPoslovnica.Where(w => w.PoslovnicaID == id).First();
+            return up.UposlenikID;
+        }
+
+        public IznajmiAutomobilController(ApplicationDbContext context)
         {
             db = context;
         }
-        public IActionResult Index(string Grad, string turistickaDestinacija, int? ProizvodjacID, int? PoslovnicaID, int? GorivoID,int ?PogonID,int? TransmisijaID,int ? EmisioniStandardID)
-        {   /*pogon transmisija stanrd*/
+
+        public IActionResult Index(string Grad, string turistickaDestinacija, int? ProizvodjacID, int? PoslovnicaID, int? GorivoID, int? PogonID, int? TransmisijaID, int? EmisioniStandardID)
+        {
+
             AutomobilRent model = new AutomobilRent();
+
             model.Proizvodjaci = PripremaListItemProizvodjaci();
             model.Proizvodjaci.FirstOrDefault().Text = "svi";
-            model.Poslovnice = PripremaListItemPoslovnice();
-            model.Poslovnice.FirstOrDefault().Text = "sve";
+            if (turistickaDestinacija == "da")
+                model.Poslovnice = PripremaListItemPoslovnice(getPoslovnicaID(Grad));
+            else
+                model.Poslovnice = PripremaListItemPoslovnice();
+
             model.Goriva = PripremaListItemGoriva();
             model.Goriva.FirstOrDefault().Text = "sve";
             model.Pogoni = PripremaListItemPogoni();
@@ -296,12 +367,13 @@ namespace AutoSalon.Controllers
             model.Transmisije.FirstOrDefault().Text = "sve";
             model.EmisioniStandardi = PripremaListItemTipoviEStandardi();
             model.EmisioniStandardi.FirstOrDefault().Text = "sve";
+
             string gorivo = "";
             string pogon = "";
             string emisionistandard = "";
             string transmisija = "";
 
-            if (GorivoID!=null)
+            if (GorivoID != null)
                 gorivo = model.Goriva.Where(x => x.Value == GorivoID.ToString()).First().Text;
             if (PogonID != null)
                 pogon = model.Pogoni.Where(x => x.Value == PogonID.ToString()).First().Text;
@@ -313,44 +385,12 @@ namespace AutoSalon.Controllers
             if (turistickaDestinacija == "da")
             {
                 model.TuristDest = Grad;
-                model.auta = db.Automobil.Where(y => (y.AutomobilDetalji.Poslovnica.Grad.Naziv == Grad) && (y.ProizvodjacID == ProizvodjacID || ProizvodjacID == null) && (y.AutomobilDetalji.PoslovnicaID == PoslovnicaID || PoslovnicaID == null)/*|| y.ProizvodjacID > 1*/)
-                    .Select(x => new AutomobilRent.Auto
-                    {
-
-                        Boja = x.Boja,
-                        Model = x.Model,
-                        Proizvodjac = x.Proizvodjac.Naziv,
-                        GodinaProizvodnje = x.GodinaProizvodnje,
-                        SlikaURL = x.SlikaURL,
-                        Gorivo = x.AutomobilDetalji.Gorivo,
-                        Transmisija = x.AutomobilDetalji.Transmisija,
-
-                        Kilovati = x.AutomobilDetalji.Kilovati,
-                        BrojSjedista = x.AutomobilDetalji.BrojSjedista,
-                        BrojVrata = x.AutomobilDetalji.BrojVrata,
-                        CijenaRentanja = x.AutomobilDetalji.CijenaRentanja,
-
-                        Pogon = x.AutomobilDetalji.Pogon,
-                        Kubikaza = x.AutomobilDetalji.Kubikaza,
-                        EmisioniStandard = x.AutomobilDetalji.Poslovnica.Grad.Naziv
-
-
-
-                    }).ToList();
-
-            }
-            else
-            {
-                model.TuristDest = "ne";
-                model.auta = db.Automobil.Where(y => (y.ProizvodjacID == ProizvodjacID || ProizvodjacID == null) && 
-                (y.AutomobilDetalji.PoslovnicaID == PoslovnicaID || PoslovnicaID == null) && 
-                (y.AutomobilDetalji.Gorivo == gorivo || gorivo=="") &&
-                (y.AutomobilDetalji.Pogon == pogon || pogon == "") &&
-                (y.AutomobilDetalji.Transmisija == transmisija || transmisija == "")&&
-                (y.AutomobilDetalji.EmisioniStandard == emisionistandard || emisionistandard == ""))
-                    .Select(x => new AutomobilRent.Auto
+                model.auta = db.Automobil.Where(y => (y.AutomobilDetalji.Poslovnica.Grad.Naziv == Grad) &&
+                (y.ProizvodjacID == ProizvodjacID || ProizvodjacID == null) &&
+                (y.AutomobilDetalji.PoslovnicaID == PoslovnicaID || PoslovnicaID == null))
+                .Select(x => new AutomobilRent.Auto
                 {
-
+                    AutomobilID = x.AutomobilID,
                     Boja = x.Boja,
                     Model = x.Model,
                     Proizvodjac = x.Proizvodjac.Naziv,
@@ -358,34 +398,190 @@ namespace AutoSalon.Controllers
                     SlikaURL = x.SlikaURL,
                     Gorivo = x.AutomobilDetalji.Gorivo,
                     Transmisija = x.AutomobilDetalji.Transmisija,
-
                     Kilovati = x.AutomobilDetalji.Kilovati,
                     BrojSjedista = x.AutomobilDetalji.BrojSjedista,
                     BrojVrata = x.AutomobilDetalji.BrojVrata,
                     CijenaRentanja = x.AutomobilDetalji.CijenaRentanja,
-
                     Pogon = x.AutomobilDetalji.Pogon,
                     Kubikaza = x.AutomobilDetalji.Kubikaza,
-                    EmisioniStandard = x.AutomobilDetalji.EmisioniStandard
-
-
+                    EmisioniStandard = x.AutomobilDetalji.Poslovnica.Grad.Naziv
 
                 }).ToList();
             }
-            
-            return View(model);
-            
-        }
-        public IActionResult KreirajRezervaciju()
-        {
-            RegisterViewModel model = new RegisterViewModel()   
+            else
             {
-                Gradovi = PripremaListItemGradovi()
-            };
+                model.TuristDest = "ne";
+                model.auta = db.Automobil.Where(y => (y.ProizvodjacID == ProizvodjacID || ProizvodjacID == null) &&
+                (y.AutomobilDetalji.PoslovnicaID == PoslovnicaID || PoslovnicaID == null) &&
+                (y.AutomobilDetalji.Gorivo == gorivo || gorivo == "") &&
+                (y.AutomobilDetalji.Pogon == pogon || pogon == "") &&
+                (y.AutomobilDetalji.Transmisija == transmisija || transmisija == "") &&
+                (y.AutomobilDetalji.EmisioniStandard == emisionistandard || emisionistandard == ""))
+                .Select(x => new AutomobilRent.Auto
+                {
+                        AutomobilID = x.AutomobilID,
+                        Boja = x.Boja,
+                        Model = x.Model,
+                        Proizvodjac = x.Proizvodjac.Naziv,
+                        GodinaProizvodnje = x.GodinaProizvodnje,
+                        SlikaURL = x.SlikaURL,
+                        Gorivo = x.AutomobilDetalji.Gorivo,
+                        Transmisija = x.AutomobilDetalji.Transmisija,
+                        Kilovati = x.AutomobilDetalji.Kilovati,
+                        BrojSjedista = x.AutomobilDetalji.BrojSjedista,
+                        BrojVrata = x.AutomobilDetalji.BrojVrata,
+                        CijenaRentanja = x.AutomobilDetalji.CijenaRentanja,
+                        Pogon = x.AutomobilDetalji.Pogon,
+                        Kubikaza = x.AutomobilDetalji.Kubikaza,
+                        EmisioniStandard = x.AutomobilDetalji.EmisioniStandard
+
+                }).ToList();
+            }
+
             return View(model);
 
-            
         }
-       
+   
+        public IActionResult KreirajRezervaciju(int AutomobilID)
+        {
+
+            KreirajRezervacijuVM model = new KreirajRezervacijuVM();
+            Automobil a = getAuto(AutomobilID);
+            model.AutomobilID = AutomobilID;
+            model.PoslovnicaID = getLokacijaID(AutomobilID);
+            model.nazivPoslovnice = getImePoslvnice(model.PoslovnicaID);
+            model.DatumPreuzimanja = DateTime.Today;
+            model.DatumVracanja = DateTime.Today.AddDays(1);       
+            model.Iznos = getCijenaRentanje(model.AutomobilID);
+            model.Model = a.Model;
+            model.Proizvodjac = a.Proizvodjac.Naziv;
+            model.SlikaURL = a.SlikaURL;
+            model.Boja = a.Boja;
+
+            int x = 0;
+            string klijentID=User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Int32.TryParse(klijentID.ToString(),out x);
+            model.KlijentID = x;
+            //get id od logged usera
+            model.UposlenikID = getUposlenika(model.PoslovnicaID);
+
+            return View(model);
+
+        }
+     
+        public IActionResult Snimi(KreirajRezervacijuVM model)
+        {
+            
+
+            double cijenaOpreme = 0;
+            List<int> OpremaIDs = new List<int>();
+            List<string> opremaListaCijene = new List<string>();
+            List<string> opremaListaNaziv = new List<string>();
+
+
+            if (model.DjecijaSjedalica || model.KrovniKofer || model.KrovniNosaci || model.NosaciSkije || model.NosaciBicikla)
+            {
+                if (model.DjecijaSjedalica)
+                { cijenaOpreme += getCijenaOpreme("DjecijaSjedalica"); OpremaIDs.Add(getIDOprema("DjecijaSjedalica")); opremaListaCijene.Add(getCijenaOpreme("DjecijaSjedalica").ToString()+" KM"); opremaListaNaziv.Add("Djecija sjedalica "); }
+                if (model.KrovniKofer)
+                { cijenaOpreme += getCijenaOpreme("KrovniKofer"); OpremaIDs.Add(getIDOprema("KrovniKofer")); opremaListaCijene.Add(getCijenaOpreme("KrovniKofer").ToString()+" KM"); opremaListaNaziv.Add("Krovni kofer "); }
+                if (model.KrovniNosaci)
+                { cijenaOpreme += getCijenaOpreme("KrovniNosaci"); OpremaIDs.Add(getIDOprema("KrovniNosaci")); opremaListaCijene.Add(getCijenaOpreme("KrovniNosaci").ToString()+" KM"); opremaListaNaziv.Add("Krovni nosaci "); }
+                if (model.NosaciSkije)
+                { cijenaOpreme += getCijenaOpreme("NosaciSkije"); OpremaIDs.Add(getIDOprema("NosaciSkije")); opremaListaCijene.Add(getCijenaOpreme("NosaciSkije").ToString()+" KM"); opremaListaNaziv.Add("Nosaci za skije "); }
+                if (model.NosaciBicikla)
+                { cijenaOpreme += getCijenaOpreme("NosaciBicikla"); OpremaIDs.Add(getIDOprema("NosaciBicikla")); opremaListaCijene.Add(getCijenaOpreme("NosaciBicikla").ToString()+" KM"); opremaListaNaziv.Add("Nosaci za bicikla "); }
+
+            }
+
+            double brojDana = Math.Ceiling((model.DatumVracanja - model.DatumPreuzimanja).TotalDays);
+            decimal cijenaRentanjeDan = getCijenaRentanje(model.AutomobilID);
+
+            if (brojDana <= 0)
+                brojDana = 1;
+
+            model.Iznos = cijenaRentanjeDan * System.Convert.ToDecimal(brojDana) + System.Convert.ToDecimal(cijenaOpreme);
+            model.IznosbezPopusta= cijenaRentanjeDan * System.Convert.ToDecimal(brojDana) + System.Convert.ToDecimal(cijenaOpreme);
+            model.IznosbezOpreme = cijenaRentanjeDan * System.Convert.ToDecimal(brojDana);
+            int brrezervacija = db.RezervacijaRentanja.Where(w => w.KlijentID == model.KlijentID).Count();
+            double popust = 0;
+
+            if (brrezervacija >= 1 && brrezervacija <= 5)
+            { model.Iznos = model.Iznos - (model.Iznos / 100) * 10; popust = 10; }
+            if (brrezervacija > 5)
+            { model.Iznos = model.Iznos - (model.Iznos / 100) * 15; popust = 15; }
+        
+
+            Racun racun = new Racun { DatumIzdavanja = DateTime.Now, Iznos = model.Iznos };
+            db.Add(racun);
+            db.SaveChanges();
+            int racunID = db.Racun.Last().RacunID;
+
+            RezervacijaRentanje rr = new RezervacijaRentanje { AutomobilID = model.AutomobilID,
+                UposlenikID =model.UposlenikID, KlijentID =model.KlijentID, PoslovnicaID=model.PoslovnicaID,DatumKreiranja=DateTime.Now,
+                RezervacijaOd=model.DatumPreuzimanja,RezervacijaDo=model.DatumVracanja,Iznos=model.Iznos,Popust=popust,Opis="/",RacunID=racunID
+
+            };
+
+            db.Add(rr);
+            db.SaveChanges();
+
+            RacunVM racunVM = new RacunVM();
+
+            if (cijenaOpreme!=0)
+            {
+                foreach(int x in OpremaIDs)
+                {
+                    RezervacijaRentanjaDodatnaOprema rrdo = new RezervacijaRentanjaDodatnaOprema { DodatnaOpremaID = x, RezervacijaRentanjaID = rr.RezervacijaRentanjaID };
+                    db.Add(rrdo);
+                    db.SaveChanges();
+                    racunVM.Oprema = true;
+                }
+            }
+
+            Automobil a = db.Automobil.Find(model.AutomobilID);
+            a.Dostupan = false;
+
+            model.Popust = popust;
+            model.CijenaOpreme = cijenaOpreme;
+            model.DatumKreiranja = DateTime.Now;
+
+            
+
+            Poslovnica p = db.Poslovnica.Include(i=>i.Grad.Drzava).Where(w => w.PoslovnicaID == model.PoslovnicaID).First();
+            racunVM.adresaPoslovnice = p.Adresa.ToString();
+            racunVM.DrzavaGradPoslovnica = p.Grad.Drzava.Naziv + " " + p.Grad.Naziv + " "+p.Naziv;
+            racunVM.Uposlenik = db.Users.Where(w => w.Id == model.UposlenikID).First().Prezime + db.Users.Where(w => w.Id == model.UposlenikID).First().Ime;
+            racunVM.KlijentEmail = db.Users.Where(w => w.Id == model.KlijentID).First().Email;
+            racunVM.RacunID = rr.RezervacijaRentanjaID;
+            racunVM.Popust = popust;
+            racunVM.nazivPoslovnice = p.Naziv;
+            racunVM.KlijentImePrezime = db.Users.Where(w => w.Id == model.KlijentID).First().Prezime + " "+db.Users.Where(w => w.Id == model.UposlenikID).First().Ime;
+            if (db.Users.Include(i => i.Grad).Where(w => w.Id == model.KlijentID).FirstOrDefault().Grad != null)
+                racunVM.KlijentGrad = db.Users.Include(i => i.Grad).Where(w => w.Id == model.KlijentID).FirstOrDefault().Grad.Naziv.ToString();
+            else racunVM.KlijentGrad = "/";
+            racunVM.CijenaOpreme = cijenaOpreme;
+            racunVM.DatumKreiranja = model.DatumKreiranja;
+            racunVM.DatumPreuzimanja = model.DatumPreuzimanja;
+            racunVM.DatumVracanja = model.DatumVracanja;
+            racunVM.Iznos = model.Iznos;
+            racunVM.IznosbezOpreme = model.IznosbezOpreme;
+            racunVM.IznosbezPopusta = model.IznosbezPopusta;
+            racunVM.Automobil = db.Automobil.Include(i => i.Proizvodjac).Where(w => w.AutomobilID == model.AutomobilID).First().Proizvodjac.Naziv + " " + db.Automobil.Include(i => i.Proizvodjac).Where(w => w.AutomobilID == model.AutomobilID).First().Model;
+            racunVM.brojDana = brojDana;
+            racunVM.cijenaPoDanu = db.Automobil.Include(i => i.AutomobilDetalji).Where(x => x.AutomobilID == model.AutomobilID).First().AutomobilDetalji.CijenaRentanja;
+            racunVM.AutomobilDetalji=db.Automobil.Include(i => i.AutomobilDetalji).Where(x => x.AutomobilID == model.AutomobilID).First().AutomobilDetalji.KonjskeSnage + " ks " + db.Automobil.Include(i => i.AutomobilDetalji).Where(x => x.AutomobilID == model.AutomobilID).First().AutomobilDetalji.Gorivo + " " + db.Automobil.Include(i => i.AutomobilDetalji).Where(x => x.AutomobilID == model.AutomobilID).First().AutomobilDetalji.Pogon;
+            
+            if(opremaListaCijene.Count!=0)
+            {
+                racunVM.ListaOpremaCijene = opremaListaCijene;
+                racunVM.ListaOpremaNaziv = opremaListaNaziv;
+
+            }
+            return View(racunVM);
+
+
+        }
+
     }
 }

@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\Automobili\" />
+    <Folder Include="wwwroot\images\Logo\" />
     <Folder Include="wwwroot\images\NewFolder\" />
     <Folder Include="wwwroot\images\Poslovnice\" />
   </ItemGroup>

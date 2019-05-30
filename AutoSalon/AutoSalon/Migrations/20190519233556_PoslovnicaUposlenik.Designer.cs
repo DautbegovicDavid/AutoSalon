@@ -11,9 +11,10 @@ using System;
 namespace AutoSalon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190519233556_PoslovnicaUposlenik")]
+    partial class PoslovnicaUposlenik
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -448,24 +449,6 @@ namespace AutoSalon.Migrations
                     b.ToTable("RezervacijaTestiranja");
                 });
 
-            modelBuilder.Entity("AutoSalon.Models.UposlenikPoslovnica", b =>
-                {
-                    b.Property<int>("UposlenikPoslovnicaID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("PoslovnicaID");
-
-                    b.Property<int>("UposlenikID");
-
-                    b.HasKey("UposlenikPoslovnicaID");
-
-                    b.HasIndex("PoslovnicaID");
-
-                    b.HasIndex("UposlenikID");
-
-                    b.ToTable("UposlenikPoslovnica");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -733,19 +716,6 @@ namespace AutoSalon.Migrations
                         .HasForeignKey("KlijentID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AutoSalon.Models.Poslovnica", "Poslovnica")
-                        .WithMany()
-                        .HasForeignKey("PoslovnicaID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AutoSalon.Models.ApplicationUser", "Uposlenik")
-                        .WithMany()
-                        .HasForeignKey("UposlenikID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("AutoSalon.Models.UposlenikPoslovnica", b =>
-                {
                     b.HasOne("AutoSalon.Models.Poslovnica", "Poslovnica")
                         .WithMany()
                         .HasForeignKey("PoslovnicaID")
