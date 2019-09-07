@@ -288,7 +288,7 @@ namespace AutoSalon.Controllers
                     {
                         IdentityUserRole<int> newUserRole = new IdentityUserRole<int>
                         {
-                            RoleId = 1,
+                            RoleId = 2,
                             UserId = user.Id,
 
                         };

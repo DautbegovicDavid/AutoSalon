@@ -21,7 +21,7 @@
     <div class="col-xs-5">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Izdavatelj: <a href="#">@Model.nazivPoslovnice</a></h4>
+                <h4>Izdavatelj: <a asp-action="Index" asp-controller="Poslovnica" asp-route-nazivPoslovnice="@Model.nazivPoslovnice">@Model.nazivPoslovnice</a></h4>
             </div>
             <div class="panel-body">
                 <p>
@@ -147,7 +147,7 @@
         </div>
     </div>
 </div>
-<a asp-action="Index" asp-controller="Home" class="btn btn-info" style="float:right">Vrati se nazad</a>
+<a asp-action="Index" asp-controller="Aktivnosti" class="btn btn-info" style="float:right">Vrati se nazad</a>
 <a class="btn btn-outline-info" href="javascript:window.print()">Isprintaj</a>
 
 

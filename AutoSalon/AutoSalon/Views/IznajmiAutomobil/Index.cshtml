@@ -2,15 +2,24 @@
 @{
     ViewData["Title"] = "Index";
 }
-@{ if (Model.TuristDest != "ne")
+<hr />
+@{ if (Model.auta.Count.Equals(0))
     {
-        <h2 style="text-align:center">Izaberite jedan od ponudjenih automobila smjestenih u @Model.TuristDest -u</h2>
+        <h2 style="text-align:center">Nema rezultata</h2>
 
+    }
+    else if (Model.TuristDest != "ne")
+    {
+       
+        <h2 style="text-align:center;opacity:0.7"> Izaberite jedan od ponudjenih automobila smjestenih u @Model.TuristDest - u</h2>
     }
     else
     {
-        <h2 style="text-align:center">Izaberite jedan od ponudjenih automobila i krenite na nezaboravnu avanturu !</h2>
+    <h2 style="text-align:center;opacity:0.7">Izaberite jedan od ponudjenih automobila i krenite na nezaboravnu avanturu !</h2>
+    
     }
+
+
 }
 
 <hr />
@@ -18,238 +27,238 @@
 
 <div id="IznajmiFilter" class="container">
 
-    <button onclick="prikaziDiv('prikaziSakrijDIV')" class="btn tPsS" >Napredna pretraga</button>
+    <button onclick="prikaziDiv('prikaziSakrijDIV')" class="btn tPsS">Napredna pretraga</button>
 </div>
-    <div id="prikaziSakrijDIV" style="display:none;box-shadow:rgb(137, 189, 211) 10px 17px 10px" class="container" >
-        
-            <form asp-action="Index" asp-route-ProizvodjacID="@Model.ProizvodjacID" asp-route-PoslovnicaID="@Model.PoslovnicaID" asp-route-GorivoID="@Model.GorivoID"
-                  asp-route-PogonID="@Model.PogonID" asp-route-TransmisijaID="@Model.TransmisijaID" asp-route-EmisioniStandardID="@Model.EmisioniStandardID">
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <span>Proizvođač : </span><br />
-                        <select asp-for="ProizvodjacID" asp-items="@Model.Proizvodjaci" class="form-control "></select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <span>Poslovnica : </span><br />
-                        <select asp-for="PoslovnicaID" asp-items="@Model.Poslovnice" class="form-control "></select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <span>Gorivo : </span>
-                        <select asp-for="GorivoID" asp-items="@Model.Goriva" class="form-control "></select>
-                    </div>
+<div id="prikaziSakrijDIV" style="display:none;box-shadow:rgb(137, 189, 211) 10px 17px 10px" class="container">
 
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <span>Pogon : </span>
-                        <select asp-for="PogonID" asp-items="@Model.Pogoni" class="form-control "></select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <span>Transmisija : </span>
-                        <select asp-for="TransmisijaID" asp-items="@Model.Transmisije" class="form-control "></select>
-                    </div>
-                    <div class="form-group col-md-4">
-
-                        <span>Emisioni standard : </span>
-                        <select asp-for="EmisioniStandardID" asp-items="@Model.EmisioniStandardi" class="form-control "></select>
-                    </div>
-                </div>
-
-
-
-
-
-                <button type="submit" class="mt-3 btn tPsS " style="position:center;">Traži</button>
-            </form>
-        
-
-    </div>
-
-
-
-
-    @foreach (AutomobilRent.Auto x in Model.auta)
-    {
-        <div class="d-flex mt-4 bijela" style="box-shadow:rgb(201, 201, 201) 10px 17px 10px">
-
-            <div class="w-50">
-                <dl>
-                    <dt class="w-100 mt-1">
-                        <img src="~/images/Automobili/@x.SlikaURL" class="img-fluid" style="box-shadow:rgb(128, 128, 128) 10px 17px 10px "/>
-                    </dt>
-                </dl>
+    <form asp-action="Index" asp-route-ProizvodjacID="@Model.ProizvodjacID" asp-route-PoslovnicaID="@Model.PoslovnicaID" asp-route-GorivoID="@Model.GorivoID"
+          asp-route-PogonID="@Model.PogonID" asp-route-TransmisijaID="@Model.TransmisijaID" asp-route-EmisioniStandardID="@Model.EmisioniStandardID">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <span>Proizvođač : </span><br />
+                <select asp-for="ProizvodjacID" asp-items="@Model.Proizvodjaci" class="form-control "></select>
+            </div>
+            <div class="form-group col-md-4">
+                <span>Poslovnica : </span><br />
+                <select asp-for="PoslovnicaID" asp-items="@Model.Poslovnice" class="form-control "></select>
+            </div>
+            <div class="form-group col-md-4">
+                <span>Gorivo : </span>
+                <select asp-for="GorivoID" asp-items="@Model.Goriva" class="form-control "></select>
             </div>
 
-            <div class="ml-5 w-50">
-                <div class="container w-100 h-100 mt">
-                    <div class="row w-100 h-100 kontrast ">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <span>Pogon : </span>
+                <select asp-for="PogonID" asp-items="@Model.Pogoni" class="form-control "></select>
+            </div>
+            <div class="form-group col-md-4">
+                <span>Transmisija : </span>
+                <select asp-for="TransmisijaID" asp-items="@Model.Transmisije" class="form-control "></select>
+            </div>
+            <div class="form-group col-md-4">
 
-
-                        <div class="col-sm-4 ">
-
-                            <div>
-                                <dt>
-                                    <label class="text-white">Proizvođač: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.Proizvodjac</p>
-                                </dd>
-                            </div>
-
-                            <div>
-                                <dt>
-                                    <label class="text-white">Godište: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.GodinaProizvodnje</p>
-                                </dd>
-                            </div>
-
-                            <div>
-                                <dt>
-                                    <label class="text-white">Gorivo: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.Gorivo</p>
-                                </dd>
-                            </div>
-
-                            <div>
-                                <dt>
-                                    <label class="text-white">Transmisija: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.Transmisija</p>
-                                </dd>
-                            </div>
-
-
-
-                            <div>
-                                <dt>
-                                    <label class="text-white">Kilovati: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.Kilovati</p>
-                                </dd>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="col-sm-4">
-                            <div>
-                                <dt>
-                                    <label class="text-white">Pogon: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.Pogon</p>
-                                </dd>
-                            </div>
-                            <div>
-                                <dt>
-                                    <label class="text-white">Model: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.Model</p>
-
-                                </dd>
-                            </div>
-                            <div>
-                                <dt>
-                                    <label class="text-white">Boja: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.Boja</p>
-
-                                </dd>
-                            </div>
-
-
-
-                            <div>
-                                <dt>
-                                    <label class="text-white">Broj sjedišta: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.BrojSjedista</p>
-
-                                </dd>
-                            </div>
-
-                            <div>
-                                <dt>
-                                    <label class="text-white">Broj vrata: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.BrojVrata</p>
-
-                                </dd>
-                            </div>
+                <span>Emisioni standard : </span>
+                <select asp-for="EmisioniStandardID" asp-items="@Model.EmisioniStandardi" class="form-control "></select>
+            </div>
+        </div>
 
 
 
 
-                        </div>
 
-                        <div class="col-sm-4">
-                            <div>
-                                <dt>
-                                    <label class="text-white">Kubikaža: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.Kubikaza</p>
+        <button type="submit" class="mt-3 btn tPsS " style="position:center;">Traži</button>
+    </form>
 
-                                </dd>
-                            </div>
 
-                            <div>
-                                <dt>
-                                    <label class="text-white">Emisioni standard: </label>
-                                </dt>
-                                <dd>
-                                    <p>@x.EmisioniStandard</p>
-
-                                </dd>
-                            </div>
+</div>
 
 
 
 
+@foreach (AutomobilRent.Auto x in Model.auta)
+{
+    <div class="d-flex mt-4 bijela" style="box-shadow:rgb(201, 201, 201) 10px 17px 10px">
+
+        <div class="w-50">
+            <dl>
+                <dt class="w-100 mt-1">
+                    <img src="~/images/Automobili/@x.SlikaURL" class="img-fluid" style="box-shadow:rgb(128, 128, 128) 10px 17px 10px " />
+                </dt>
+            </dl>
+        </div>
+
+        <div class="ml-5 w-50">
+            <div class="container w-100 h-100 mt">
+                <div class="row w-100 h-100 kontrast ">
+
+
+                    <div class="col-sm-4 ">
+
+                        <div>
                             <dt>
-                                <label class="text-white">Cijena po danu: </label>
+                                <label class="text-white">Proizvođač: </label>
                             </dt>
                             <dd>
-                                <p style="margin-bottom:59%">@x.CijenaRentanja KM</p>
+                                <p>@x.Proizvodjac</p>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Godište: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.GodinaProizvodnje</p>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Gorivo: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Gorivo</p>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Transmisija: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Transmisija</p>
+                            </dd>
+                        </div>
+
+
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Kilovati: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Kilovati</p>
+                            </dd>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <div>
+                            <dt>
+                                <label class="text-white">Pogon: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Pogon</p>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt>
+                                <label class="text-white">Model: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Model</p>
 
                             </dd>
-            <div>
-            @{ if (User.Identity.IsAuthenticated)
-                {
-                    
-                    <a  asp-action="KreirajRezervaciju" asp-route-AutomobilID="@x.AutomobilID"  class=" btn btn-secondary mt-6  ">Kreiraj rezervaciju</a>
-                    
-                }
-                else
-                {
-                    <a asp-action="Login" asp-controller="Account" asp-route-korisnik="true" class=" btn btn-secondary m-3
-                       
-                       ">Prijavi se i napravi rezervaciju</a>
+                        </div>
+                        <div>
+                            <dt>
+                                <label class="text-white">Boja: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Boja</p>
 
-                }
-            }
-            </div>
-        </div>
+                            </dd>
+                        </div>
+
+
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Broj sjedišta: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.BrojSjedista</p>
+
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Broj vrata: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.BrojVrata</p>
+
+                            </dd>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div>
+                            <dt>
+                                <label class="text-white">Kubikaža: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.Kubikaza</p>
+
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>
+                                <label class="text-white">Emisioni standard: </label>
+                            </dt>
+                            <dd>
+                                <p>@x.EmisioniStandard</p>
+
+                            </dd>
+                        </div>
+
+
+
+
+                        <dt>
+                            <label class="text-white">Cijena po danu: </label>
+                        </dt>
+                        <dd>
+                            <p style="margin-bottom:59%">@x.CijenaRentanja KM</p>
+
+                        </dd>
+                        <div>
+                            @{ if (User.Identity.IsAuthenticated)
+                                {
+
+                                    <a asp-action="KreirajRezervaciju" asp-route-AutomobilID="@x.AutomobilID" class=" btn btn-secondary mt-6  ">Kreiraj rezervaciju</a>
+
+                                }
+                                else
+                                {
+                                    <a asp-action="Login" asp-controller="Account" asp-route-korisnik="true" class=" btn btn-secondary m-3
+
+                       ">Login/Registracija</a>
+
+                                }
+                            }
+                        </div>
                     </div>
                 </div>
-
-
             </div>
 
 
         </div>
-    }
-   
-    <div id="kraj"><button id="BtnVrh" onclick="VrhFunkcija()">Vrati se gore !</button></div>
+
+
+    </div>
+}
+
+<div id="kraj"><button id="BtnVrh" onclick="VrhFunkcija()">Vrati se gore !</button></div>
 

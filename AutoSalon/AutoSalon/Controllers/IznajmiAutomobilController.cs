@@ -15,12 +15,20 @@ using AutoSalon.Models.ViewModels.IznajmiAutomobilViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Principal;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AutoSalon.Controllers
 {
     public class IznajmiAutomobilController : Controller
     {
-
+        private ApplicationDbContext db;
+        private IHostingEnvironment he;
+        public IznajmiAutomobilController(ApplicationDbContext _db, IHostingEnvironment _he)
+        {
+            db = _db;
+            he = _he;
+        }
+       
 
         public List<SelectListItem> PripremaListItemGradovi()
         {
@@ -292,7 +300,7 @@ namespace AutoSalon.Controllers
             return listItems;
         }
 
-        public ApplicationDbContext db;
+       
 
         public int getLokacijaID(int id)
         {
@@ -342,10 +350,7 @@ namespace AutoSalon.Controllers
             return up.UposlenikID;
         }
 
-        public IznajmiAutomobilController(ApplicationDbContext context)
-        {
-            db = context;
-        }
+       
 
         public IActionResult Index(string Grad, string turistickaDestinacija, int? ProizvodjacID, int? PoslovnicaID, int? GorivoID, int? PogonID, int? TransmisijaID, int? EmisioniStandardID)
         {
@@ -556,7 +561,7 @@ namespace AutoSalon.Controllers
             racunVM.RacunID = rr.RezervacijaRentanjaID;
             racunVM.Popust = popust;
             racunVM.nazivPoslovnice = p.Naziv;
-            racunVM.KlijentImePrezime = db.Users.Where(w => w.Id == model.KlijentID).First().Prezime + " "+db.Users.Where(w => w.Id == model.UposlenikID).First().Ime;
+            racunVM.KlijentImePrezime = db.Users.Where(w => w.Id == model.KlijentID).First().Prezime + " "+db.Users.Where(w => w.Id == model.KlijentID).First().Ime;
             if (db.Users.Include(i => i.Grad).Where(w => w.Id == model.KlijentID).FirstOrDefault().Grad != null)
                 racunVM.KlijentGrad = db.Users.Include(i => i.Grad).Where(w => w.Id == model.KlijentID).FirstOrDefault().Grad.Naziv.ToString();
             else racunVM.KlijentGrad = "/";
@@ -578,6 +583,25 @@ namespace AutoSalon.Controllers
                 racunVM.ListaOpremaNaziv = opremaListaNaziv;
 
             }
+
+            Notifikacija notifikacija = new Notifikacija();
+            notifikacija.DatumKreiranja = racunVM.DatumKreiranja;
+            notifikacija.PosiljaocID = model.KlijentID;
+            notifikacija.PrimalacID = model.UposlenikID;
+            if (opremaListaNaziv.Count() > 0)
+            {
+                for (int i = 0; i < opremaListaNaziv.Count(); i++)
+                    notifikacija.Sadrzaj = racunVM.KlijentImePrezime + " kreira rezervaciju na dan " + racunVM.DatumKreiranja + " u trajanju od - " + racunVM.DatumPreuzimanja + " do - " + racunVM.DatumVracanja + " ." + " Automobil: " + racunVM.Automobil + ", dodatna oprema: " + racunVM.ListaOpremaNaziv[i];
+            }
+            else
+            {
+                notifikacija.Sadrzaj = racunVM.KlijentImePrezime + " kreira rezervaciju na dan " + racunVM.DatumKreiranja + " u trajanju od - " + racunVM.DatumPreuzimanja + " do - " + racunVM.DatumVracanja + " ." + " Automobil: " + racunVM.Automobil + ", dodatna oprema: /";
+
+            }
+            db.Add(notifikacija);
+            db.SaveChanges();
+
+            TempData["porukaSuccess"] = "Uspjesno je kreirana rezervacija";
             return View(racunVM);
 
 

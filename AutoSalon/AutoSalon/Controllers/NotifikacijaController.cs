@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoSalon.Data;
 using AutoSalon.Hubs;
 using AutoSalon.Models;
 using AutoSalon.Models.ViewModels.NotifikacijaViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoSalon.Controllers
 {
@@ -27,24 +30,63 @@ namespace AutoSalon.Controllers
         }
         public IActionResult Index(int LogiraniKorisnikID)
         {
-            NotifikacijaIndexVM model = new NotifikacijaIndexVM()
+            int rola = -1;
+            if(db.UserRoles.Where(w => w.UserId == LogiraniKorisnikID).FirstOrDefault()!=null)
+             rola = db.UserRoles.Where(w => w.UserId == LogiraniKorisnikID).FirstOrDefault().RoleId;
+            if (rola == 2)
             {
-                KorisnikID = LogiraniKorisnikID,
-                Rows = db.Notifikacija.Where(y => y.PrimalacID == LogiraniKorisnikID).Select(x => new NotifikacijaIndexVM.Row() {
-                    NotifikacijaID=x.NotifikacijaID,
-                    DatumKreiranja=x.DatumKreiranja,
-                    Posiljaoc=x.Posiljaoc.UserName,
-                    Sadrzaj=x.Sadrzaj,
-                    Status=x.Status
-                }).ToList()
-            };
-            return View(model);
+                NotifikacijaIndexVM model = new NotifikacijaIndexVM()
+                {
+                    KorisnikID = LogiraniKorisnikID,
+                    Klijent=true,
+                    Rows = db.Notifikacija.Where(y => y.PosiljaocID == LogiraniKorisnikID).Select(x => new NotifikacijaIndexVM.Row()
+                    {
+                        NotifikacijaID = x.NotifikacijaID,
+                        DatumKreiranja = x.DatumKreiranja,
+                        Posiljaoc = x.Posiljaoc.UserName,
+                        Sadrzaj = x.Sadrzaj,
+                        Status = x.Status
+                    }).ToList()
+                };
+                return PartialView(model);
+
+            }
+            else
+            {
+                NotifikacijaIndexVM model = new NotifikacijaIndexVM()
+                {
+                    KorisnikID = LogiraniKorisnikID,
+                    Klijent=false,
+                    Rows = db.Notifikacija.Where(y => y.PrimalacID == LogiraniKorisnikID).Select(x => new NotifikacijaIndexVM.Row()
+                    {
+                        NotifikacijaID = x.NotifikacijaID,
+                        DatumKreiranja = x.DatumKreiranja,
+                        Posiljaoc = x.Posiljaoc.UserName,
+                        Sadrzaj = x.Sadrzaj,
+                        Status = x.Status
+                    }).ToList()
+                };
+                return PartialView(model);
+            }
+            
+            
         }
 
         public int  GetBrojNotifikacija(int KorisnikID)
         {
-            return db.Notifikacija.Count(x => x.PrimalacID == KorisnikID);
+            if (db.UserRoles.Where(w => w.UserId == KorisnikID).FirstOrDefault() != null)
+            {
+                int rola = db.UserRoles.Where(w => w.UserId == KorisnikID).FirstOrDefault().RoleId;
+                if (rola == 2)
+                    return db.Notifikacija.Count(x => x.PosiljaocID == KorisnikID && x.Status == true);
+                else return db.Notifikacija.Count(x => x.PrimalacID == KorisnikID && x.Status == false);
+            }
+            else
+            { return db.Notifikacija.Count(x => x.PrimalacID == KorisnikID && x.Status == false); }
+
         }
+
+
 
         public async Task<IActionResult> OznaciKaoProcitano(int NotifikacijaID)
         {
@@ -53,7 +95,7 @@ namespace AutoSalon.Controllers
             notifikacija.Status = true;
 
             await db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index), new { LogiraniKorisnikID = userManager.GetUserId(HttpContext.User) });
+            return RedirectToAction("Index","Home");
         }
     }
 }

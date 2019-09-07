@@ -12,43 +12,45 @@
         @foreach (var item in Model.Rows)
         {
 
-            <div class="card-deck col-sm-3 w-100 h-100">
+            <div class="card-deck col-sm-3 w-100 h-100 bgTplava m-4" style="border-radius:12%">
 
                 <!-- Card -->
-                <div class="card  ml-0 mb-4">
+                <div class="card  " style="border-color:#e3e3e3;">
 
                     <!--Card image-->
                     <div class="view overlay w-100 h-100">
-                        <img class="card-img-top w-100 h-100" src="~/images/Automobili/@item.SlikaURL" alt="@item.SlikaURL">
+                        <img class="card-img-top w-100 h-80" src="~/images/Automobili/@item.SlikaURL" alt="@item.SlikaURL">
                         <a href="#!">
                             <div class="mask rgba-white-slight"></div>
                         </a>
+                        
                     </div>
-
+                    
                     <!--Card content-->
-                    <div class="card-body ">
+                    <div class="card-body bgSiva">
 
                         <!--Title-->
-                        <h4 class="card-title text-white">@item.Proizvodjac - @item.Model</h4>
+                        <h4 class="card-title fontBijela"style="text-align:center">@item.Proizvodjac - @item.Model</h4>
                         <!--Text-->
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Godište: @item.GodinaProizvodnje</li>
-                            <li class="list-group-item">Cijena: @item.Cijena </li>
-                            <li class="list-group-item">Boja: @item.Boja </li>
+                        <ul class="list-group list-group-flush fontBijela bgSiva" style="border-radius:10%">
+                            <li class="list-group-item bordersSiva">Godište: @item.GodinaProizvodnje</li>
+                            <li class="list-group-item bordersSiva">Cijena: @item.Cijena </li>
+                            <li class="list-group-item bordersSiva">Boja: @item.Boja </li>
 
                             @if (item.Stanje == "Novo")
                             {
-                                <li class="list-group-item text-success">Novo</li>
+                                <li class="list-group-item text-success bordersSiva">Novo</li>
                             }
                             else
                             {
-                                <li class="list-group-item text-info">Korišteno</li>
+                                <li class="list-group-item bordersSiva">Korišteno vozilo</li>
                             }
                         </ul>
                         <div class="mt-3 ml-5">
                             <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                            <a asp-controller="Automobil" asp-action="Detalji" asp-route-AutomobilID="@item.AutomobilID" asp-route-partial="true" asp-route-div="divVUDD" onclick="prikaziDiv('divVUDD')" class="btn btn-outline-dark text-dark ml-5" ajax-poziv="da" ajax-rezultat="divVUDD" >Detalji</a>
+                            <a asp-controller="Automobil" asp-action="Detalji" asp-route-AutomobilID="@item.AutomobilID" asp-route-partial="true" asp-route-div="divVUDD" onclick="prikaziDiv('divVUDD')" class="btn btnTpSp ml-5" ajax-poziv="da" ajax-rezultat="divVUDD">Detalji</a>
                         </div>
+
                     </div>
 
                 </div>

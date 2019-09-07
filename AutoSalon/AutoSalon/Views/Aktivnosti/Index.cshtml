@@ -1,0 +1,141 @@
+﻿@using AutoSalon.Models.ViewModels.AktivnostiViewModels;
+@model AktivnostiIndexVM;
+@{
+    ViewData["Title"] = "Index";
+    var porukaSuccess = TempData["porukaSuccess"] as string;
+    var porukaWarning = TempData["porukaWarning"] as string;
+    var porukaError = TempData["porukaError"] as string;
+}
+@if (porukaSuccess != null)
+{
+    <div class="alert alert-success" role="alert">
+        <strong>Operacija uspjesna !</strong> @porukaSuccess
+    </div>
+}
+
+@if (porukaWarning != null)
+{
+    <div class="alert alert-warning" role="alert">
+        <strong>Well done!</strong> @porukaWarning
+    </div>
+}
+
+
+@if (porukaError != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Well done!</strong> @porukaError
+    </div>
+}
+
+<h3>Pregled aktivnosti</h3>
+<h6>@Model.ImePrezime - @Model.GradDrzava</h6>
+<br />
+<hr />
+<h4 style="text-align:center">Iznajmljivanje</h4>
+<table class="table">
+
+    <thead>
+
+
+        <tr>
+            <th>Datum kreiranja rezervacije</th>
+            <th>Datum preuzimanja vozila</th>
+            <th>Datum vracanja vozila</th>
+            <th>Poslovnica</th>
+            <th>Uposlenik</th>
+            <th>Automobil</th>
+        </tr>
+
+
+    </thead>
+    <tbody>
+
+
+        @foreach (var x in Model.rentanja)
+        {
+            <tr>
+                <td>
+                    @x.datumKreiranja
+                </td>
+                <td>
+                    @x.datumPreuzimanja
+                </td>
+                <td>
+                    @x.datumVracanja
+                </td>
+                <td>
+                    @x.Poslovnica
+                </td>
+                <td>
+                    @x.Uposlenik
+                </td>
+                <td>
+                    @x.Automobil
+                </td>
+            </tr>
+        }
+
+
+
+    </tbody>
+
+</table>
+<br />
+<hr />
+<br />
+<h4 style="text-align:center">Kupovina</h4>
+
+<table class="table table-active">
+    <thead>
+        <tr>
+            <th>Datum kreiranja rezervacije</th>
+            <th>Datum preuzimanja vozila</th>
+            <th>Poslovnica</th>
+            <th>Uposlenik</th>
+            <th>Automobil</th>
+            <th>Kupljeno</th>
+        </tr>
+
+
+
+    </thead>
+    <tbody>
+
+
+        @foreach (var x in Model.kupovine)
+        {
+            <tr>
+                <td>
+                    @x.datumKreiranja
+                </td>
+                <td>
+                    @x.datumPreuzimanja
+                </td>
+                <td>
+                    @x.Poslovnica
+                </td>
+                <td>
+                    @x.Uposlenik
+                </td>
+                <td>
+                    @x.Automobil
+                </td>
+                <td>
+                    @{
+                        if (x.kompletiranaKupovina == true)
+                        {<span>DA</span>}
+                        else
+                        { <span> NE </span>}
+
+                    }
+
+                </td>
+            </tr>
+        }
+
+
+
+    </tbody>
+
+</table>

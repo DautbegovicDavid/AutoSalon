@@ -8,6 +8,9 @@
 {
     <a asp-action="Dodaj" class="btn btn-primary mb-3">Novi proizvođač</a>
 }
+<br />
+<br />
+<br />
 <form class="form-inline" asp-action="Index" asp-route-DrzavaID="@Model.DrzavaID" asp-route-nazivProizvodjaca="@Model.nazivProizvodjaca">
     <span class="mr-2">Država : </span>
     <select asp-for="DrzavaID" asp-items="@Model.Drzave" class="form-control mr-3"></select>
@@ -27,11 +30,11 @@
 
         @foreach (var item in Model.Rows)
         {
-
-            <div class="card-deck col-sm-3">
+            <input asp-for="@item.ProizvodjacID" type="hidden" />
+            <div class="card-deck col-sm-3 ">
 
                 <!-- Card -->
-                <div class="card  ml-0 mb-4">
+                <div class="card  ml-0 mb-4 bordersSiva">
 
                     <!--Card image-->
                     <div class="view overlay w-100 h-100">
@@ -42,17 +45,33 @@
                     </div>
 
                     <!--Card content-->
-                    <div class="card-body ">
+                    <div class="card-body bordersSiva ">
 
                         <!--Title-->
                         <h4 class="card-title text-white">@item.Naziv</h4>
                         <!--Text-->
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Država: @item.Drzava</li>
-                           
+                        <ul class="list-group list-group-flush ">
+                            @if (User.IsInRole("Klijent"))
+                            {
+                                <li class="list-group-item bordertPlava"><a asp-controller="KupiAutomobil" asp-action="Vozila" asp-route-ProizvodjacID="@item.ProizvodjacID" class="btn tPsS" style="width:100%">Kupi</a></li>
+
+
+                                <li class="list-group-item bordersSiva"><a class="btn SP" style="width:100%" asp-controller="IznajmiAutomobil" asp-route-ProizvodjacID="@item.ProizvodjacID">Iznajmi</a></li>
+
+
+                            }
+                            @if (User.IsInRole("Uposlenik") || User.IsInRole("Administrator"))
+                            {
+                                <li class="list-group-item">Država: @item.Drzava</li>
+                            }
+
+
 
                         </ul>
-                    <a class="btn btn-block">sta ima tebra    </a>
+
+
+
+
                     </div>
 
                 </div>

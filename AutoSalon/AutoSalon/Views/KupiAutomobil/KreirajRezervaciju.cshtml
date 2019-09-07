@@ -1,0 +1,122 @@
+﻿
+
+
+@using AutoSalon.Models.ViewModels.KupiAutomobilViewModels;
+@model RezervisiAutomobilVM;
+@{
+    ViewData["Title"] = "KreirajRezervaciju";
+    var porukaSuccess = TempData["porukaSuccess"] as string;
+    var porukaWarning = TempData["porukaWarning"] as string;
+    var porukaError = TempData["porukaError"] as string;
+}
+@if (porukaSuccess != null)
+{
+    <div class="alert alert-success" role="alert">
+        <strong>Well done!</strong> @porukaSuccess
+    </div>
+}
+
+@if (porukaWarning != null)
+{
+    <div class="alert alert-warning" role="alert">
+        <strong>Well done!</strong> @porukaWarning
+    </div>
+}
+
+
+@if (porukaError != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Well done!</strong> @porukaError
+    </div>
+}
+<h2>Rezervisi vozilo</h2>
+@Html.HiddenFor(model => model.AutomobilID)
+<hr />
+<form asp-action="Snimi" class="container">
+
+    <input asp-for="AutomobilID" hidden />
+    <input asp-for="PoslovnicaID" hidden />
+    <input asp-for="KlijentID" hidden />
+    <input asp-for="UposlenikID" hidden />
+
+
+    <div class="form-group">
+        <label>Odaberite datum preuzimanja vozila</label>
+        <input asp-for="@Model.DatumPreuzimanja" type="date" class="form-control" />
+
+
+    </div>
+    <div class="form-group">
+        <label>Mjesto preuzimanja vozila </label>
+        <select asp-for="@Model.PoslovnicaID" asp-items="@Model.poslovnice" class="form-control"></select>
+
+    </div>
+    <div class="form-group">
+        <label>Cijena vozila  </label>
+        <label asp-for="@Model.Iznos" class="form-control">@Model.Iznos </label>
+
+
+    </div>
+
+    <div class="card-deck col-sm-4 w-100 h-100" style="float:right">
+
+        <!-- Card -->
+        <div class="card  ml-0 mb-3">
+
+            <!--Card image-->
+            <div class="view overlay w-100 h-100">
+                <img class="card-img-top w-100 h-100 " src="~/images/Automobili/@Model.SlikaURL" alt="@Model.SlikaURL">
+                <a href="#!">
+                    <div class="mask rgba-white-slight" style="color:black"></div>
+                </a>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body ">
+
+                <!--Title-->
+                <h4 class="card-title text-black-50" style="text-align:center">  @Model.Proizvodjac - @Model.Model - @Model.Godiste - @Model.Gorivo</h4>
+                <!--Text-->
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="form-row">
+
+        <p style="padding:1%;margin-top:1%">
+            Vozilo ce biti  dostupno poslije 12:00 h u zeljenoj poslovnici.<br />
+            Transport vozila je u uracunat u cijenu.<br />
+            Cijena je izrazena u KM.
+        </p>
+
+
+    </div>
+    <div class="form-row" style="width:50%;margin-top:1%">
+
+        <label>Ukoliko imate pitanje ili komentar,osjecajte se slobodno da napisete </label>
+        <textarea rows="3" cols="30" asp-for="@Model.komentar" class="form-control"></textarea>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <button type="submit" class="btn tPsS form-check" style="margin-top:5%;width:100%">Potvrdi</button>
+
+
+
+
+</form>
+<footer style="margin-top:10%"></footer>

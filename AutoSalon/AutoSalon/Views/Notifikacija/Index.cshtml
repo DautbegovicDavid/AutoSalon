@@ -1,0 +1,88 @@
+﻿@model AutoSalon.Models.ViewModels.NotifikacijaViewModels.NotifikacijaIndexVM;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 style="text-align:center">Notifikacije</h2>
+@if (Model.Klijent == false)
+{
+    <table class="table table-active table-bordered" style="background-color:whitesmoke">
+
+        <thead>
+            <tr style="text-align:center;vertical-align:text-top;">
+                <th>Posiljaoc</th>
+                <th>Datum kreiranja</th>
+                <th>Status</th>
+                <th>Sadrzaj</th>
+                <th>Procitano</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in Model.Rows)
+            {
+                <tr style="text-align:center;vertical-align:central;">
+                    <td>@x.Posiljaoc</td>
+                    <td>@x.DatumKreiranja</td>
+                    <td>@x.Status</td>
+                    <td>@x.Sadrzaj</td>
+                    @if (x.Status == false)
+                    {
+                        <td><a style="background-color:red;color:white;" asp-action="OznaciKaoProcitano" asp-controller="Notifikacija" asp-route-NotifikacijaID="@x.NotifikacijaID">NE</a></td>
+                    }
+                    else
+                    {
+                        <td><a style="background-color:green;color:white;">Da</a></td>
+                    }
+
+
+                </tr>
+            }
+
+
+        </tbody>
+
+    </table>
+}
+else
+{
+    <table class="table table-active table-bordered" style="background-color:whitesmoke">
+
+        <thead>
+            <tr style="text-align:center;vertical-align:text-top;">
+                
+                <th>Datum kreiranja</th>
+                
+                <th>Sadrzaj</th>
+                <th>Procitano</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in Model.Rows)
+            {
+                <tr style="text-align:center;vertical-align:central;">
+                    
+                    <td>@x.DatumKreiranja</td>
+                    
+                    <td>@x.Sadrzaj</td>
+                    @if (x.Status == false)
+                    {
+                        <td>NE</td>
+                    }
+                    else
+                    {
+                        <td><a style="background-color:green;color:white;">Da,ocekujte poziv za potvrdu !</a></td>
+                    }
+
+
+                </tr>
+            }
+
+
+        </tbody>
+
+    </table>
+}
+
+

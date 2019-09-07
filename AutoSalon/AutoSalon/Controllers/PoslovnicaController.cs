@@ -27,7 +27,7 @@ namespace AutoSalon.Controllers
             he = _he;
         }
 
-        //Index
+        [AllowAnonymous]
         public IActionResult Index(int ? GradID,string nazivPoslovnice,string partial)
         {
             PoslovnicaIndexVM model = new PoslovnicaIndexVM();

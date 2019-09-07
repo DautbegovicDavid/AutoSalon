@@ -13,10 +13,10 @@
                     <span class="badge badge-pill font-weight-bold" data-toggle="popover" id="Notifikacija">0</span>
 
                 </button>
-                <div class="collapse position-relative" id="collapseExample">
-                    <div class="jumbotron text-info">
-                        Nema novih notifikacija
-                    </div>
+                <div class="collapse position-relative" id="collapseExample" >
+                    @*<div class="jumbotron text-info" style="background-color:#e3e3e3;">*@
+                        <div  id="NotifikacijaText" style="color:#2AA198;"> </div>
+                    @*</div>*@
                 </div>
             </li>
 
@@ -44,14 +44,7 @@ else
     </nav>
 }
 
-<script>
-
-    $.ajax({
-        url: "@Url.Action("GetBrojNotifikacija", "Notifikacija")",
-        type: "GET",
-        data: { KorisnikID:@UserManager.GetUserId(User)},
-        success: function (result) {
-            $("#Notifikacija").html("<span>"+result+"</span>");
-        }
-    })
-</script>
+    <script>
+       
+       
+    </script>

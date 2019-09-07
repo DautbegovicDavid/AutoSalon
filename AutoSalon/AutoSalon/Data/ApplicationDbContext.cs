@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoSalon.Models;
 using Microsoft.AspNetCore.Identity;
 using Autosalon.Models;
+using System;
 
 namespace AutoSalon.Data
 {
@@ -18,9 +19,15 @@ namespace AutoSalon.Data
         public DbSet<Kupovina> Kupovina { get; set; }
         public DbSet<Ocjena> Ocjena { get; set; }
         public DbSet<Proizvodjac> Proizvodjac { get; set; }
+
+        internal object Find(int x)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<Racun> Racun { get; set; }
         public DbSet<RezervacijaRentanje> RezervacijaRentanja { get; set; }
-        public DbSet<RezervacijaTestiranje> RezervacijaTestiranja { get; set; }
+        public DbSet<RezervacijaKupovina> RezervacijaKupovina { get; set; }
         public DbSet<Notifikacija> Notifikacija { get; set; }
         public DbSet<RezervacijaRentanjaDodatnaOprema> RezervacijaRentanjaDodatnaOprema { get; set; }
         public DbSet<UposlenikPoslovnica> UposlenikPoslovnica { get; set; }

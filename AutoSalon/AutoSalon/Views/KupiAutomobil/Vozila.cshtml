@@ -1,53 +1,204 @@
-﻿@model AutomobilIndexVM
+﻿@model AutomobilKupiVM
 
 
 @{
 
-    
+
 }
+<div id="FILTERI" style="display:none">
+    <form asp-action="Vozila" asp-route-ProizvodjacID="@Model.proizvodjacID" asp-route-Model="@Model.model" asp-route-Gorivo="@Model.gorivo"
+          asp-route-Transmisija="@Model.transmisija" asp-route-EmisioniStandard="@Model.emisioniStandard" asp-route-Pogon="@Model.pogon"
+          asp-route-godisteOD="@Model.godisteOd" asp-route-godisteDO="@Model.godisteDo" asp-route-cijenaDO="@Model.cijenaDo" asp-route-cijenaOD="@Model.cijenaOd"
+          asp-route-kilometrazaDO="@Model.kilometrazaDo" asp-route-kilometrazaOD="@Model.kilometrazaOd" asp-route-stanje="@Model.stanje"
+          asp-route-poslovnicaID="@Model.poslovnicaID" asp-route-konjeOD="@Model.konjeOd" asp-route-konjeDO="@Model.konjeDo">
+        <div class="form-row m-1" style="height:60px">
+            <div class="form-group col-md-3">
+                <span>Proizvođač : </span><br />
+                <select asp-for="proizvodjacID" asp-items="@Model.proizvodjaci" class="form-control " style="width:200px;height:30px;padding-top:2px"></select>
+            </div>
+        </div>
+        <div class="form-row m-1" style="height:60px">
+            <div class="form-group col-md-3">
+                <span>Model : </span><br />
+                <select asp-for="model" asp-items="@Model.modeli" class="form-control " style="width:200px;height:30px;padding-top:2px"></select>
+            </div>
+        </div>
+        <div class="form-row m-1" style="height:60px">
+            <div class="form-group col-md-3">
+                <span>Gorivo : </span><br />
+                <select asp-for="gorivo" asp-items="@Model.goriva" class="form-control " style="width:200px;height:30px;padding-top:2px"></select>
+            </div>
+        </div>
+        <div class="form-row m-1" style="height:60px">
+            <div class="form-group col-md-3">
+                <span>Transmisija : </span><br />
+                <select asp-for="transmisija" asp-items="@Model.transimisije" class="form-control " style="width:200px;height:30px;padding-top:2px"></select>
+            </div>
+        </div>
+        <div class="form-row m-1" style="height:60px">
+            <div class="form-group col-md-4">
+                <span>Eko norma : </span><br />
+                <select asp-for="emisioniStandard" asp-items="@Model.emisioniStandardi" class="form-control " style="width:200px;height:30px;padding-top:2px"></select>
+            </div>
+        </div>
+        <div class="form-row m-1" style="height:60px">
+            <div class="form-group col-md-4">
+                <span>Pogon : </span><br />
+                <select asp-for="pogon" asp-items="@Model.pogoni" class="form-control " style="width:200px;height:30px;padding-top:2px"></select>
+            </div>
+        </div>
+        <div class="form-row m-1" style="height:60px">
+            <div class="form-group col-md-4">
+                <span>Poslovnica : </span><br />
+                <select asp-for="poslovnicaID" asp-items="@Model.poslovnice" class="form-control " style="width:200px;height:30px;padding-top:2px"></select>
+            </div>
+        </div>
 
-<h2>Dostupna Vozila</h2>
 
+        <div class="form-row m-1" style="height:60px">
+
+            <div class="form-group col-md-3">
+                <span>Godiste :</span>
+                <input type="text" asp-for="godisteOd" class="form-control " style="width:80px;height:30px;padding-top:2px" placeholder="OD" onfocus="this.value=''" value="" />
+
+            </div>
+            <div class="form-group col-md-3">
+
+                <input type="text" asp-for="godisteDo" class=" form-control " style="width:80px;height:30px;padding-top:2px;margin-top:25%" placeholder="DO" onfocus="this.value=''" value="" />
+
+            </div>
+            <div class="form-group col-md-3">
+                <span>Cijena :</span>
+                <input asp-for="cijenaOd" class="form-control " style="width:80px;height:30px;padding-top:2px" placeholder="OD" onfocus="this.value=''" value="" />
+
+
+            </div>
+            <div class="form-group col-md-3">
+
+                <input type="text" asp-for="cijenaDo" class=" form-control " style="width:80px;height:30px;padding-top:2px;margin-top:25%" placeholder="DO" onfocus="this.value=''" value="" />
+
+
+            </div>
+        </div>
+
+        <div class="form-row m-1" style="height:60px">
+
+            <div class="form-group col-md-3">
+                <span>Kilometraza :</span>
+                <input type="text" asp-for="kilometrazaOd" class="form-control " style="width:80px;height:30px;padding-top:2px" placeholder="OD" onfocus="this.value=''" value="" />
+
+
+            </div>
+            <div class="form-group col-md-3">
+
+                <input type="text" asp-for="kilometrazaDo" class=" form-control " style="width:80px;height:30px;padding-top:2px;margin-top:25%" placeholder="DO" value="" onfocus="this.value=''" />
+
+
+            </div>
+            <div class="form-group col-md-3">
+                <span>KS :</span>
+                <input type="text" asp-for="konjeOd" class="form-control " style="width:80px;height:30px;padding-top:2px" placeholder="OD" onfocus="this.value=''" value="" />
+
+
+            </div>
+            <div class="form-group col-md-3">
+
+                <input type="text" asp-for="konjeDo" class=" form-control " style="width:80px;height:30px;padding-top:2px;margin-top:25%" placeholder="DO" value="" onfocus="this.value=''" />
+
+
+            </div>
+        </div>
+
+        <div class="form-row m-1" style="height:60px">
+            <div class="form-group col-md-4">
+                <span>Stanje : </span><br />
+                <select asp-for="stanje" asp-items="@Model.stanja" class="form-control " style="width:102px;height:30px;padding-top:2px;padding-left:6px;"></select>
+            </div>
+        </div>
+        <div class="form-row form-group m-1">
+            <button type="submit" class=" btn tPsS " style="position:center;margin-left:1.7%;margin-top:2%;width:96%;">Traži</button>
+        </div>
+
+
+
+
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<button id="btnFilter" class="btn tPsS" value="Prikazi filtere">Prikazi filtere</button>
+<hr />
+@{
+    if (Model.automobili1.Count.Equals(0))
+    {
+        <h2 style="text-align:center;color:#89bdd3;">Nema rezultata</h2>
+
+    }
+    else
+    {
+        <h2 style="text-align:center;color:#89bdd3;">Ponuda vozila</h2>
+
+    }
+}
+<hr style="margin-bottom:5%;" />
 <div class="container">
     <div class="row">
 
-        @foreach (var item in Model.Rows)
+        @foreach (var item in Model.automobili1)
         {
-           
-            <div class="card-deck col-sm-3 w-100 h-100 ">
 
-                <div class="card  ml-0 mb-4">
+            <div class="card-deck col-sm-3 w-100 h-100  bgTplava m-4" style="border-radius:14%">
+
+                <div class="card  " style="border-color:#e3e3e3;">
 
                     <div class="view overlay w-100 h-100">
                         <img class="card-img-top w-100 h-100" src="~/images/Automobili/@item.SlikaURL" alt="@item.SlikaURL">
-                        <a href="#!">
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
+
+
                     </div>
 
-                    <div class="card-body ">
+                    <div class="card-body bgSiva">
 
-                        <h4 class="card-title text-white">@item.Proizvodjac - @item.Model</h4>
+                        <h4 class="card-title fontBijela " style="text-align:center">@item.Proizvodjac - @item.Model</h4>
 
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Godište: @item.GodinaProizvodnje</li>
-                            <li class="list-group-item">Cijena: @item.Cijena </li>
-                            <li class="list-group-item">Boja: @item.Boja </li>
+                        <ul class="list-group list-group-flush fontBijela bgSiva" style="border-radius:10%">
+                            <li class="list-group-item bordersSiva">Godište: @item.GodinaProizvodnje</li>
+                            <li class="list-group-item bordersSiva">Cijena: @item.Cijena </li>
+
 
                             @if (item.Stanje == "Novo")
                             {
-                                <li class="list-group-item text-success">Novo</li>
+                                <li class="list-group-item bordersSiva">Novo</li>
                             }
                             else
                             {
-                                <li class="list-group-item text-info">Korišteno</li>
+                                <li class="list-group-item bordersSiva">Korišteno vozilo</li>
                             }
+                            @if (item.Dostupan == true)
+                            {
+                                <li class="list-group-item bordersSiva" style="color:darkgreen">Dostupno</li>
+                            }
+                            else
+                            {
+                                <li class="list-group-item bordersSiva" style="color:darkred">U dolasku</li>
+                            }
+
                         </ul>
                         <div class="mt-3 ml-5">
 
-                            <a asp-controller="Automobil" asp-action="Detalji" asp-route-AutomobilID="@item.AutomobilID" asp-route-partial="true" asp-route-div="divDetalji" class="btn btn-outline-dark text-dark ml-5" ajax-poziv="da" ajax-rezultat="divDetalji" onclick="prikaziDiv('divDetalji')">Detalji</a>
+                            <a id="automobilDetalji" asp-controller="Automobil" asp-action="Detalji" asp-route-AutomobilID="@item.AutomobilID" asp-route-partial="true" asp-route-div="divDetalji" class="btn btnTpSp ml-5" ajax-poziv="da" ajax-rezultat="divDetalji" onclick="scroll_to_Bott('divRez1')">Detalji</a>
 
                         </div>
+
                     </div>
 
                 </div>
@@ -56,8 +207,7 @@
     </div>
 </div>
 <div id="divDetalji"></div>
-<p><a asp-action="VozilaUDolasku" asp-route-Stanje=@Model.Stanje ajax-poziv="da" ajax-rezultat="divVUD" class="aRWa"><h2>Vozila u dolasku</h2></a></p>
-<div id="divVUD" ></div>
-<div id="divVUDD" syle="margin:2%;" ></div>
+<div id="kraj"><button id="BtnVrh" onclick="VrhFunkcija()">Vrati se gore !</button></div>
+
 
 

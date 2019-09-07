@@ -8,17 +8,33 @@
 <dd>
     @Html.HiddenFor(model => model.AutomobilID)
 </dd>
-<div class="d-flex mt-4">
+<div class="d-flex mt-4 " style="background-color:#c9c9c9;border-radius:3%;box-shadow:rgb(137, 189, 211) 10px 17px 10px" >
     <div class="w-50">
-        <dl >
-            <dt class="w-100">
-                <img src="~/images/Automobili/@Model.SlikaURL" class="img-thumbnail" />
+        <dl>
+            <dt class="w-100 mt-3 ml-3" style="border-color:white">
+                <img src="~/images/Automobili/@Model.SlikaURL" class="img-fluid" style="box-shadow:rgb(137, 189, 211) 10px 17px 10px;border-radius:3%; "/>
             </dt>
+           
+            <dt class="" style="float:left;margin-top:25%">
+                @if (User.IsInRole("Klijent"))
+                {
+
+                    <a asp-controller="KupiAutomobil" asp-action="KreirajRezervaciju" asp-route-AutomobilID="@Model.AutomobilID" class="btn tPsS ml-3 mt-3" onclick="sakrijDiv('divDetalji')" style="width:460px;">Rezervisi vozilo</a>
+                    <button class="btn mt-3 ml-3" id="xIcon" onclick="sakrijDiv('divDetalji')" style="float:right"></button>
+                }
+                else {
+                <a asp-action="Login" asp-controller="Account" asp-route-korisnik="true"  class="btn tPsS ml-3 mt-3" onclick="sakrijDiv('divDetalji')" style="width:460px;">Login/Registracija</a>
+                <button class="btn mt-3 ml-3" id="xIcon" onclick="sakrijDiv('divDetalji')" style="float:right"></button>
+                }
+            </dt>
+
+
         </dl>
     </div>
+    
     <div class="ml-5 w-50">
         <div class="container w-100 h-100">
-            <div class="row w-100 h-100">
+            <div class="row w-100 h-100 kontrast2">
 
 
                 <div class="col-sm-4">
@@ -26,7 +42,7 @@
                     <div>
                         <dt>
 
-                            <label asp-for="Proizvodjac" class="text-dark">Proizvođač: </label>
+                            <label asp-for="Proizvodjac" class="text-white" >Proizvođač: </label>
                         </dt>
                         <dd>
                             <p>@Model.Proizvodjac</p>
@@ -35,7 +51,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="GodinaProizvodnje" class="text-dark">Godište: </label>
+                            <label asp-for="GodinaProizvodnje"class="text-white" >Godište: </label>
                         </dt>
                         <dd>
                             <p>@Model.GodinaProizvodnje</p>
@@ -44,7 +60,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Gorivo" class="text-dark">Gorivo: </label>
+                            <label asp-for="Gorivo" class="text-white">Gorivo: </label>
                         </dt>
                         <dd>
                             <p>@Model.Gorivo</p>
@@ -53,7 +69,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Transmisija" class="text-dark">Transmisija: </label>
+                            <label asp-for="Transmisija" class="text-white">Transmisija: </label>
                         </dt>
                         <dd>
                             <p>@Model.Transmisija</p>
@@ -62,7 +78,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Pogon" class="text-dark">Pogon: </label>
+                            <label asp-for="Pogon" class="text-white" >Pogon: </label>
                         </dt>
                         <dd>
                             <p>@Model.Pogon</p>
@@ -71,7 +87,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Kilovati" class="text-dark">Kilovati: </label>
+                            <label asp-for="Kilovati" class="text-white">Kilovati: </label>
                         </dt>
                         <dd>
                             <p>@Model.Kilovati kW</p>
@@ -80,7 +96,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Kilometraza" class="text-dark">Kilometraža: </label>
+                            <label asp-for="Kilometraza" class="text-white" >Kilometraža: </label>
                         </dt>
                         <dd>
                             <p>@Model.Kilometraza KM</p>
@@ -92,7 +108,7 @@
                 <div class="col-sm-4">
                     <div>
                         <dt>
-                            <label asp-for="Model" class="text-dark">Model: </label>
+                            <label asp-for="Model" class="text-white">Model: </label>
                         </dt>
                         <dd>
                             <p>@Model.Model</p>
@@ -101,7 +117,7 @@
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="Boja" class="text-dark">Boja: </label>
+                            <label asp-for="Boja" class="text-white">Boja: </label>
                         </dt>
                         <dd>
                             <p>@Model.Boja</p>
@@ -111,7 +127,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="VelicinaFelgi" class="text-dark">Veličina felgi: </label>
+                            <label asp-for="VelicinaFelgi" class="text-white">Veličina felgi: </label>
                         </dt>
                         <dd>
                             <p>@Model.VelicinaFelgi "</p>
@@ -121,7 +137,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="BrojSjedista" class="text-dark">Broj sjedišta: </label>
+                            <label asp-for="BrojSjedista" class="text-white">Broj sjedišta: </label>
                         </dt>
                         <dd>
                             <p>@Model.BrojSjedista</p>
@@ -131,7 +147,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="BrojVrata" class="text-dark">Broj vrata: </label>
+                            <label asp-for="BrojVrata" class="text-white">Broj vrata: </label>
                         </dt>
                         <dd>
                             <p>@Model.BrojVrata</p>
@@ -141,7 +157,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Tezina" class="text-dark">Težina: </label>
+                            <label asp-for="Tezina" class="text-white">Težina: </label>
                         </dt>
                         <dd>
                             <p>@Model.Tezina kg</p>
@@ -151,7 +167,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Kubikaza" class="text-dark">Kubikaža: </label>
+                            <label asp-for="Kubikaza" class="text-white">Kubikaža: </label>
                         </dt>
                         <dd>
                             <p>@Model.Kubikaza </p>
@@ -163,7 +179,7 @@
                 <div class="col-sm-4">
                     <div>
                         <dt>
-                            <label asp-for="Tip" class="text-dark">Tip: </label>
+                            <label asp-for="Tip" class="text-white">Tip: </label>
                         </dt>
                         <dd>
                             <p>@Model.Tip</p>
@@ -172,7 +188,7 @@
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="EmisioniStandard" class="text-dark">Emisioni standard: </label>
+                            <label asp-for="EmisioniStandard" class="text-white">Emisioni standard: </label>
                         </dt>
                         <dd>
                             <p>@Model.EmisioniStandard</p>
@@ -182,7 +198,7 @@
 
                     <div>
                         <dt>
-                            <label asp-for="Dostupan" class="text-dark">Dostupan: </label>
+                            <label asp-for="Dostupan" class="text-white">Dostupan: </label>
                         </dt>
                         <dd>
                             <p>
@@ -198,7 +214,7 @@
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="Novo" class="text-dark">Novo: </label>
+                            <label asp-for="Novo" class="text-white">Novo: </label>
                         </dt>
                         <dd>
                             <p>
@@ -216,7 +232,7 @@
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="Cijena" class="text-dark">Cijena: </label>
+                            <label asp-for="Cijena" class="text-white">Cijena: </label>
                         </dt>
                         <dd>
                             <p>@Model.Cijena</p>
@@ -225,13 +241,14 @@
                     </div>
                     <div>
                         <dt>
-                            <label asp-for="CijenaRentanja" class="text-dark">Cijena rentanja: </label>
+                            <label asp-for="CijenaRentanja" class="text-white">Cijena rentanja: </label>
                         </dt>
                         <dd>
                             <p>@Model.CijenaRentanja</p>
 
                         </dd>
                     </div>
+                    
                 </div>
             </div>
 
@@ -242,11 +259,8 @@
             <a asp-action="Uredi" asp-route-AutomobilID="@Model.AutomobilID" class="btn btn-outline-warning ml-5">Uredi</a>
             <a asp-action="Index" class="float-lg-left btn btn-outline-danger mr-2">Vrati se nazad</a>
         }
-        @if (User.IsInRole("Korisnik"))
-        {
-            
-            @*<button class="btn btn-outline-warning ml-5" onclick="sakrijDiv(xy)">Sakrij</button>*@
-        }
+        
+
 
     </div>
 </div>

@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Autosalon.Models
 {
-    public class RezervacijaTestiranje
+    public class RezervacijaKupovina
     {
         [Key]
-        public int RezervacijaTestiranjaID { get; set; }
+        public int RezervacijaKupovinaID { get; set; }
         public int KlijentID { get; set; }
         [ForeignKey("KlijentID")]
         public ApplicationUser Klijent { get; set; }
@@ -29,9 +29,11 @@ namespace Autosalon.Models
         public Poslovnica Poslovnica { get; set; }
 
         public DateTime DatumKreiranja { get; set; }
-        public DateTime DatumTestiranja { get; set; }
+        public DateTime DatumPreuzimanja { get; set; }
 
-        public string Status { get; set; }// ???
+        public string Komentar { get; set; }
+        public bool KompletiranaKupovina { get; set; }
+
 
     }
 }

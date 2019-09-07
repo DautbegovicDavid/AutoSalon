@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoSalon.Controllers
 {
-    [Authorize(Roles = "Administrator, Uposlenik, Korisnik")]
+    [Authorize(Roles = "Administrator, Uposlenik, Klijent")]
     public class AutomobilController : Controller
     {
         private ApplicationDbContext db;
@@ -299,7 +299,7 @@ namespace AutoSalon.Controllers
         }
 
         //Dodaj Get
-        [Authorize(Roles = "Administrator,Uposlenik")]
+        [Authorize(Roles = "Administrator,Uposlenik,Klijent")]
         public IActionResult Dodaj()
         {
             AutomobilDodajVM model = new AutomobilDodajVM();
@@ -418,7 +418,8 @@ namespace AutoSalon.Controllers
                 Tipovi = PripremaListItemTipoviVozila(),
                 Pogoni = PripremaListItemPogoni(),
                 BrojeviVrata = PripremaListItemBrojVrata(),
-                Goriva = PripremaListItemGoriva(),Poslovnice=PripremaListItemPoslovnice()
+                Goriva = PripremaListItemGoriva(),
+                Poslovnice =PripremaListItemPoslovnice()
             };
             return View(model);
         }
@@ -476,7 +477,7 @@ namespace AutoSalon.Controllers
 
             return View(AutomobilUrediVM);
         }
-
+        [AllowAnonymous]
         public IActionResult Detalji(int AutomobilID,string partial,string div)
         {
             Automobil automobil = db.Automobil.Include(y=> y.Proizvodjac).FirstOrDefault(x => x.AutomobilID == AutomobilID);

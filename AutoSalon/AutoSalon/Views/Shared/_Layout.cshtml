@@ -8,6 +8,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-solar.css" /> @* Bijela stranica sve razbacano*@
         <link rel="stylesheet" href="~/css/site.css" />
+
         @*<link  media="print" />*@
 
 
@@ -38,17 +39,22 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     @*<li class="nav-item active"><a asp-area="" asp-controller="Poslovnica" asp-action="Index" class="nav-link">Poslovnica</a></li>*@
-                    @*<li class="nav-item active"><a asp-area="" asp-controller="Automobil" asp-action="Index" class="nav-link">Automobil</a></li>*@
                     <li class="nav-item active"><a asp-area="" asp-controller="Proizvodjac" asp-action="Index" class="nav-link">Proizvođači</a></li>
                     <li class="nav-item active"><a asp-controller="Poslovnica" asp-action="Index" class="nav-link">Saloni</a></li>
+                    <li class="nav-item active"><a asp-controller="Aktivnosti" asp-action="Index" class="nav-link">Aktivnosti</a></li>
+
 
                 }
                 @if (User.IsInRole("Administrator"))
                 {
                     <li class="nav-item active"><a asp-area="" asp-controller="Korisnik" asp-action="Index" class="nav-link">Korisnici</a></li>
+                    @*<li class="nav-item active"><a asp-area="" asp-controller="Automobil" asp-action="Index" class="nav-link">Automobil</a></li>*@
+
                 }
                 @if (User.IsInRole("Administrator") || User.IsInRole("Uposlenik"))
                 {
+                    <li class="nav-item active"><a asp-area="" asp-controller="Automobil" asp-action="Index" class="nav-link">Automobil</a></li>
+
                     <li class="nav-item active"><a asp-area="" asp-controller="Drzava" asp-action="Index" class="nav-link">Drzava</a></li>
                     <li class="nav-item active"><a asp-area="" asp-controller="Grad" asp-action="Index" class="nav-link">Grad</a></li>
                 }
@@ -62,11 +68,11 @@
 
     <div class="container body-content">
         @*<div id="xx"></div>*@
-        <div class="collapse" id="collapseExample">
+        @*<div class="collapse" id="collapseExample">
             <div>
-                Nema novih notifikacija
+               heheheheh
             </div>
-        </div>
+        </div>*@
         @RenderBody()
 
 

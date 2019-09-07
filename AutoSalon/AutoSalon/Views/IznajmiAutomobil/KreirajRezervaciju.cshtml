@@ -7,7 +7,7 @@
 <h2>Kreiranje rezervacije</h2>
 @Html.HiddenFor(model => model.AutomobilID)
 <hr />
-<form asp-action="Snimi">
+<form asp-action="Snimi" class="container" >
 
     <input asp-for="AutomobilID" hidden />
     <input asp-for="PoslovnicaID" hidden />
@@ -67,49 +67,47 @@
     </div>
     <h5>Dodatna Oprema</h5>
     
-    <div style="margin-top:2%;height:150px">
-        <div class="form-check form-check-inline">
-            <span class="form-check-input">@Html.CheckBoxFor(m => m.KrovniNosaci)</span>
-            <label class="form-check-label">Krovni nosaci</label>
-            <small>- 15KM</small>
-
+    <div style="margin-top:1%;height:150px">
+        <div class="form-group custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1" asp-for="KrovniNosaci">
+            <label class="custom-control-label " for="customCheck1" asp-for="KrovniNosaci">Krovni nosaci</label>
+            <small> - 15KM</small>
         </div>
-        
-        <div class="form-check form-check-inline">
-            <span class="form-check-input">@Html.CheckBoxFor(m => m.NosaciSkije)</span>
-            <label class="form-check-label">Nosaci za skije</label>
+        <div class="form-group  custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck2" asp-for="NosaciSkije">
+            <label class="custom-control-label " for="customCheck2" asp-for="NosaciSkije">Nosaci za skije</label>
             <small> - 30KM</small>
+        </div>
+        <div class="form-group  custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck3" asp-for="NosaciBicikla">
+            <label class="custom-control-label " for="customCheck3" asp-for="NosaciBicikla">Nosaci za bicikla</label>
+            <small> - 30KM</small>
+        </div>
+        <div class="form-group  custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck4" asp-for="KrovniKofer">
+            <label class="custom-control-label " for="customCheck4" asp-for="KrovniKofer">Krovni kofer</label>
+            <small> - 30KM</small>
+        </div>
+        <div class="form-group  custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck5" asp-for="DjecijaSjedalica">
+            <label class="custom-control-label " for="customCheck5" asp-for="DjecijaSjedalica">Djecija sjedalica</label>
+            <small> - 20KM</small>
+        </div>
 
-        </div>
-        <br />
-        <br />
-        <div class="form-check form-check-inline">
-            <span class="form-check-input">@Html.CheckBoxFor(m => m.NosaciBicikla)</span>
-            <label class="form-check-label">Nosaci za bicikla</label>
-            <small>- 30KM</small>
 
-        </div>
-        
-        <div class="form-check form-check-inline">
-            <span class="form-check-input">@Html.CheckBoxFor(m => m.KrovniKofer)</span>
-            <label class="form-check-label">Krovni kofer</label>
-            <small>- 30KM</small>
 
-        </div>
+
+
+
+
+
         <br />
-        <br />
-        
-        <div class="form-check form-check-inline">
-            <span class="form-check-input">@Html.CheckBoxFor(m => m.DjecijaSjedalica)</span>
-            <label class="form-check-label">Djecija sjedalica</label>
-            <small>- 20KM</small>
-        </div>
-        <br />
-       
-        <button type="submit" class="btn tPsS form-check" style="margin-top:50px;margin-left:0%">Potvrdi</button>
+
+        <button type="submit" class="btn tPsS form-check">Potvrdi</button>
     </div>
 
 
 
 </form>
+<footer style="margin-top:10%"></footer>
 

@@ -1,12 +1,27 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    var x = ViewData["x"];
+    var merc = ViewData["merc"];
+    var vw = ViewData["vw"];
+    var bmw = ViewData["bmw"];
+    var audi = ViewData["audi"];
+    var peu = ViewData["peu"];
+    var toy = ViewData["toy"];
+    var hyu = ViewData["hyu"];
+    var cit = ViewData["cit"];
+
+
+
 }
+
+<input id="hiddenID" value="@x" type="hidden" />
+
+
 
 <div class="container active font-weight-bold p-xl-5" style="text-align:right;">
     <div id="novaVozila" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="~/images/novaVozila2.jpg" alt="First slide">
+                <img class="d-block w-100" src="~/images/novaVozila3.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="~/images/novaVozila1.jpg" alt="Second slide">
@@ -15,7 +30,7 @@
                 <img class="d-block w-100" src="~/images/novaVozila.jpg" alt="Third slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="~/images/novaVozila3.jpg" alt="Third slide">
+                <img class="d-block w-100" src="~/images/novaVozila2.jpg" alt="Third slide">
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="~/images/novaVozila4.jpg" alt="Third slide">
@@ -29,51 +44,77 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-        </div>
-       
-
     </div>
-    <hr />
-    <div id="InfoGradovi" class="container">
+
+
+</div>
+<hr />
+<div id="InfoGradovi" class="container" style="color:#9ad3de">
+    <br />
+    <div id="InfoGradoviJedan" style="color:#89bdd3">
+        <p>Želite putovati i imate namjeru iznajmiti auto ? Nikakav problem ! </p>
+        <p>
+            Napravite rezervaciju i automobil Vas čeka na lokaciji po vašoj želji.
+        </p>
         <br />
-        <div id="InfoGradoviJedan">
-            <p>Zelite putovati i imate namjeru iznajmiti auto ? Nikakav problem ! </p>
-            <p>
-                Napravite rezervaciju i automobil vas cega na lokaciji po vasoj zelji.
-            </p>
-            <br />
-            <p>Pogledajte ponudu u nasim salonima smjestenim na najpoznatijim turistickim destinacijama !</p>
-            <br />
-        </div>
-        @*<div id="InfoGradoviDva">
-
-            </div>*@
-
-
-
-    </div>
-    <div id="kupi"></div>
-    <div id="popularSaloni" class="container ">
-
-
-        <div id="popularSalonSlike" class="container">
-            <div class="slika sa" ><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Sarajevo" asp-route-partial="true" ajax-poziv="da" ajax-rezultat="oNama" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Sarajevo</a> </div>
-            <div class="slika mo"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Mostar" asp-route-turistickaDestinacija="da" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Mostar</a></div>
-            <div class="slika be"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Berlin" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Berlin</a></div>
-        </div>
-        <div id="popularSalonSlike" class="container">
-            <div class="slika pa"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Pariz"  style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Pariz</a></div>
-            <div class="slika am"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Amsterdam" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Amsterdam</a></div>
-            <div class="slika bg"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Beograd" asp-route-turistickaDestinacija="da" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Beograd</a></div>
-
-        </div>
+        <p>Pogledajte ponudu u našim salonima smještenim na najpoznatijim turističkim destinacijama.</p>
+        <br />
     </div>
 
-    <div id="PoslovnicaDivShared">
 
+
+
+</div>
+<div id="kupi"></div>
+<div id="popularSaloni" class="container ">
+
+
+    <div id="popularSalonSlike" class="container">
+        <div class="slika sa"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Sarajevo" asp-route-partial="true" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Sarajevo</a> </div>
+        <div class="slika mo"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Mostar" asp-route-turistickaDestinacija="da" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Mostar</a></div>
+        <div class="slika be"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Berlin" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Berlin</a></div>
+    </div>
+    <div id="popularSalonSlike" class="container">
+        <div class="slika pa"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Pariz" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Pariz</a></div>
+        <div class="slika am"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Amsterdam" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Amsterdam</a></div>
+        <div class="slika bg"><a asp-action="Index" asp-controller="IznajmiAutomobil" asp-route-Grad="Beograd" asp-route-turistickaDestinacija="da" style="box-shadow:rgb(137, 189, 211) 5px 5px 10px">Beograd</a></div>
 
     </div>
-    <div id="kraj"><button id="BtnVrh" onclick="VrhFunkcija()">Vrati se gore !</button></div>
+</div>
+<br />
+<hr />
+
+<div id="InfoGradovi" class="container" style="color:#9ad3de">
+    <br />
+    <div id="InfoGradoviJedan" style="color:#89bdd3">
+        <p>Odlučili ste se za kupovinu automobila ? </p>
+
+        <br />
+        <p>Pogledajte neke od najpoznatijih svjetskih brendova dostupnih kod nas !</p>
+        <br />
+    </div>
+
+    <div class="container" style="width:100%;height:100%;display:flex">
+        
+        <a class="VW HH" asp-controller="KupiAutomobil" asp-action="Vozila" asp-route-ProizvodjacID="@vw"></a>
+        <a class="CITROEN HH" asp-controller="KupiAutomobil" asp-action="Vozila" asp-route-ProizvodjacID="@cit"></a>
+        <a  class="BMW HH" asp-controller="KupiAutomobil" asp-action="Vozila" asp-route-ProizvodjacID="@bmw"></a>
+        <a class="AUDI HH" asp-controller="KupiAutomobil" asp-action="Vozila" asp-route-ProizvodjacID="@audi"></a>
+    </div>
+    <div class="container" style="width:100%;height:100%;display:flex">
+        <a class="MERCEDES HH" a asp-controller="KupiAutomobil" asp-action="Vozila" asp-route-ProizvodjacID="@merc"></a>
+        <a class="HYUNDAI HH" asp-controller="KupiAutomobil" asp-action="Vozila" asp-route-ProizvodjacID="@hyu"></a>
+        <a class="TOYOTA HH" asp-controller="KupiAutomobil" asp-action="Vozila" asp-route-ProizvodjacID="@toy"></a>
+        <a class="PEUGEOT HH" asp-controller="KupiAutomobil" asp-action="Vozila" asp-route-ProizvodjacID="@peu"></a>
+    </div>
+
+
+
+
+</div>
+
+
+<div id="kraj"><button id="BtnVrh" onclick="VrhFunkcija()">Vrati se gore !</button></div>
 
 
 

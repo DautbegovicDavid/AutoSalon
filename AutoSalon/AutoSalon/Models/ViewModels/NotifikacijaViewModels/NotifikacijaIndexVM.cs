@@ -8,6 +8,8 @@ namespace AutoSalon.Models.ViewModels.NotifikacijaViewModels
     public class NotifikacijaIndexVM
     {
         public int KorisnikID { get; set; }
+        public bool Klijent { get; set; } 
+
         public List<Row> Rows { get; set; }
 
         public class Row
